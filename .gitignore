@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+build/
+dist/
+node_modules/
+# training outputs (never committed)
+outputs/
+runs/
+checkpoints/
+wandb/
+*.safetensors
+*.bin
+# raw downloads are re-creatable from data/MANIFEST.json; derived task files are committed
+data/raw/.cache/
