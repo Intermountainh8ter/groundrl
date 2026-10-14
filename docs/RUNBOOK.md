@@ -1,8 +1,8 @@
 # Runbook: training and evaluating a groundrl model
 
-**Status: SFT has been run on gfx906; GRPO has not.** The first real SFT run on Qwen3-0.6B is
+**Status: SFT has been run on gfx906; GRPO has been run and the run was degenerate (null result).**
 committed under `results/groundrl-sft/` (`eval_baseline.json`, `eval_sft.json`, `summary_sft.json`,
-`LEAKAGE_CHECK.md`). The GRPO row in the README still reads NOT YET RUN. Hyperparameters in
+`LEAKAGE_CHECK.md`). The GRPO row in the README now reads DEGENERATE with a daggered footnote pointing at `results/groundrl-grpo/summary_grpo.json` and the diagnostic in METHODOLOGY §6a. Hyperparameters in
 `train/configs/*.json` for the configs that have not been exercised are still untuned defaults,
 their memory figures are formulas rather than measurements, and no timing or cost estimate is
 given for them. What is verified without a GPU: the configs validate, the keyword arguments they

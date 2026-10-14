@@ -189,7 +189,7 @@ both are fixed and covered by tests, and the audit and baselines were regenerate
   baseline (no model, no gold) reaches 0.613 (95% CI 0.563-0.663) on TEST, which is the number a
   trained model must beat to show it learned anything beyond locate-and-copy.
 
-## 6. Training protocol (SFT run on gfx906; GRPO not run)
+## 6. Training protocol (SFT run on gfx906; GRPO run was degenerate)
 
 Stages, in order (`docs/RUNBOOK.md` has the commands):
 
@@ -204,6 +204,53 @@ Stages, in order (`docs/RUNBOOK.md` has the commands):
 3. **Evaluation on TEST** with greedy decoding: grounded-correct rate, correct rate, verified
    rate, abstention precision and recall, hallucinated-citation rate, mean reward under each
    version, length statistics, all with 95% bootstrap intervals over tasks.
+
+### 6a. GRPO run — null result (2026-10-14)
+
+With the pre-registered settings in `train/configs/qwen3-0.6b-24gb.json` (reward v2,
+LoRA on the merged SFT model, group size 8, KL beta 0.02, lr 2e-5, 300 optimizer
+steps on gfx906 under torch 2.4.1+rocm6.0, TRL 0.17.0, warmup_steps=15, scale_rewards=true,
+loss_type=bnpo), the run was degenerate at every log point:
+
+- `completions/mean_length` = 0 at every step
+- `rewards/groundrl_reward_v2/mean` = 0 at every step
+- `grad_norm` = 0 at every step
+- `completions/clipped_ratio` = 1.0 at every step
+- `kl` = NaN at every step (no non-trivial completion to score against the reference)
+
+Diagnostic from the stdout trace: the merged SFT policy under the GRPO prompt
+rendering emits an immediate EOS after the Qwen3 chat-template `<think>\n\n</think>\n\n`
+block (no thinking, no answer). The trainer sees empty new tokens, so there is
+nothing to score with the reward or update the policy on. Full environment and
+log history are in `results/groundrl-grpo/summary_grpo.json`.
+
+**What this is**: a null result reported honestly; no numbers are being published
+for the GRPO row of the results table.
+
+**What this is NOT**: a reason to tune the pre-registered settings post-hoc. The
+pre-registration and the config file are unchanged. Fixing the degeneracy requires
+a hypothesis-driven change (listed below as the next-step options), which is a
+*new* pre-registered run on a new config file, not an edit to this one.
+
+**Hypothesis to test next, each as its own pre-registered run on a new config:**
+
+1. **Prompt-template mismatch.** The SFT model may have been trained with the
+   Qwen3 chat template in thinking mode (SFT trainer builds its own prompt), while
+   TRL's GRPOTrainer renders prompts with thinking disabled via the chat template's
+   `<think>\n\n</think>\n\n` shortcut, which closes the thinking block before any
+   generation. Byte-compare the SFT and GRPO prompt renderings on five fixed
+   TRAIN examples; if they differ, pin a single renderer in `groundrl.data`.
+2. **Max-new-tokens too small.** `generation.max_new_tokens` currently caps the
+   assistant turn at `completions/max_length` which was 0; verify the Qwen3
+   SFT model actually generates non-empty completions under the GRPO prompt in a
+   fresh inference call before another training run.
+3. **EOS token drift.** The TRL logs show the tokenizer EOS/BOS/PAD were patched
+   mid-run ("new PAD/BOS/EOS tokens that differ from the model config"). Pin
+   `tokenizer.pad_token_id` and `generation_config.eos_token_id` before training.
+
+Only after one of these is confirmed as the cause does another GRPO run belong
+in this repo. That next run will have its own pre-registered config and its own
+summary file.
 
 Comparison points that need no model (`groundrl baseline-eval`): the `oracle`, the top-1
 `extractive` policy, `eip_id_shortcut` and `refuse_all`. A trained model has to beat `extractive`
