@@ -1,15 +1,17 @@
 # Runbook: training and evaluating a groundrl model
 
-**Status: the training and evaluation scripts have never been run against real torch/TRL.** This
-repository was built in a container with no GPU and no access to huggingface.co. Everything below
-is therefore a procedure, not a record. The hyperparameters in `train/configs/*.json` are untuned
-defaults, the memory figures are formulas (not measurements), and no timing or cost estimate is
-given because none was measured. What *has* been verified without a GPU: the configs validate, the
-keyword arguments they pass exist in the pinned TRL / transformers / PEFT sources (checked by
-`tests/test_trainconf.py` against `tests/api_fields.json`), the dry run works without torch, and
-the whole control flow runs against a fake stack (`--mock`, labelled MOCK).
+**Status: SFT has been run on gfx906; GRPO has not.** The first real SFT run on Qwen3-0.6B is
+committed under `results/groundrl-sft/` (`eval_baseline.json`, `eval_sft.json`, `summary_sft.json`,
+`LEAKAGE_CHECK.md`). The GRPO row in the README still reads NOT YET RUN. Hyperparameters in
+`train/configs/*.json` for the configs that have not been exercised are still untuned defaults,
+their memory figures are formulas rather than measurements, and no timing or cost estimate is
+given for them. What is verified without a GPU: the configs validate, the keyword arguments they
+pass exist in the pinned TRL / transformers / PEFT sources (checked by `tests/test_trainconf.py`
+against `tests/api_fields.json`), the dry run works without torch, and the whole control flow
+runs against a fake stack (`--mock`, labelled MOCK).
 
-Training results are not claimed anywhere until `results/eval_*.json` files from real runs exist.
+Training results are not claimed in the README or REPORT until `results/**/eval_*.json` files
+from real runs exist; `scripts/make_report.py` renders only from those files.
 
 ## 1. Pick a config
 

@@ -189,13 +189,15 @@ both are fixed and covered by tests, and the audit and baselines were regenerate
   baseline (no model, no gold) reaches 0.613 (95% CI 0.563-0.663) on TEST, which is the number a
   trained model must beat to show it learned anything beyond locate-and-copy.
 
-## 6. Training protocol (specified, not run)
+## 6. Training protocol (SFT run on gfx906; GRPO not run)
 
 Stages, in order (`docs/RUNBOOK.md` has the commands):
 
 1. **SFT baseline.** Supervised fine-tuning with LoRA on the gold answers of the TRAIN split
    (prompt-completion format, loss on the completion only), then the adapter is merged into the
-   base weights. This is the starting point for GRPO and the comparison point for it.
+   base weights. This is the starting point for GRPO and the comparison point for it. The first
+   real SFT run on gfx906 is in `results/groundrl-sft/`; the TEST-split comparison and leakage
+   check live beside it in `summary_sft.json` and `LEAKAGE_CHECK.md`.
 2. **GRPO.** Reward v2 (`make_trl_reward("v2")`), a fresh LoRA on the merged SFT model, group size
    4-8, a small KL coefficient (0.02), learning rate 2e-5. Prompts are pre-rendered with the
    model's own chat template (thinking disabled) so training and evaluation see identical text.
