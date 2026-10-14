@@ -29,7 +29,7 @@ from .chunker import Chunk
 from .corpus import sha256_hex
 from .facts import CLOZE, CONSTANT, METADATA, OPCODE, TYPE_BYTE, Fact, supports
 from .protocol import ABSTAIN_TEXT
-from .tokens import claim_tokens, word_count
+from .tokens import claim_tokens, content_words, word_count
 
 SPLITS = ("train", "val", "test")
 QTYPES = ("constant", "opcode", "multi", "comparison", "unanswerable")
@@ -81,15 +81,23 @@ class ChunkIndex:
         for c in self.chunks:
             self.by_doc[c.doc].append(c)
         self._tokens: dict[str, set[str]] = {}
+        self._words: dict[str, set[str]] = {}
 
     def tokens(self, chunk_id: str) -> set[str]:
         if chunk_id not in self._tokens:
             self._tokens[chunk_id] = claim_tokens(self.by_id[chunk_id].text)
         return self._tokens[chunk_id]
 
+    def words(self, chunk_id: str) -> set[str]:
+        if chunk_id not in self._words:
+            self._words[chunk_id] = content_words(self.by_id[chunk_id].text)
+        return self._words[chunk_id]
+
+    def supports(self, chunk_id: str, fact: Fact) -> bool:
+        return supports(self.by_id[chunk_id], fact, self.tokens(chunk_id), self.words(chunk_id))
+
     def supporting(self, fact: Fact, chunk_ids: Iterable[str]) -> list[str]:
-        return [cid for cid in chunk_ids
-                if supports(self.by_id[cid], fact, self.tokens(cid))]
+        return [cid for cid in chunk_ids if self.supports(cid, fact)]
 
 
 def assign_splits(
@@ -258,10 +266,9 @@ def build_context(
     def usable(c: Chunk) -> bool:
         if c.id in gold_ids:
             return False
-        toks = index.tokens(c.id)
-        if any(supports(c, f, toks) for f in facts):
+        if banned_names & index.tokens(c.id):
             return False
-        return not (banned_names & toks)
+        return not any(index.supports(c.id, f) for f in facts)
 
     same_doc = [c for d in sorted(target_docs) for c in index.by_doc[d] if usable(c)]
     other = [c for d in split_docs if d not in target_docs for c in index.by_doc[d] if usable(c)]

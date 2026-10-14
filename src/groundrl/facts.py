@@ -291,8 +291,15 @@ def token_supported(tok: str, chunk_tokens: set[str]) -> bool:
     return bool(number_variants(tok) & chunk_tokens) if tok[:1].isdigit() else tok in chunk_tokens
 
 
-def supports(chunk: Chunk, fact: Fact, chunk_tokens: set[str] | None = None) -> bool:
-    """Does ``chunk`` contain what is needed to answer a question about ``fact``?"""
+def supports(
+    chunk: Chunk, fact: Fact, chunk_tokens: set[str] | None = None,
+    chunk_words: set[str] | None = None,
+) -> bool:
+    """Does ``chunk`` contain what is needed to answer a question about ``fact``?
+
+    ``chunk_tokens`` / ``chunk_words`` are optional precomputed caches of the chunk's claim
+    tokens and content words; passing them never changes the result.
+    """
     toks = chunk_tokens if chunk_tokens is not None else claim_tokens(chunk.text)
     if not all(token_supported(t, toks) for t in fact.tokens):
         return False
@@ -302,5 +309,6 @@ def supports(chunk: Chunk, fact: Fact, chunk_tokens: set[str] | None = None) -> 
         want = content_words(normalize_text(fact.blanked.replace(BLANK, " ")))
         if not want:
             return False  # pragma: no cover - cloze sentences always have content words
-        return len(want & content_words(chunk.text)) / len(want) >= 0.7
+        have = chunk_words if chunk_words is not None else content_words(chunk.text)
+        return len(want & have) / len(want) >= 0.7
     return fact.name.lower() in toks
