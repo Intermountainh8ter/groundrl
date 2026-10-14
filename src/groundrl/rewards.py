@@ -40,11 +40,11 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass, replace
 from statistics import fmean
 
+from .consistency import count_contradictions
 from .example import Example
 from .protocol import CITATION, is_abstention
 from .tokens import (
     claim_tokens,
-    content_words,
     number_variants,
     sentences,
     strip_citations,
@@ -254,34 +254,9 @@ def redundancy_factor(answer: str) -> tuple[float, float, float]:
     return (1.0 - dup_sentences) * (1.0 - dup_cites), dup_sentences, dup_cites
 
 
-def _canon(tok: str) -> str:
-    """Decimal spelling of a numeric token when one exists (0x40 -> 64), else the token."""
-    dec = [v for v in number_variants(tok) if v.isdigit()]
-    return dec[0] if dec else tok
-
-
 def contradictions(answer: str, ex: Example) -> int:
-    """Pairs of sentences that say the same thing with different numbers (answering twice).
-
-    Two sentences say the same thing if their words are identical once pure numbers are removed
-    (EIP numbers are kept, so "EIP-198 was created on ..." and "EIP-1167 was created on ..." are
-    different). They contradict if both carry numeric claims and the sets differ. Legitimate
-    multi-fact answers use different words for different facts, so they do not trigger this. A
-    hedge that rewords the sentence is not caught here; the extra-claim penalty still applies.
-    """
-    eips = {e.split("-", 1)[1] for e in ex.task.eips}
-    rows: list[tuple[frozenset[str], set[str]]] = []
-    for s in sentences(answer):
-        body = strip_citations(s)
-        words = frozenset(w for w in content_words(body) if not w[:1].isdigit() or w in eips)
-        nums = {_canon(t) for t in claim_tokens(body) if t[:1].isdigit()} - eips
-        rows.append((words, nums))
-    count = 0
-    for i, (wi, ni) in enumerate(rows):
-        for wj, nj in rows[i + 1:]:
-            if wi and wi == wj and ni and nj and ni != nj:
-                count += 1
-    return count
+    """Sentence pairs that say the same thing with different numbers (see :mod:`consistency`)."""
+    return count_contradictions(answer, {e.split("-", 1)[1] for e in ex.task.eips})
 
 
 def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tuple[float, Breakdown]:

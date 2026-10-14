@@ -215,9 +215,11 @@ def cloze_candidates(chunk: Chunk) -> list[tuple[str, str, str]]:
             continue
         spans = [m for m in _CLOZE_NUM.finditer(s) if not _CLOZE_BAD_PREFIX.search(s[:m.start()])]
         for m in spans[:3]:
-            if _in_power_expression(s, m):
+            if _in_power_expression(s, m) or _in_spaced_number(s, m):
                 continue
             value = m.group(1)
+            if value == str(chunk.number):  # the document naming itself ("the 2309 standard")
+                continue
             if value.isdigit() and len(value) == 1 and (len(s) + ord(value)) % 4:  # keep ~1 in 4
                 continue
             if _DATE.match(value) or _is_year(value) or _is_placeholder_hex(value):
@@ -230,6 +232,11 @@ def _in_power_expression(s: str, m: re.Match[str]) -> bool:
     """A number that is half of ``2^128`` / ``2 ** 256`` cannot be blanked on its own."""
     return bool(re.search(r"(?:\^|\*\*)\s*$", s[:m.start()])
                 or re.match(r"\s*(?:\^|\*\*)", s[m.end():]))
+
+
+def _in_spaced_number(s: str, m: re.Match[str]) -> bool:
+    """``205 000`` (space as thousands separator): neither half can be blanked on its own."""
+    return bool(re.search(r"\d\s$", s[:m.start()]) or re.match(r"\s\d", s[m.end():]))
 
 
 def _is_year(value: str) -> bool:

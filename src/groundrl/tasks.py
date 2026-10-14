@@ -26,6 +26,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from .chunker import Chunk
+from .consistency import count_contradictions
 from .corpus import sha256_hex
 from .facts import CLOZE, CONSTANT, METADATA, OPCODE, TYPE_BYTE, Fact, supports
 from .protocol import ABSTAIN_TEXT
@@ -314,6 +315,8 @@ def _make_task(
         answer = oracle_answer(facts, [f.chunk_id for f in facts])
         if not verify_answer(answer, {c: index.by_id[c].text for c in ctx}, ctx).ok:
             return None  # the oracle itself must pass the verifier
+        if count_contradictions(answer, {e.split("-", 1)[1] for e in {f.doc for f in facts}}):
+            return None  # ... and must not look like hedging to the consistency term
     else:
         answer = ABSTAIN_TEXT
     return Task(

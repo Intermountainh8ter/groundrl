@@ -148,7 +148,7 @@ The decision tree for these symptoms is in `docs/FLOWCHARTS.md`.
 ## 7. Reading the results honestly
 
 * Compare against the scripted baselines first. `extractive` (locate and copy the best line)
-  scores 0.608 reward v2 and 57.8% grounded-correct on TEST; a trained model that does not beat it
+  scores 0.613 reward v2 and 57.4% grounded-correct on TEST; a trained model that does not beat it
   has not learned more than lexical matching.
 * Use `eval_*.json`, not the training reward, to judge a run. Rewards of different versions are
   not comparable with each other.

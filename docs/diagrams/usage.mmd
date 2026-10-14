@@ -1,0 +1,23 @@
+flowchart TD
+    A["1. Fetch corpus<br/>python scripts/fetch_corpus.py<br/>130 EIPs, sha256 manifest"] --> B["2. Build tasks<br/>groundrl build-tasks<br/>1792 tasks, split by EIP"]
+    B --> C["3. Audit the reward<br/>python scripts/reward_audit.py<br/>19 scripted policies x v0 v1 v2"]
+    C --> D{"Any hack at or<br/>above 0.50 under v2?"}
+    D -- "yes" --> E["Revise reward terms<br/>rewards.py, then re-audit<br/>(revision log in METHODOLOGY)"]
+    E --> C
+    D -- "no" --> F["Scripted baselines<br/>groundrl baseline-eval<br/>oracle, extractive, shortcut"]
+    F --> G["4. SFT baseline<br/>python train/sft.py<br/>LoRA on gold answers, then merge"]
+    G --> H["5. GRPO<br/>python train/grpo.py --init-from merged<br/>reward v2, group size 4 to 8"]
+    H --> I{"Watch the logs:<br/>verified rate up and<br/>correctness down?"}
+    I -- "yes: hacking" --> J["Stop, keep the last good checkpoint,<br/>add the exploit to the audit,<br/>see troubleshooting chart"]
+    I -- "no" --> K["6. Evaluate on TEST<br/>python train/eval.py<br/>base, SFT, GRPO, 3+ seeds"]
+    K --> L["7. Report<br/>python scripts/make_report.py<br/>renders results/*.json only"]
+    L --> M{"Beats the extractive<br/>baseline with CI margin?"}
+    M -- "yes" --> N["Report it, with intervals<br/>and the threats list"]
+    M -- "no" --> O["Report it anyway:<br/>no gain over locate-and-copy"]
+
+    classDef gpu fill:#fde68a,stroke:#92400e,color:#1f2937
+    classDef cpu fill:#bfdbfe,stroke:#1e3a8a,color:#1f2937
+    classDef decision fill:#e5e7eb,stroke:#374151,color:#1f2937
+    class A,B,C,F,L cpu
+    class G,H,K gpu
+    class D,I,M decision

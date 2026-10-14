@@ -141,6 +141,8 @@ def test_cloze_blanks_exactly_one_number_per_candidate():
     "The list goes one, two, three... and then continues with 4096 further items after that.",
     "lowercase start sentences are not used as cloze sources even with 4096 in them here.",
     "The cap is exactly 2^24 and nothing else is said about the value of it in this sentence.",
+    "The expected time for an attacker holding a third of the stake is 205 000 years in total.",
+    "Using the 900 standard you could mint millions of blank tokens in a cost effective way here.",
     "Created on 2021-04-13 by somebody who wrote this particular sentence for the test suite.",
     "Version 3 of RFC 2119 and BIP 32 and ISO 8601 are cited by this fairly long sentence here.",
 ])
