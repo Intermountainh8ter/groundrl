@@ -11,8 +11,6 @@ Ethereum EIPs with correct, grounded citations.**
   summary in ordinary words: the question, one chart, the finding, and why it
   matters. No background assumed.
 - [GLOSSARY.md](GLOSSARY.md) &mdash; every abbreviation this repo uses, defined.
-- [What does all this mean?](https://claude.ai/artifact/Mctu5EP8YgfjGx6fcCHDgs)
-  &mdash; the across-the-whole-project explainer, with all six repos on one page.
 
 > **Training results: NOT YET RUN.** No model has been trained or fine-tuned in this repository.
 > It was built in a container with no GPU. Everything under "Results" below is either a scripted,

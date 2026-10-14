@@ -124,3 +124,71 @@ Honest caveats, because this one has a real cost:
   not VRAM.
 - **No Flash Attention.** `model.attn_implementation` stays `"sdpa"`.
 - **32 GiB per card, and no NVLink.** Two cards do not combine into 64 GiB.
+
+
+## 5. Training stack: hipblasLt also has no gfx906 kernels
+
+The rocBLAS fix in section 2 lets `torch.cuda.is_available()` + a bare matmul
+work. **Training through transformers/TRL does not**, because transformers' SDPA
+attention and some optimizer-step GEMMs route through hipblasLt first, and the
+pinned PyTorch wheel's hipblasLt library ships kernels only for gfx90a and
+gfx942. On this card the first optimizer step hangs the process at 100% GPU
+utilisation with no visible progress; the log carries
+`rocblaslt warning: No paths matched .../hipblaslt/library/*gfx906*.co`.
+
+Fix: force every GEMM onto plain rocBLAS, where section 2 just restored the
+gfx906 kernels. Set both of these before importing torch (the training script
+below does this for you):
+
+```bash
+export TORCH_BLAS_PREFER_HIPBLASLT=0
+export DISABLE_ADDMM_HIP_LT=1
+```
+
+`PYTORCH_HIP_ALLOC_CONF=expandable_segments:True` is **not** supported here —
+torch logs `UserWarning: expandable_segments not supported on this platform`
+and silently ignores it. Leave the variable unset.
+
+## 6. Library pin: trl 1.14+ requires torch 2.5
+
+This repo's `pyproject.toml` floor is `trl>=1.15`, but trl 1.14 and later
+import `CheckpointPolicy` and `DTensor` from torch modules that were introduced
+in torch 2.5. On a torch 2.4.1 install they fail with:
+
+```
+RuntimeError: Failed to import trl.trainer.sft_trainer because of the
+following error: cannot import name 'CheckpointPolicy' from
+'torch.utils.checkpoint'
+```
+
+**Fix:** `pip install trl==0.17.0` after installing the pinned torch.
+`train/requirements-rocm-gfx906.txt` pins it. trl 0.17 ships `SFTConfig`,
+`SFTTrainer`, `GRPOConfig`, `GRPOTrainer` with every field this repo's SFT
+config uses. One GRPO field this repo uses that 0.17 lacks:
+`steps_per_generation`. Remove or override it before running GRPO on this
+stack. SFT is unaffected.
+
+## 7. Config field types for this transformers version
+
+transformers 4.56.2 requires `warmup_steps` to be a non-negative **int**;
+the shipped config stores it as a float (`0.05`, meaning 5% of planned steps).
+On this stack, use the integer:
+
+```bash
+--set sft.args.warmup_steps=8    # 0.05 * 158 planned SFT steps, rounded
+--set grpo.args.warmup_steps=15  # 0.05 * 300 planned GRPO steps, rounded
+```
+
+## 8. Verified SFT run
+
+End-to-end SFT on Qwen3-0.6B with LoRA, 32 examples, 1 epoch, batch=1, seq_len
+up to 2560, measured on this host:
+
+- 32 optimizer steps in 40.8 s
+- throughput ~1.3 step/s
+- grad_norm NaN on step 1 (fp16 loss-scaler warmup; finite from step 2 onward)
+- adapter + merged weights written cleanly
+- exit code 0
+
+With the config's effective batch of 16 (per_device=2, grad_accum=8), the full
+158-step SFT is expected to finish in roughly 15-30 minutes on one card.
