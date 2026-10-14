@@ -84,6 +84,11 @@ def load_model(stack: SimpleNamespace, cfg: dict[str, Any], path: str | None = N
             load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=dtype,
             bnb_4bit_use_double_quant=True)
         kwargs["device_map"] = {"": 0}
+    elif getattr(getattr(stack.torch, "cuda", None), "is_available", lambda: False)():
+        # ``run_eval`` calls ``model.generate`` directly, so the full-precision
+        # path must land on GPU here; SFTTrainer/GRPOTrainer place the model
+        # themselves and are happy to receive it already on the device.
+        kwargs["device_map"] = {"": 0}
     return stack.AutoModelForCausalLM.from_pretrained(
         path or m["init_from"] or m["name_or_path"], **kwargs)
 

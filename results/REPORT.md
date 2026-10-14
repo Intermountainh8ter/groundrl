@@ -141,4 +141,14 @@ Source: `baseline_test.json` (test split). Scripted policies, no learning.
 
 ## Training results
 
-**Training results: NOT YET RUN.** No `kind: eval` result file from a real run exists in the `results/` directory.
+| run | n | grounded-correct | correct | verified | abstain precision | abstain recall | hallucinated cite | v0 | v1 | v2 | words (mean) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `baseline` | 265 | 27.2% (21.7-33.2) | 42.6% (36.6-48.9) | 40.4% (34.0-46.4) | 25.2% (13.9-39.5) | 93.3% (75.9-100.0) | 0.8% (0.0-1.9) | 0.362 (0.306-0.423) | 0.381 (0.328-0.436) | 0.357 (0.305-0.412) | 13.7 |
+| `sft` | 265 | 98.7% (97.0-100.0) | 99.1% (97.9-100.0) | 99.6% (98.7-100.0) | 100.0% (100.0-100.0) | 93.3% (70.8-100.0) | 0.4% (0.0-1.1) | 0.883 (0.842-0.921) | 0.886 (0.847-0.922) | 0.985 (0.971-0.996) | 21.9 |
+
+* `eval_baseline.json`: split test, model `Qwen/Qwen3-0.6B`, adapter `None`, commit 28b7524fc8f25c5ec1a4509d022978e1082ca5a4
+* `eval_sft.json`: split test, model `Qwen/Qwen3-0.6B`, adapter `/home/ammo/bench/results/groundrl-sft/adapter`, commit 28b7524fc8f25c5ec1a4509d022978e1082ca5a4
+
+Training runs on record:
+
+* `summary_sft.json`: stage sft, config qwen3-0.6b-gfx906, seed 0, 32 log rows

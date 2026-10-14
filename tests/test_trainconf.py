@@ -26,7 +26,10 @@ def raw(name="qwen3-0.6b-24gb"):
 
 def test_there_are_configs_for_both_models_at_both_vram_profiles():
     names = {p.stem for p in CONFIGS}
-    assert names == {"qwen3-0.6b-24gb", "qwen3-0.6b-12gb", "qwen3-1.7b-24gb", "qwen3-1.7b-12gb"}
+    # Both models at both VRAM profiles must exist. Extra configs are allowed:
+    # an architecture-specific one (qwen3-0.6b-gfx906) is a copy of a profile
+    # with the dtype changed, and every config is validated by the test above.
+    assert names >= {"qwen3-0.6b-24gb", "qwen3-0.6b-12gb", "qwen3-1.7b-24gb", "qwen3-1.7b-12gb"}
 
 
 @pytest.mark.parametrize("path", CONFIGS, ids=lambda p: p.stem)

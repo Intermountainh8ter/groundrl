@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import subprocess
 import sys
+import textwrap
 from pathlib import Path
 
 import pytest
@@ -72,11 +74,9 @@ def test_model_params_from_name():
 
 @pytest.mark.parametrize("path", CONFIGS, ids=lambda p: p.stem)
 @pytest.mark.parametrize("stage", ["sft", "grpo", "eval"])
-def test_dry_run_plans_every_config_and_stage_without_torch(path, stage):
+def test_dry_run_plans_every_config_and_stage(path, stage):
     cfg = load_config(path)
     plan = build_plan(cfg, stage, repo_root=ROOT)
-    for heavy in ("torch", "transformers", "trl", "peft", "datasets", "vllm"):
-        assert heavy not in sys.modules
     assert plan["stage"] == stage and plan["config"] == cfg["name"]
     assert plan["examples"] > 200 and 0 < plan["kept_after_prompt_budget"] <= plan["examples"]
     assert plan["memory_estimate_gb"] < 0.85 * cfg["profile"]["vram_gb"]
@@ -85,6 +85,31 @@ def test_dry_run_plans_every_config_and_stage_without_torch(path, stage):
     assert "approximate" in plan["tokenizer"]
     text = format_plan(plan)
     assert text.startswith(f"DRY RUN: {stage} / {cfg['name']}") and "no torch" in text
+
+
+def test_dry_run_imports_no_heavy_module():
+    """build_plan must not pull in torch/TRL: the dry run has to work with no GPU stack.
+
+    This runs in a child interpreter on purpose. sys.modules is global to a
+    pytest session, so once any other test imports torch the assertion below
+    can never fail again -- it would silently stop testing anything.
+    """
+    source = textwrap.dedent(
+        """
+        import sys
+        sys.path.insert(0, {src!r})
+        from groundrl.trainconf import load_config
+        from groundrl.trainplan import build_plan
+        cfg = load_config({cfg!r})
+        build_plan(cfg, "grpo", repo_root={root!r})
+        heavy = [m for m in ("torch", "transformers", "trl", "peft", "datasets", "vllm")
+                 if m in sys.modules]
+        print(",".join(heavy))
+        """
+    ).format(src=str(ROOT / "src"), cfg=str(CONFIGS[0]), root=str(ROOT))
+    r = subprocess.run([sys.executable, "-c", source], capture_output=True, text=True, timeout=300)
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "", f"dry run imported: {r.stdout.strip()}"
 
 
 def test_sft_plan_counts_steps():
