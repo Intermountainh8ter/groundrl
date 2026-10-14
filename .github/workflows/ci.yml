@@ -1,0 +1,36 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      # Core library and tests only: no torch, transformers, trl, peft, datasets or vllm.
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: pytest -q --cov=groundrl --cov-report=term-missing
+      - name: Dataset is reproducible and consistent
+        run: groundrl check-data
+      - name: Dry run of the training configs (no GPU, no torch)
+        run: |
+          python train/sft.py --config train/configs/qwen3-0.6b-24gb.json --dry-run
+          python train/grpo.py --config train/configs/qwen3-1.7b-12gb.json --dry-run
+      - name: Heavy dependencies must not be installed
+        run: python -c "import importlib.util as u; assert all(u.find_spec(m) is None for m in ('torch','transformers','trl','peft','datasets','vllm'))"
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t groundrl .

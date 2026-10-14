@@ -4,7 +4,7 @@
   "profile": {
     "vram_gb": 12,
     "estimates_only": true,
-    "notes": "bf16 weights, LoRA, group size 4, 8 prompts (32 completions) per step, generation batch 8, shorter prompt budget (about 6% of train prompts are dropped)."
+    "notes": "bf16 weights, LoRA, group size 4, 8 prompts (32 completions) per step, generation batch 8, shorter prompt budget (the dry run prints how many train prompts are dropped; a few percent)."
   },
   "model": {
     "name_or_path": "Qwen/Qwen3-0.6B",

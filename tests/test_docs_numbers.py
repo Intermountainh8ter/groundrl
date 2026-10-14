@@ -63,3 +63,75 @@ def test_methodology_claims_about_which_policies_are_exploitable(root, results):
         "hallucinated_value"}
     share = t["policies"]["copy_chunk"]["scores"]["v2"]["frac_ge_0.5"]
     assert round(share * 100) == 14
+
+
+def _first_table(markdown: str) -> list[str]:
+    lines = markdown.split("\n")
+    start = next(i for i, line in enumerate(lines) if line.startswith("| policy | kind"))
+    out = []
+    for line in lines[start:]:
+        if not line.startswith("|"):
+            break
+        out.append(line)
+    return out
+
+
+def test_readme_audit_table_is_the_committed_audit_table(root):
+    readme = (root / "README.md").read_text()
+    for line in _first_table((root / "results" / "audit_test.md").read_text()):
+        assert line in readme, line
+
+
+def test_readme_baseline_table_matches_the_baseline_file(root, results):
+    readme = (root / "README.md").read_text()
+    for name, p in results["baseline"]["policies"].items():
+        m = p["metrics"]
+        v2 = m["mean_reward"]["v2"]
+        assert f"{v2['mean']:.3f} ({v2['lo']:.3f}-{v2['hi']:.3f})" in readme, name
+
+
+def test_readme_claims_and_counts(root, results):
+    readme = (root / "README.md").read_text()
+    summary = json.loads((root / "data" / "tasks" / "SUMMARY.json").read_text())
+    assert "Training results: NOT YET RUN" in readme
+    for key in ("train", "val", "test"):
+        assert f"`{summary['tasks'][key]}` {key}" in readme
+    assert f"{summary['total']} seeded questions" in readme
+    t = results["test"]
+    split_line = (f"({t['n_tasks']} tasks: {t['n_answerable']} answerable, "
+                  f"{t['n_unanswerable']} unanswerable)")
+    assert split_line in readme
+    assert f"{score(t, 'hedge_inline'):.3f}" in readme
+
+
+def test_diagram_text_quotes_current_counts(root):
+    summary = json.loads((root / "data" / "tasks" / "SUMMARY.json").read_text())
+    usage = (root / "docs" / "diagrams" / "usage.mmd").read_text()
+    from groundrl.audit import POLICIES
+
+    assert f"{summary['total']} tasks" in usage and f"{len(POLICIES)} policies" in usage
+    assert f"{summary['documents']} EIPs" in usage
+    flowcharts = (root / "docs" / "FLOWCHARTS.md").read_text()
+    assert usage.strip() in flowcharts
+    assert (root / "docs" / "diagrams" / "troubleshooting.mmd").read_text().strip() in flowcharts
+    assert flowcharts.count("```mermaid") == 2
+
+
+def test_threats_quote_current_corpus_and_budget_numbers(root, dataset):
+    from collections import Counter
+
+    from groundrl.trainconf import load_config
+    from groundrl.trainplan import build_plan
+
+    doc = (root / "docs" / "THREATS_TO_VALIDITY.md").read_text()
+    kinds = Counter(f.kind for f in dataset.facts)
+    assert f"{kinds['opcode'] + kinds['type_byte']} opcode and type-byte facts" in doc
+    test_opcode = sum(t.qtype == "opcode" for t in dataset.tasks["test"])
+    assert f"{test_opcode} TEST\n  tasks" in doc
+    expected = (("qwen3-0.6b-24gb", "0.7% at 2048"), ("qwen3-0.6b-12gb", "2.8% at\n  1536"))
+    for name, tokens in expected:
+        plan = build_plan(load_config(root / "train" / "configs" / f"{name}.json"), "sft",
+                          repo_root=root)
+        share = 100 * plan["dropped"] / plan["examples"]
+        assert f"{share:.1f}%" in tokens
+        assert tokens in doc
