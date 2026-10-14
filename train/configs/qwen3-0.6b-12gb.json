@@ -1,0 +1,106 @@
+{
+  "name": "qwen3-0.6b-12gb",
+  "description": "Qwen/Qwen3-0.6B with LoRA, 12 GB profile. Hyperparameters are untuned defaults chosen so that the memory estimate fits the profile; none of them has been run.",
+  "profile": {
+    "vram_gb": 12,
+    "estimates_only": true,
+    "notes": "bf16 weights, LoRA, group size 4, 8 prompts (32 completions) per step, generation batch 8, shorter prompt budget (about 6% of train prompts are dropped)."
+  },
+  "model": {
+    "name_or_path": "Qwen/Qwen3-0.6B",
+    "dtype": "bfloat16",
+    "load_in_4bit": false,
+    "attn_implementation": "sdpa",
+    "trust_remote_code": false,
+    "init_from": null
+  },
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": "all-linear",
+    "bias": "none"
+  },
+  "data": {
+    "data_dir": "data",
+    "train_split": "train",
+    "eval_split": "val",
+    "max_prompt_tokens": 1536,
+    "max_completion_tokens": 320,
+    "enable_thinking": false,
+    "limit_train": null,
+    "limit_eval": null
+  },
+  "sft": {
+    "args": {
+      "learning_rate": 0.0002,
+      "num_train_epochs": 2,
+      "per_device_train_batch_size": 1,
+      "gradient_accumulation_steps": 16,
+      "per_device_eval_batch_size": 1,
+      "warmup_steps": 0.05,
+      "lr_scheduler_type": "cosine",
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "max_length": 2048,
+      "completion_only_loss": true,
+      "packing": false,
+      "bf16": true,
+      "gradient_checkpointing": true,
+      "optim": "adamw_torch",
+      "logging_steps": 10,
+      "eval_strategy": "steps",
+      "eval_steps": 50,
+      "save_strategy": "steps",
+      "save_steps": 100,
+      "save_total_limit": 2,
+      "report_to": "none",
+      "seed": 0,
+      "dataset_num_proc": 1
+    }
+  },
+  "grpo": {
+    "reward": "v2",
+    "args": {
+      "learning_rate": 2e-05,
+      "max_steps": 300,
+      "per_device_train_batch_size": 2,
+      "steps_per_generation": 4,
+      "gradient_accumulation_steps": 16,
+      "num_generations": 4,
+      "max_completion_length": 320,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "beta": 0.02,
+      "epsilon": 0.2,
+      "loss_type": "dapo",
+      "scale_rewards": "group",
+      "num_iterations": 1,
+      "mask_truncated_completions": true,
+      "warmup_steps": 0.05,
+      "lr_scheduler_type": "constant_with_warmup",
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "bf16": true,
+      "gradient_checkpointing": true,
+      "optim": "adamw_torch",
+      "logging_steps": 1,
+      "save_strategy": "steps",
+      "save_steps": 50,
+      "save_total_limit": 3,
+      "report_to": "none",
+      "log_completions": true,
+      "num_completions_to_print": 2,
+      "use_vllm": false,
+      "seed": 0,
+      "remove_unused_columns": false
+    }
+  },
+  "eval": {
+    "split": "test",
+    "batch_size": 4,
+    "max_new_tokens": 320,
+    "temperature": 0.0,
+    "bootstrap": 2000
+  }
+}

@@ -35,7 +35,23 @@ def build_parser() -> argparse.ArgumentParser:
     au.add_argument("--boot", type=int, default=1000)
     au.add_argument("--limit", type=int, default=None)
     au.add_argument("--policies", nargs="*")
+
+    be = sub.add_parser("baseline-eval", help="evaluate scripted baseline policies (no model)")
+    be.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    be.add_argument("--split", choices=("train", "val", "test"), default="test")
+    be.add_argument("--out", type=Path, default=Path("results"))
+    be.add_argument("--boot", type=int, default=2000)
+    be.add_argument("--limit", type=int, default=None)
     return parser
+
+
+def _cmd_baseline_eval(args: argparse.Namespace) -> int:
+    from .evaluate import run_baselines
+    from .report import eval_table
+
+    result = run_baselines(args.data, args.split, args.out, n_boot=args.boot, limit=args.limit)
+    print(eval_table(list(result["policies"].items())))
+    return 0
 
 
 def _cmd_audit(args: argparse.Namespace) -> int:
@@ -81,4 +97,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     return COMMANDS[args.command](args)
 
 
-COMMANDS = {"build-tasks": _cmd_build_tasks, "check-data": _cmd_check_data, "audit": _cmd_audit}
+COMMANDS = {
+    "build-tasks": _cmd_build_tasks, "check-data": _cmd_check_data, "audit": _cmd_audit,
+    "baseline-eval": _cmd_baseline_eval,
+}

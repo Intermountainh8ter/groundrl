@@ -180,7 +180,30 @@ picture; it is a robustness check, not an independent proof.
   baseline (no model, no gold) reaches 0.61 on TEST, which is the number a trained model must beat
   to show it learned anything beyond locate-and-copy.
 
-## 6. Honesty rules
+## 6. Training protocol (specified, not run)
+
+Stages, in order (`docs/RUNBOOK.md` has the commands):
+
+1. **SFT baseline.** Supervised fine-tuning with LoRA on the gold answers of the TRAIN split
+   (prompt-completion format, loss on the completion only), then the adapter is merged into the
+   base weights. This is the starting point for GRPO and the comparison point for it.
+2. **GRPO.** Reward v2 (`make_trl_reward("v2")`), a fresh LoRA on the merged SFT model, group size
+   4-8, a small KL coefficient (0.02), learning rate 2e-5. Prompts are pre-rendered with the
+   model's own chat template (thinking disabled) so training and evaluation see identical text.
+3. **Evaluation on TEST** with greedy decoding: grounded-correct rate, correct rate, verified
+   rate, abstention precision and recall, hallucinated-citation rate, mean reward under each
+   version, length statistics, all with 95% bootstrap intervals over tasks.
+
+Comparison points that need no model (`groundrl baseline-eval`): the `oracle`, the top-1
+`extractive` policy, `eip_id_shortcut` and `refuse_all`. A trained model has to beat `extractive`
+to show it learned more than locating and copying a line.
+
+Claims that would need evidence this repository does not yet have: that GRPO with v2 beats the SFT
+baseline; that v2 is robust to a *learned* policy's exploration (the audit covers only scripted
+attacks); that anything transfers beyond EIPs. Planned reporting: three or more seeds per
+configuration, intervals not point estimates, TEST touched once per final comparison.
+
+## 7. Honesty rules
 
 * No training results are reported unless `results/*.json` produced by a real run exist.
   `scripts/make_report.py` renders only from those files.
