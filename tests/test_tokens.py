@@ -75,7 +75,8 @@ def test_number_variants_hex_decimal_and_powers():
     assert "4096" in number_variants("2**12")
     assert "2**12" in number_variants("4096")
     assert number_variants("abc") == {"abc"}
-    assert number_variants("3") == {"3"}  # too small to alias to hex
+    assert number_variants("3") == {"3", "0x3"}
+    assert number_variants("5") >= {"0x5"} and "5" in number_variants("0x5")
 
 
 def test_unit_variants_cover_eth_gwei_and_wei():

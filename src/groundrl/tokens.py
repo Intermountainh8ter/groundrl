@@ -106,8 +106,7 @@ def number_variants(tok: str) -> set[str]:
                 out.add(str(int(base) ** int(exp)))
         elif tok.isdigit():
             v = int(tok)
-            if v >= 16:
-                out.add(norm_number(hex(v)))
+            out.add(norm_number(hex(v)))
             if v > 1 and v & (v - 1) == 0:
                 out.add(f"2**{v.bit_length() - 1}")
     except ValueError:  # pragma: no cover - guarded by the isdigit/startswith checks

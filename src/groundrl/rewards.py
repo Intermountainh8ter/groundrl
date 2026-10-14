@@ -13,8 +13,8 @@ Every reward is a pure function ``(completion, example) -> (score, breakdown)`` 
 
   ``abstention``   abstain scores 1 only when the gold label says the context cannot answer;
                    answering an unanswerable question scores 0
-  ``correctness``  recall x precision of the answer's claim tokens against the gold tokens
-                   (tokens echoed from the question are neutral)
+  ``correctness``  recall of the gold tokens, times 0.25 for every extra claim token the gold
+                   answer does not contain (tokens echoed from the question are neutral)
   ``citation``     precision x recall of the cited chunks against the gold support groups
   ``relevance``    share of the question's claim tokens that the answer repeats
   ``length``       penalty for answers longer than 1.5x the gold answer plus a small allowance
@@ -23,12 +23,12 @@ Every reward is a pure function ``(completion, example) -> (score, breakdown)`` 
 
   ``score = consistency * length * redundancy * grounding * (floor + (1 - floor) * correctness
   * citation * (0.7 + 0.3 * relevance))`` where ``grounding`` is the v1 score and ``floor`` keeps
-  a small gradient for well-formed, grounded answers that are not yet correct. ``correctness`` is
-  ``recall * precision ** 2``: a wrong extra claim costs more than a missing one.
+  a small gradient for well-formed, grounded answers that are not yet correct.
 
-  v2 has two revisions. Revision 1 (``V2Config.rev1()``) had no consistency term and used
-  ``recall * precision``; the audit showed it could be exploited by answering twice with
-  contradicting values, so revision 2 (the default) added both changes.
+  v2 has two revisions. Revision 1 (``V2Config.rev1()``) had no consistency term and scored
+  correctness as ``recall * precision``; the audit showed it could be exploited by answering twice
+  with contradicting values (``hedge_right_and_wrong``), so revision 2 (the default) replaced
+  the precision factor by the per-extra-claim penalty and added the consistency term.
 
 Training wrappers (:func:`make_trl_reward`) have the signature ``fn(prompts, completions,
 **kwargs) -> list[float]`` expected by TRL and need no TRL import.
@@ -143,13 +143,13 @@ class V2Config:
     length_slack: float = 1.5
     length_pad: int = 15
     relevance_weight: float = 0.3
-    precision_power: float = 2.0
+    extra_claim_factor: float | None = 0.25
     consistency_factor: float = 0.25
 
     @classmethod
     def rev1(cls) -> V2Config:
         """The first v2 design, kept so the audit can show what revision 2 changed."""
-        return cls(consistency=False, precision_power=1.0)
+        return cls(consistency=False, extra_claim_factor=None)
 
     def without(self, term: str) -> V2Config:
         if term not in V2_TERMS:
@@ -165,7 +165,9 @@ def token_equiv(a: str, b: str) -> bool:
     """Equal tokens, or numerically equivalent spellings (0x40 = 64 = 2**6)."""
     if a == b:
         return True
-    return a[:1].isdigit() and b[:1].isdigit() and b in number_variants(a)
+    if not (a[:1].isdigit() and b[:1].isdigit()):
+        return False
+    return b in number_variants(a) or a in number_variants(b)
 
 
 def _in(tok: str, bag: set[str]) -> bool:
@@ -173,16 +175,19 @@ def _in(tok: str, bag: set[str]) -> bool:
 
 
 def correctness(
-    answer: str, ex: Example, precision_power: float = 1.0,
-) -> tuple[float, float, float]:
-    """``(recall x precision**power, recall, precision)`` of claim tokens vs the gold tokens.
+    answer: str, ex: Example, extra_claim_factor: float | None = None,
+) -> tuple[float, float, float, int]:
+    """``(score, recall, precision, extras)`` of the answer's claim tokens vs the gold tokens.
 
-    Tokens that also occur in the question, and the numbers of the EIPs involved, are neutral:
-    repeating them neither earns credit nor counts as an unsupported extra.
+    ``extras`` counts claim tokens that are neither gold nor neutral. Tokens that also occur in
+    the question, and the numbers of the EIPs involved, are neutral: repeating them neither earns
+    credit nor counts as an extra. With ``extra_claim_factor=None`` the score is
+    ``recall * precision`` (the first v2 design); otherwise ``recall * factor ** extras``, so each
+    additional claim the gold answer does not contain multiplies the score by ``factor``.
     """
     gold = set(ex.task.gold_tokens)
     if not gold:
-        return 1.0, 1.0, 1.0
+        return 1.0, 1.0, 1.0, 0
     answer_tokens = claim_tokens(strip_citations(answer))
     neutral = claim_tokens(ex.task.question) | {e.split("-", 1)[1] for e in ex.task.eips}
     matched = {a for a in answer_tokens if _in(a, gold)}
@@ -190,7 +195,9 @@ def correctness(
     recall = sum(_in(g, answer_tokens) for g in gold) / len(gold)
     denom = len(matched) + len(extras)
     precision = len(matched) / denom if denom else 0.0
-    return recall * precision**precision_power, recall, precision
+    if extra_claim_factor is None:
+        return recall * precision, recall, precision, len(extras)
+    return recall * extra_claim_factor ** len(extras), recall, precision, len(extras)
 
 
 def citation_quality(cited: list[str], ex: Example) -> tuple[float, float, float]:
@@ -254,26 +261,25 @@ def _canon(tok: str) -> str:
 
 
 def contradictions(answer: str, ex: Example) -> int:
-    """Pairs of near-identical sentences that give different numbers (answering twice).
+    """Pairs of sentences that say the same thing with different numbers (answering twice).
 
-    Two sentences are near-identical if their non-numeric content words overlap by at least 80%
-    (Jaccard). They contradict if both carry numeric claims and the sets differ. EIP numbers are
-    ignored. Legitimate multi-fact answers differ in their words, so they do not trigger this.
+    Two sentences say the same thing if their words are identical once pure numbers are removed
+    (EIP numbers are kept, so "EIP-198 was created on ..." and "EIP-1167 was created on ..." are
+    different). They contradict if both carry numeric claims and the sets differ. Legitimate
+    multi-fact answers use different words for different facts, so they do not trigger this. A
+    hedge that rewords the sentence is not caught here; the extra-claim penalty still applies.
     """
     eips = {e.split("-", 1)[1] for e in ex.task.eips}
-    rows: list[tuple[set[str], set[str]]] = []
+    rows: list[tuple[frozenset[str], set[str]]] = []
     for s in sentences(answer):
         body = strip_citations(s)
-        words = {w for w in content_words(body) if not w[:1].isdigit()}
+        words = frozenset(w for w in content_words(body) if not w[:1].isdigit() or w in eips)
         nums = {_canon(t) for t in claim_tokens(body) if t[:1].isdigit()} - eips
         rows.append((words, nums))
     count = 0
     for i, (wi, ni) in enumerate(rows):
         for wj, nj in rows[i + 1:]:
-            union = wi | wj
-            if not union or not ni or not nj or ni == nj:
-                continue
-            if len(wi & wj) / len(union) >= 0.8:
+            if wi and wi == wj and ni and nj and ni != nj:
                 count += 1
     return count
 
@@ -296,10 +302,11 @@ def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tupl
     res = _verify(completion, ex)
     g = graded_grounding(res)
     c = rc = pc = k = kp = kr = 1.0
+    extras = 0
     rel = 1.0
     if task.answerable or not cfg.abstention:
         if cfg.correctness and task.answerable:
-            c, rc, pc = correctness(completion, ex, cfg.precision_power)
+            c, rc, pc, extras = correctness(completion, ex, cfg.extra_claim_factor)
         if cfg.citation and task.answerable:
             k, kp, kr = citation_quality(res.cited_chunks, ex)
     if cfg.relevance:
@@ -313,6 +320,7 @@ def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tupl
     score = max(0.0, min(1.0, cf * lf * df * g * inner))
     bd.update({
         "verified": res.ok, "grounded": g, "correctness": c, "recall": rc, "precision": pc,
+        "extra_claims": extras,
         "citation_quality": k, "cite_precision": kp, "cite_recall": kr, "relevance": rel,
         "length_factor": lf, "words": words, "word_budget": budget, "redundancy_factor": df,
         "dup_sentences": dup_s, "dup_citations": dup_c, "contradictions": conflicts,

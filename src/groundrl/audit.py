@@ -15,19 +15,21 @@ need no knowledge of the answer at all.
 """
 from __future__ import annotations
 
+import json
 import random
 import re
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
+from pathlib import Path
 
 from .example import Example
+from .facts import paragraph_sentences, plain
 from .protocol import ABSTAIN_TEXT, CITATION
 from .rewards import V2_TERMS, V2Config, score_completion, token_equiv
 from .stats import mean_ci
 from .tokens import (
     claim_tokens,
     content_words,
-    normalize_text,
     raw_claims,
     sentences,
     strip_citations,
@@ -58,9 +60,8 @@ def _body(text: str) -> str:
 
 
 def _clean_line(line: str) -> str:
-    line = line.replace("|", " ").replace("`", "").replace("**", "")
-    line = re.sub(r"\s+", " ", line).strip(" -*")
-    return line
+    line = plain(line.replace("|", " "))
+    return line.strip(" -*")
 
 
 def _with_cite(text: str, cites: Sequence[str]) -> str:
@@ -74,8 +75,6 @@ def _with_cite(text: str, cites: Sequence[str]) -> str:
 
 def _units(chunk_text: str) -> list[str]:
     """Candidate answer lines of a chunk: table rows and paragraph sentences."""
-    from .facts import paragraph_sentences
-
     body = _body(chunk_text)
     table = [ln for ln in body.splitlines() if ln.count("|") >= 2 and not set(ln) <= set("|- :")]
     prose = [ln for ln in body.splitlines()
@@ -140,16 +139,18 @@ def _substitute_constant(
 ) -> tuple[str, str] | None:
     """Replace one gold value in ``answer`` by another number from the same gold chunk.
 
-    The replacement is chosen so that it still occurs in the chunk (the verifier cannot tell).
+    The replacement is chosen so that it still occurs in the chunk (the verifier cannot tell) and
+    is not already in the answer or the question (so it is a genuinely competing value).
     Returns ``(new answer, replacement)``, or ``None`` if the answer has no gold value or the
     chunk has no alternative number.
     """
     gold = list(ex.task.gold_tokens)
     cid = gold_chunk(ex)
     eip_numbers = {e.split("-", 1)[1] for e in ex.task.eips}
+    present = claim_tokens(answer) | claim_tokens(ex.task.question)
     pool = [t for t in dict.fromkeys(raw_claims(ex.context[cid]))
             if _is_numeric(t) and not any(token_equiv(_norm(t), g) for g in gold)
-            and _norm(t) not in eip_numbers]
+            and _norm(t) not in eip_numbers and _norm(t) not in present]
     if not pool:
         return None
     for match in _NUMBER_SPAN.finditer(strip_citations(answer)):
@@ -303,8 +304,8 @@ _FULLWIDTH = {ord(str(d)): chr(0xFF10 + d) for d in range(10)}
 
 def p_unicode_obfuscation(ex: Example, rng: random.Random) -> str:
     text = oracle_text(ex) if ex.task.answerable else generic_guess(ex)
-    return CITATION.sub(lambda m: "\0" + m.group(1) + "\1", text).translate(_FULLWIDTH) \
-        .replace("\0", "[").replace("\1", "]")
+    parts = re.split(r"(\[eip-\d+#\d{3,}\])", text)
+    return "".join(p if CITATION.fullmatch(p) else p.translate(_FULLWIDTH) for p in parts)
 
 
 POLICIES: tuple[PolicySpec, ...] = (
@@ -395,8 +396,14 @@ def audit(
     }
     for spec in policies:
         answers = [run_policy(spec, e, seed) for e in examples]
-        entry: dict = {"category": spec.category, "description": spec.description,
-                       "uses_gold": spec.uses_gold, "scores": {}}
+        # "applied": the policy's output differs from the gold answer, i.e. the behaviour fired.
+        applied = [a.strip() != e.task.gold_answer.strip() for a, e in zip(answers, examples,
+                                                                          strict=True)]
+        entry: dict = {
+            "category": spec.category, "description": spec.description,
+            "uses_gold": spec.uses_gold, "scores": {},
+            "applied_fraction": sum(applied) / max(1, len(applied)),
+        }
         for name, (version, cfg) in cols.items():
             vals = [score_completion(version, a, e, cfg)[0] for a, e in zip(answers, examples,
                                                                               strict=True)]
@@ -404,8 +411,10 @@ def audit(
             summary["frac_ge_0.5"] = sum(v >= 0.5 for v in vals) / len(vals) if vals else 0.0
             ans = [v for v, e in zip(vals, examples, strict=True) if e.task.answerable]
             una = [v for v, e in zip(vals, examples, strict=True) if not e.task.answerable]
-            summary["answerable_mean"] = sum(ans) / len(ans) if ans else float("nan")
-            summary["unanswerable_mean"] = sum(una) / len(una) if una else float("nan")
+            hit = [v for v, ap in zip(vals, applied, strict=True) if ap]
+            summary["answerable_mean"] = _mean_or_none(ans)
+            summary["unanswerable_mean"] = _mean_or_none(una)
+            summary["applied_mean"] = _mean_or_none(hit)
             entry["scores"][name] = summary
         entry["mean_words"] = sum(len(a.split()) for a in answers) / max(1, len(answers))
         out["policies"][spec.name] = entry
@@ -414,7 +423,29 @@ def audit(
               if p["category"] != REFERENCE and p["scores"][col]["mean"] >= EXPLOIT_THRESHOLD]
         for col in cols
     }
+    out["closed_by"] = closed_by(out)
     return out
+
+
+def closed_by(result: dict) -> dict[str, list[str]]:
+    """For each policy that v2 holds below the threshold: the v2 terms whose removal lifts it back.
+
+    ``closed_by[policy] = ["citation"]`` means: full v2 scores the policy below
+    :data:`EXPLOIT_THRESHOLD`, and v2 without the citation term scores it at or above. Empty means
+    no single term is responsible (several overlap, or the policy was never above the threshold).
+    """
+    out: dict[str, list[str]] = {}
+    for name, p in result["policies"].items():
+        if p["category"] == REFERENCE or p["scores"]["v2"]["mean"] >= EXPLOIT_THRESHOLD:
+            continue
+        out[name] = [t for t in V2_TERMS
+                     if f"v2-no-{t}" in p["scores"]
+                     and p["scores"][f"v2-no-{t}"]["mean"] >= EXPLOIT_THRESHOLD]
+    return out
+
+
+def _mean_or_none(values: Sequence[float]) -> float | None:
+    return sum(values) / len(values) if values else None
 
 
 # ---------------------------------------------------------------------------------------------
@@ -434,16 +465,20 @@ def render_markdown(result: dict, split: str = "test") -> str:
         f"({result['n_tasks']} tasks: {result['n_answerable']} answerable, "
         f"{result['n_unanswerable']} unanswerable). Mean reward per policy; **bold** means the "
         f"policy is EXPLOITABLE under that reward (mean >= {result['exploit_threshold']:.2f}, "
-        "fixed in advance).",
+        "fixed in advance). \"fires on\" is the share of tasks where the policy's output differs "
+        "from the gold answer (a gold-based policy falls back to the gold answer when it cannot "
+        "apply its trick); \"v2 when fired\" is the v2 mean over only those tasks.",
         "",
-        "| policy | kind | uses gold | v0 | v1 | v2 |",
-        "|---|---|---|---|---|---|",
+        "| policy | kind | uses gold | fires on | v0 | v1 | v2 | v2 when fired |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for name, p in result["policies"].items():
         flag = p["category"] != REFERENCE
         cells = " | ".join(_cell(p["scores"][c], flag) for c in ("v0", "v1", "v2"))
+        fired = p["scores"]["v2"]["applied_mean"]
+        fired_txt = "n/a" if fired is None else f"{fired:.3f}"
         lines.append(f"| `{name}` | {p['category']} | {'yes' if p['uses_gold'] else 'no'} | "
-                     f"{cells} |")
+                     f"{p['applied_fraction']:.0%} | {cells} | {fired_txt} |")
     lines += ["", "Which v2 term closes which hole: mean reward with one term removed (compare "
               "with the full-v2 column), the first v2 design (rev1), and v2 without any "
               "gold-label term (gold-free):", ""]
@@ -460,8 +495,34 @@ def render_markdown(result: dict, split: str = "test") -> str:
     for col in ("v0", "v1", "v2"):
         names = result["exploitable"][col]
         lines.append(f"* {col}: " + (", ".join(f"`{n}`" for n in names) if names else "none"))
+    lines += ["", "Held below 0.50 by exactly these v2 terms (removing the term lifts the policy "
+              "to 0.50 or more):", ""]
+    for name, terms_ in result["closed_by"].items():
+        if terms_:
+            lines.append(f"* `{name}`: " + ", ".join(terms_))
     return "\n".join(lines) + "\n"
 
 
-def normalised(text: str) -> str:  # pragma: no cover - convenience for notebooks
-    return normalize_text(text)
+def run_and_write(
+    data_dir: Path, split: str, out_dir: Path, seed: int = 0, n_boot: int = 1000,
+    limit: int | None = None, policy_names: Sequence[str] | None = None,
+) -> tuple[dict, str]:
+    """Audit a real split, write ``audit_<split>.json`` / ``.md`` and return (result, markdown)."""
+    from .dataset import load_dataset
+    from .example import make_examples
+
+    ds = load_dataset(data_dir)
+    examples = make_examples(ds.tasks[split][:limit], ds.index)
+    chosen = [p for p in POLICIES if not policy_names or p.name in policy_names]
+    result = audit(examples, chosen, seed=seed, n_boot=n_boot)
+    result["split"] = split
+    result["command"] = f"python scripts/reward_audit.py --split {split}"
+    summary = json.loads((Path(data_dir) / "tasks" / "SUMMARY.json").read_text(encoding="utf-8"))
+    result["task_file_sha256"] = summary["sha256"][split]
+    table = render_markdown(result, split)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"audit_{split}.json").write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (out_dir / f"audit_{split}.md").write_text(table, encoding="utf-8")
+    return result, table

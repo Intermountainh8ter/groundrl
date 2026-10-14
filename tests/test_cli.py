@@ -24,3 +24,11 @@ def test_build_tasks_then_check_data_on_a_temp_corpus(tmp_path, capsys):
 def test_check_data_passes_on_the_committed_dataset(capsys):
     assert cli.main(["check-data", "--data", "data"]) == 0
     assert "data OK" in capsys.readouterr().out
+
+
+def test_audit_subcommand_writes_files(tmp_path, capsys):
+    out = tmp_path / "res"
+    rc = cli.main(["audit", "--split", "val", "--limit", "8", "--boot", "10", "--out", str(out),
+                   "--policies", "oracle", "empty"])
+    assert rc == 0 and (out / "audit_val.json").exists()
+    assert "Reward-hacking audit" in capsys.readouterr().out

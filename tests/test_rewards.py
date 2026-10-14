@@ -13,6 +13,7 @@ from groundrl.rewards import (
     V2Config,
     citation_quality,
     completion_text,
+    contradictions,
     correctness,
     graded_grounding,
     length_factor,
@@ -96,9 +97,11 @@ def test_completion_text_handles_strings_messages_and_junk():
     assert completion_text([]) == ""
 
 
-def test_token_equiv():
+def test_token_equiv_is_symmetric():
     assert token_equiv("0x40", "64") and token_equiv("64", "0x40") and token_equiv("2**6", "64")
+    assert token_equiv("64", "2**6") and token_equiv("2", "0x2") and token_equiv("0x2", "2")
     assert token_equiv("a", "a") and not token_equiv("a", "b") and not token_equiv("4", "5")
+    assert not token_equiv("a", "4")
 
 
 # --- v0 / v1 ---
@@ -160,37 +163,51 @@ def test_v2_oracle_scores_one():
         assert reward_v2(e.task.gold_answer, e)[0] == pytest.approx(1.0, abs=0.005)
 
 
-def test_correctness_rewards_recall_and_punishes_extra_claims():
+def test_correctness_rewards_recall_and_quarters_the_score_per_extra_claim():
     e = ex()
-    assert correctness("FIELD_ELEMENTS_PER_BLOB is 4096", e)[0] == 1.0
-    assert correctness("FIELD_ELEMENTS_PER_BLOB is 8192", e)[0] == 0.0
-    c, recall, precision = correctness("FIELD_ELEMENTS_PER_BLOB is 4096 and 786432", e)
-    assert recall == 1.0 and precision == 0.5 and c == 0.5
+    assert correctness("FIELD_ELEMENTS_PER_BLOB is 4096", e, 0.25)[0] == 1.0
+    assert correctness("FIELD_ELEMENTS_PER_BLOB is 8192", e, 0.25)[0] == 0.0
+    c, recall, precision, extras = correctness(
+        "FIELD_ELEMENTS_PER_BLOB is 4096 and 786432", e, 0.25)
+    assert (recall, precision, extras, c) == (1.0, 0.5, 1, 0.25)
+    c, *_, extras = correctness("is 4096 and 786432 and 2400 and 7", e, 0.25)
+    assert extras == 3 and c == pytest.approx(0.25**3)
+
+
+def test_correctness_first_design_is_recall_times_precision():
+    c, recall, precision, extras = correctness("is 4096 and 786432", ex(), None)
+    assert (c, recall, precision, extras) == (0.5, 1.0, 0.5, 1)
 
 
 def test_correctness_treats_question_and_eip_tokens_as_neutral():
-    c, recall, precision = correctness("In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096", ex())
-    assert (recall, precision) == (1.0, 1.0)
+    c, recall, precision, extras = correctness("In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096", ex(),
+                                               0.25)
+    assert (recall, precision, extras) == (1.0, 1.0, 0)
 
 
-def test_correctness_accepts_equivalent_spellings():
+def test_correctness_accepts_equivalent_spellings_in_both_directions():
     e = ex(gold_tokens=["0x40"])
-    assert correctness("the byte is 64", e)[0] == 1.0
-    assert correctness("the byte is 0x40", e)[0] == 1.0
+    assert correctness("the byte is 64", e, 0.25)[0] == 1.0
+    assert correctness("the byte is 0x40", e, 0.25)[0] == 1.0
+    small = ex(gold_tokens=["0x2"])
+    assert correctness("type 2", small, 0.25)[0] == 1.0
+    assert correctness("type 0x02", small)[0] == 1.0
+    assert correctness("type 2", ex(gold_tokens=["2"]), 0.25)[0] == 1.0
 
 
 def test_correctness_with_no_gold_tokens_is_neutral():
-    assert correctness("anything 42", ex(gold_tokens=[])) == (1.0, 1.0, 1.0)
+    assert correctness("anything 42", ex(gold_tokens=[])) == (1.0, 1.0, 1.0, 0)
 
 
 def test_correctness_of_an_answer_without_claims_is_zero():
     assert correctness("It is large.", ex())[0] == 0.0
 
 
-def test_multi_fact_correctness_is_the_product_of_recall_and_precision():
+def test_multi_fact_one_wrong_value_loses_recall_and_pays_for_the_extra():
     e = multi()
-    c, recall, precision = correctness("FIELD_ELEMENTS_PER_BLOB is 4096 and GAS_PER_BLOB is 5", e)
-    assert recall == 0.5 and precision == 0.5 and c == 0.25
+    c, recall, precision, extras = correctness(
+        "FIELD_ELEMENTS_PER_BLOB is 4096 and GAS_PER_BLOB is 5", e, 0.25)
+    assert recall == 0.5 and extras == 1 and c == pytest.approx(0.125)
 
 
 def test_citation_quality_is_precision_times_recall_over_gold_groups():
@@ -301,7 +318,7 @@ def test_v2_config_without_rejects_unknown_terms():
     with pytest.raises(ValueError, match="unknown reward term"):
         V2Config().without("vibes")
     assert set(V2_TERMS) == {"abstention", "correctness", "citation", "relevance", "length",
-                             "redundancy"}
+                             "redundancy", "consistency"}
 
 
 def test_v2_breakdown_has_every_term():
@@ -425,3 +442,55 @@ def test_examples_preserve_context_order(real_examples, dataset):
     for e in real_examples["test"][:50]:
         assert e.context_ids == e.task.context_ids
         assert all(dataset.index.by_id[c].text == t for c, t in e.context.items())
+
+
+# --- consistency (answering twice) and revisions -------------------------------------------------
+
+
+def test_contradictions_flags_the_same_sentence_with_different_numbers():
+    e = ex()
+    twice = ("In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096 [eip-4844#003]. "
+             "In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 786432 [eip-4844#003].")
+    assert contradictions(twice, e) == 1
+    same = ("In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096 [eip-4844#003]. "
+            "In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 0x1000 [eip-4844#003].")
+    assert contradictions(same, e) == 0  # equivalent spellings agree
+
+
+def test_contradictions_does_not_flag_legitimate_multi_fact_answers():
+    assert contradictions(multi().task.gold_answer, multi()) == 0
+    cmp_ = ex(eips=["eip-198", "eip-1167"])
+    dates = ("EIP-198 was created on 2017-01-30 [eip-198#000]. "
+             "EIP-1167 was created on 2018-06-22 [eip-1167#000].")
+    assert contradictions(dates, cmp_) == 0  # different EIPs are different sentences
+    siblings = ("a single G1 point (128 bytes) [eip-2537#018]. "
+                "a single G2 point (256 bytes) [eip-2537#018].")
+    assert contradictions(siblings, ex()) == 0
+
+
+def test_contradictions_ignores_sentences_without_numbers():
+    assert contradictions("It is large [eip-4844#003]. It is large [eip-4844#003].", ex()) == 0
+    assert contradictions("", ex()) == 0
+
+
+def test_v2_penalises_answering_twice_but_rev1_did_not_fully():
+    twice = ("In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096 [eip-4844#003]. "
+             "In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 786432 [eip-4844#003].")
+    final, bd = reward_v2(twice, ex())
+    assert bd["contradictions"] == 1 and bd["consistency_factor"] == 0.25
+    no_cons, _ = reward_v2(twice, ex(), V2Config().without("consistency"))
+    rev1, _ = reward_v2(twice, ex(), V2Config.rev1())
+    assert final < no_cons <= rev1 + 1e-9 or final < rev1
+    assert final < 0.2
+
+
+def test_rev1_preset_has_no_consistency_term_and_the_precision_formula():
+    cfg = V2Config.rev1()
+    assert cfg.consistency is False and cfg.extra_claim_factor is None
+    assert V2Config().consistency is True and V2Config().extra_claim_factor == 0.25
+
+
+def test_inline_hedge_pays_for_the_extra_claim():
+    hedged = "In EIP-4844, FIELD_ELEMENTS_PER_BLOB is 4096 (or 786432) [eip-4844#003]."
+    s, bd = reward_v2(hedged, ex())
+    assert bd["extra_claims"] == 1 and s < 0.4

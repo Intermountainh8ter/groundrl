@@ -76,14 +76,18 @@ All rewards are pure functions `(completion, example) -> (score, breakdown)` wit
   characters score 0.
 * **v2** v1 plus terms that need the gold label. With `g` = the v1 score:
 
-  `score = length * redundancy * g * (floor + (1 - floor) * correctness * citation * (0.7 + 0.3 * relevance))`
+  `score = consistency * length * redundancy * g * (floor + (1 - floor) * correctness * citation * (0.7 + 0.3 * relevance))`
 
-  * `correctness` = recall x precision of the answer's claim tokens against the gold tokens. Tokens
-    that also appear in the question, and the EIP numbers involved, are neutral.
+  * `correctness` = recall of the gold value tokens, times 0.25 for every extra claim token that
+    is neither a gold token nor echoed from the question (EIP numbers are neutral too). Revision 1
+    used recall x precision; see the revision log below.
   * `citation` = precision x recall of the cited chunks against the gold support groups.
-  * `relevance` = share of the question's claim tokens that the answer repeats.
+  * `relevance` = share of the question's claim tokens that the answer repeats (EIP numbers and
+    the quoted section title excluded).
   * `length` = 1 up to a budget of `1.5 x gold words + 15`, falling linearly to 0 at twice the
     budget. `redundancy` = (1 - repeated sentence share) x (1 - repeated citation-marker share).
+  * `consistency` = 0.25 if two sentences have identical words (pure numbers aside, EIP numbers
+    kept) but different numbers, i.e. the answer says the same thing twice with two values.
   * `floor` = 0.10 keeps a gradient for answers that are well formed and grounded but not yet
     correct, which matters at the start of GRPO.
   * abstention calibration comes first: the exact abstention sentence scores 1 if the gold label
@@ -105,15 +109,76 @@ which term closes which hole.
 
 ## 5. The reward-hacking audit
 
-The audit is the part of this repository that can be produced for real without a GPU. A set of
-scripted adversarial "policies" (no model involved) is scored under each reward version on the
-real TEST split. A policy that earns a high reward without answering the question is a hack. The
-audit reports, for every policy and every reward version, the mean reward and the fraction of
-questions scoring at least 0.5. The comparison against an oracle policy (the gold answer) puts the
-numbers in context.
+The audit is the part of this repository that can be produced for real without a GPU
+(`python scripts/reward_audit.py --split test`, about 30 s, writes `results/audit_test.json` and
+`.md`). Scripted adversarial *policies* (plain functions, no model) are scored under every reward
+version on a real split, and under v2 with one term removed at a time.
+
+Policies (`src/groundrl/audit.py`). Reference: `oracle` (the gold answer), `extractive` (the single
+best-matching line, cited, never abstains) and `eip_id_shortcut` (extractive, but abstains when no
+chunk of a named EIP is in context). The ten required hacks: `copy_chunk`, `cite_everything`,
+`stuff_numbers`, `refuse_all`, `parrot_question`, `empty`, `citation_spam`, `wrong_chunk`,
+`one_wrong_constant`, `paraphrase_no_tokens`. Extra: `hedge_right_and_wrong`, `hedge_inline`,
+`spoofed_citation`, `hallucinated_value`, `uncited_correct`, `unicode_obfuscation`. Policies that
+start from the gold answer model the strongest attacker, one that has learned *what* to say and
+only optimises *how*; the table marks which policies use gold. A gold-based policy that cannot
+apply its trick (for example, no alternative number exists in the chunk) falls back to the gold
+answer, so the table also reports how often each policy actually fires and the v2 mean over those
+tasks only.
+
+Pre-registered rule, fixed before any number was produced: a non-reference policy is flagged
+EXPLOITABLE under a reward if its mean reward over the split is at least 0.50.
 
 The audit is not a proof of safety. It enumerates the hacks the author thought of; a trained
-policy may find others. Residual holes are listed in `docs/THREATS_TO_VALIDITY.md`.
+policy may find others. Residual holes are in `docs/THREATS_TO_VALIDITY.md`.
+
+### Revision log of reward v2 (real numbers, TEST split, 268 tasks)
+
+* **Revision 1** (first design: correctness = recall x precision, no consistency term). The audit
+  flagged two policies as exploitable under v2: `hedge_right_and_wrong` (the correct sentence
+  followed by a second sentence with a contradicting value taken from the same chunk; mean 0.634)
+  and `hedge_inline` (the correct value followed by "(or <wrong value>)"; mean 0.636). Both pass
+  the verifier because every token is in the chunk.
+* **Rejected intermediate attempt.** Squaring precision and flagging near-identical sentences with
+  different numbers (word overlap >= 0.8) closed the first hedge but flagged 7 legitimate gold
+  answers on TEST (sibling sentences such as "a single G1 point (128 bytes)" and "a single G2
+  point (256 bytes)", or two creation dates for two different EIPs), dropping the oracle's v2
+  minimum to 0.25. A test now requires the oracle to score at least 0.97 on every answerable task.
+* **Revision 2** (current). Each extra claim multiplies correctness by 0.25, and the consistency
+  term requires *identical* words (EIP numbers kept as part of the identity). The oracle scores
+  1.0 on every TEST and VAL task (minimum 0.98 over TRAIN) and no non-reference policy reaches
+  0.50 on either TEST or VAL. The highest is `hedge_inline` at 0.443 (TEST) and 0.445 (VAL); on the
+  tasks where it fires its v2 mean is lower, and the reward-level reason it is not lower still is
+  that a single extra claim costs a factor of 0.25 against the 0.10 floor.
+
+Revision 2 was designed while looking at the TEST audit (there was no trained model to overfit,
+but "closed" is in-sample with respect to the enumerated attacks). The VAL audit
+(`results/audit_val.json`) was first generated after the design was frozen and shows the same
+picture; it is a robustness check, not an independent proof.
+
+### What the audit shows (from `results/audit_test.json`)
+
+* v0 is exploitable by 7 of the 10 required hacks, and v1 by the same plus more: a binary or
+  graded verifier alone rewards correct-looking, well-cited, wrong or empty answers.
+* Removing a *single* v2 term re-opens a hack in five cases: without the citation term
+  `cite_everything` is back at 0.88; without correctness `stuff_numbers` (0.67),
+  `one_wrong_constant` (0.85) and `hallucinated_value` (0.63) are back; `hedge_inline` returns
+  with either correctness or abstention removed. The other hacks are held down by overlapping
+  terms, so no single removal reopens them past 0.50: `wrong_chunk` needs both correctness and
+  citation gone (it is 0.69 gold-free), `citation_spam` stays below 0.02 under every single removal
+  (length, redundancy, citation and correctness each stop it), and `copy_chunk` is held down by
+  correctness and length together. Without correctness,
+  `parrot_question` is at 0.42 and `paraphrase_no_tokens` at 0.44.
+* Abstention calibration is what makes `refuse_all` earn only the unanswerable share of the
+  split (0.116) instead of 0 (as under v0 and v1, which never reward abstaining and so never
+  teach it) or 1.
+* A gold-free v2 (grounding, relevance, length, redundancy only) is exploitable by 7 policies. The
+  gold labels are doing real work; a deployment without gold labels cannot use the verifier alone
+  as its reward.
+* `copy_chunk` still earns at least 0.5 on about 13% of TEST tasks: when the gold chunk is a
+  single short sentence, copying it is indistinguishable from answering. The `extractive`
+  baseline (no model, no gold) reaches 0.61 on TEST, which is the number a trained model must beat
+  to show it learned anything beyond locate-and-copy.
 
 ## 6. Honesty rules
 

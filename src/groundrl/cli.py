@@ -26,7 +26,25 @@ def build_parser() -> argparse.ArgumentParser:
 
     cd = sub.add_parser("check-data", help="verify manifest hashes and task invariants")
     cd.add_argument("--data", type=Path, default=DEFAULT_DATA)
+
+    au = sub.add_parser("audit", help="score scripted adversarial policies under each reward")
+    au.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    au.add_argument("--split", choices=("train", "val", "test"), default="test")
+    au.add_argument("--out", type=Path, default=Path("results"))
+    au.add_argument("--seed", type=int, default=0)
+    au.add_argument("--boot", type=int, default=1000)
+    au.add_argument("--limit", type=int, default=None)
+    au.add_argument("--policies", nargs="*")
     return parser
+
+
+def _cmd_audit(args: argparse.Namespace) -> int:
+    from .audit import run_and_write
+
+    _, table = run_and_write(args.data, args.split, args.out, args.seed, args.boot, args.limit,
+                             args.policies)
+    print(table)
+    return 0
 
 
 def _cmd_build_tasks(args: argparse.Namespace) -> int:
@@ -63,4 +81,4 @@ def main(argv: Sequence[str] | None = None) -> int:
     return COMMANDS[args.command](args)
 
 
-COMMANDS = {"build-tasks": _cmd_build_tasks, "check-data": _cmd_check_data}
+COMMANDS = {"build-tasks": _cmd_build_tasks, "check-data": _cmd_check_data, "audit": _cmd_audit}

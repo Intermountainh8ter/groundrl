@@ -1,0 +1,2564 @@
+{
+  "closed_by": {
+    "citation_spam": [],
+    "cite_everything": [
+      "citation"
+    ],
+    "copy_chunk": [],
+    "empty": [],
+    "hallucinated_value": [
+      "correctness"
+    ],
+    "hedge_inline": [
+      "abstention",
+      "correctness"
+    ],
+    "hedge_right_and_wrong": [],
+    "one_wrong_constant": [
+      "correctness"
+    ],
+    "paraphrase_no_tokens": [],
+    "parrot_question": [],
+    "refuse_all": [],
+    "spoofed_citation": [],
+    "stuff_numbers": [
+      "correctness"
+    ],
+    "uncited_correct": [],
+    "unicode_obfuscation": [],
+    "wrong_chunk": []
+  },
+  "command": "python scripts/reward_audit.py --split val",
+  "exploit_threshold": 0.5,
+  "exploitable": {
+    "v0": [
+      "copy_chunk",
+      "cite_everything",
+      "stuff_numbers",
+      "citation_spam",
+      "wrong_chunk",
+      "one_wrong_constant",
+      "paraphrase_no_tokens",
+      "hedge_right_and_wrong",
+      "hedge_inline"
+    ],
+    "v1": [
+      "copy_chunk",
+      "cite_everything",
+      "stuff_numbers",
+      "parrot_question",
+      "citation_spam",
+      "wrong_chunk",
+      "one_wrong_constant",
+      "paraphrase_no_tokens",
+      "hedge_right_and_wrong",
+      "hedge_inline",
+      "hallucinated_value"
+    ],
+    "v2": [],
+    "v2-gold-free": [
+      "cite_everything",
+      "stuff_numbers",
+      "parrot_question",
+      "wrong_chunk",
+      "one_wrong_constant",
+      "paraphrase_no_tokens",
+      "hedge_inline",
+      "hallucinated_value"
+    ],
+    "v2-no-abstention": [
+      "hedge_inline"
+    ],
+    "v2-no-citation": [
+      "cite_everything"
+    ],
+    "v2-no-consistency": [],
+    "v2-no-correctness": [
+      "stuff_numbers",
+      "one_wrong_constant",
+      "hedge_inline",
+      "hallucinated_value"
+    ],
+    "v2-no-length": [],
+    "v2-no-redundancy": [],
+    "v2-no-relevance": [],
+    "v2-rev1": [
+      "hedge_right_and_wrong",
+      "hedge_inline"
+    ]
+  },
+  "kind": "reward_audit",
+  "n_answerable": 237,
+  "n_tasks": 267,
+  "n_unanswerable": 30,
+  "policies": {
+    "citation_spam": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "one correct sentence repeated 12 times, each citing the gold chunk 3 times",
+      "mean_words": 211.23595505617976,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 8.264444052067123e-05,
+          "applied_mean": 7.335854832733738e-05,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00012960956242167237,
+          "lo": 2.632230770339386e-05,
+          "mean": 7.335854832733738e-05,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.00029708954118236834,
+          "applied_mean": 0.00026370869385850676,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0004733354553501247,
+          "lo": 8.570143726666828e-05,
+          "mean": 0.00026370869385850676,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 8.264444052067123e-05,
+          "applied_mean": 7.335854832733738e-05,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00012960956242167237,
+          "lo": 2.632230770339386e-05,
+          "mean": 7.335854832733738e-05,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.00014119282030674443,
+          "applied_mean": 0.00012532845847452597,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00022013760081643986,
+          "lo": 4.2786175019321105e-05,
+          "mean": 0.00012532845847452597,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 8.264444052067123e-05,
+          "applied_mean": 7.335854832733738e-05,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00012960956242167237,
+          "lo": 2.632230770339386e-05,
+          "mean": 7.335854832733738e-05,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.00015046882325363346,
+          "applied_mean": 0.0001335622138992926,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00023579827464346827,
+          "lo": 4.78248915046668e-05,
+          "mean": 0.00013356221389929259,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.021584711548121374,
+          "applied_mean": 0.01915946305956841,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.02047172391467512,
+          "lo": 0.017819600499375792,
+          "mean": 0.019159463059568407,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0029751998587441626,
+          "applied_mean": 0.002640907739784144,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.004665944247180202,
+          "lo": 0.0009476030773221783,
+          "mean": 0.002640907739784144,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 9.56788432175212e-05,
+          "applied_mean": 8.492841139532781e-05,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00015042580702693073,
+          "lo": 3.111167107733901e-05,
+          "mean": 8.492841139532781e-05,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 8.264444052067123e-05,
+          "applied_mean": 7.335854832733738e-05,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.00012960956242167237,
+          "lo": 2.632230770339386e-05,
+          "mean": 7.335854832733738e-05,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "cite_everything": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "correct sentence(s) citing every context chunk",
+      "mean_words": 22.632958801498127,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 1.0,
+          "applied_mean": 0.9706551532806214,
+          "frac_ge_0.5": 0.9850187265917603,
+          "hi": 0.982748023304203,
+          "lo": 0.9558784886946872,
+          "mean": 0.9706551532806214,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.38177874878623946,
+          "frac_ge_0.5": 0.14232209737827714,
+          "hi": 0.40276635802469135,
+          "lo": 0.36199638646136784,
+          "mean": 0.3817787487862395,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 1.0,
+          "applied_mean": 0.8876404494382022,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9213483146067416,
+          "lo": 0.850187265917603,
+          "mean": 0.8876404494382022,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.3365822784810127,
+          "applied_mean": 0.29876404494382025,
+          "frac_ge_0.5": 0.0449438202247191,
+          "hi": 0.3139737827715357,
+          "lo": 0.28142041198501877,
+          "mean": 0.2987640449438203,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "copy_chunk": {
+      "applied_fraction": 0.9850187265917603,
+      "category": "hack",
+      "description": "copy the whole gold chunk, every line cited",
+      "mean_words": 73.69662921348315,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.9789029535864979,
+          "applied_mean": 0.973384030418251,
+          "frac_ge_0.5": 0.9737827715355806,
+          "hi": 0.9925093632958801,
+          "lo": 0.951310861423221,
+          "mean": 0.9737827715355806,
+          "n": 267,
+          "unanswerable_mean": 0.9333333333333333
+        },
+        "v1": {
+          "answerable_mean": 0.9961058368495077,
+          "applied_mean": 0.9948142277539486,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.9983425890051228,
+          "lo": 0.9906589413069462,
+          "mean": 0.9948919172257993,
+          "n": 267,
+          "unanswerable_mean": 0.985301952198504
+        },
+        "v2": {
+          "answerable_mean": 0.20889810991770041,
+          "applied_mean": 0.17303746026804184,
+          "frac_ge_0.5": 0.11610486891385768,
+          "hi": 0.22251519230716638,
+          "lo": 0.1507092600671751,
+          "mean": 0.18542641217413858,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.5065477556182159,
+          "applied_mean": 0.4602009700325255,
+          "frac_ge_0.5": 0.50187265917603,
+          "hi": 0.5184437842374864,
+          "lo": 0.42112338898927754,
+          "mean": 0.46828784688597075,
+          "n": 267,
+          "unanswerable_mean": 0.16603456790123458
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.20889810991770041,
+          "applied_mean": 0.19197676459137658,
+          "frac_ge_0.5": 0.1348314606741573,
+          "hi": 0.24170854350083767,
+          "lo": 0.16852268326964684,
+          "mean": 0.2040819816012436,
+          "n": 267,
+          "unanswerable_mean": 0.16603456790123458
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.22803806669715068,
+          "applied_mean": 0.19028525401986585,
+          "frac_ge_0.5": 0.15355805243445692,
+          "hi": 0.2414058043437556,
+          "lo": 0.1666180677880263,
+          "mean": 0.2024158120120776,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.2157330248509376,
+          "applied_mean": 0.17919668018886772,
+          "frac_ge_0.5": 0.12359550561797752,
+          "hi": 0.2298485539244423,
+          "lo": 0.15621655715554175,
+          "mean": 0.19149335913734908,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.41667575239294957,
+          "applied_mean": 0.3602743472134184,
+          "frac_ge_0.5": 0.3408239700374532,
+          "hi": 0.41365295417857556,
+          "lo": 0.32693398864381756,
+          "mean": 0.3698582521240788,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.3092239909744116,
+          "applied_mean": 0.26344519338758765,
+          "frac_ge_0.5": 0.16853932584269662,
+          "hi": 0.3191994854380563,
+          "lo": 0.2337055958789366,
+          "mean": 0.2744797223256014,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.20900898829887962,
+          "applied_mean": 0.173137377288344,
+          "frac_ge_0.5": 0.11610486891385768,
+          "hi": 0.22255720401246826,
+          "lo": 0.15083769858648943,
+          "mean": 0.18552483231024144,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.2104149538069507,
+          "applied_mean": 0.17440435000854493,
+          "frac_ge_0.5": 0.1198501872659176,
+          "hi": 0.2242835753260712,
+          "lo": 0.15159348940768813,
+          "mean": 0.18677282416572027,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.2747187534385738,
+          "applied_mean": 0.23235112001879085,
+          "frac_ge_0.5": 0.19101123595505617,
+          "hi": 0.2846694828506973,
+          "lo": 0.20702357137789415,
+          "mean": 0.24385147777131835,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "eip_id_shortcut": {
+      "applied_fraction": 0.550561797752809,
+      "category": "reference",
+      "description": "extractive, but abstains when no chunk of a named EIP is in context",
+      "mean_words": 20.415730337078653,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 0.9438202247191011,
+          "hi": 0.9700374531835206,
+          "lo": 0.9138576779026217,
+          "mean": 0.9438202247191011,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v1": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 0.9438202247191011,
+          "hi": 0.9700374531835206,
+          "lo": 0.9138576779026217,
+          "mean": 0.9438202247191011,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.31320119655244516,
+          "frac_ge_0.5": 0.550561797752809,
+          "hi": 0.6703141823386474,
+          "lo": 0.5718311246291377,
+          "mean": 0.6218748160794362,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.9612016472744321,
+          "applied_mean": 0.9163628976843261,
+          "frac_ge_0.5": 0.9288389513108615,
+          "hi": 0.9240230370518994,
+          "lo": 0.8679241287721156,
+          "mean": 0.8977728313093483,
+          "n": 267,
+          "unanswerable_mean": 0.3966851851851852
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.3941573567943197,
+          "frac_ge_0.5": 0.5430711610486891,
+          "hi": 0.6571029897775504,
+          "lo": 0.5633450684324179,
+          "mean": 0.6102664099204681,
+          "n": 267,
+          "unanswerable_mean": 0.3966851851851852
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.6852310434431862,
+          "applied_mean": 0.3904745394288104,
+          "frac_ge_0.5": 0.6142322097378277,
+          "hi": 0.7093424442757709,
+          "lo": 0.6194217086121955,
+          "mean": 0.664418566651817,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.31320119655244516,
+          "frac_ge_0.5": 0.550561797752809,
+          "hi": 0.6703141823386474,
+          "lo": 0.5718311246291377,
+          "mean": 0.6218748160794362,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.8331515691879615,
+          "applied_mean": 0.6289586523642646,
+          "frac_ge_0.5": 0.7640449438202247,
+          "hi": 0.83321175434792,
+          "lo": 0.7536235181537148,
+          "mean": 0.7957188086050445,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.6383590940690457,
+          "applied_mean": 0.3149054781929513,
+          "frac_ge_0.5": 0.550561797752809,
+          "hi": 0.6711176324720879,
+          "lo": 0.5732075179661833,
+          "mean": 0.6228131284433103,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.31320119655244516,
+          "frac_ge_0.5": 0.550561797752809,
+          "hi": 0.6703141823386474,
+          "lo": 0.5718311246291377,
+          "mean": 0.6218748160794362,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.6422456655254322,
+          "applied_mean": 0.3211715831940641,
+          "frac_ge_0.5": 0.5580524344569289,
+          "hi": 0.6737565627925504,
+          "lo": 0.5767597761877559,
+          "mean": 0.6262630064776308,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.6838001378309924,
+          "applied_mean": 0.3881675691560896,
+          "frac_ge_0.5": 0.599250936329588,
+          "hi": 0.7091231807271483,
+          "lo": 0.6150191340488216,
+          "mean": 0.6631484369511055,
+          "n": 267,
+          "unanswerable_mean": 0.5
+        }
+      },
+      "uses_gold": false
+    },
+    "empty": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "the empty answer",
+      "mean_words": 0.0,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": false
+    },
+    "extractive": {
+      "applied_fraction": 0.6067415730337079,
+      "category": "reference",
+      "description": "top-1 lexical match: the single best-matching line, cited; never abstains",
+      "mean_words": 21.54307116104869,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.2842010857605521,
+          "frac_ge_0.5": 0.4943820224719101,
+          "hi": 0.6151586457548849,
+          "lo": 0.5185030319100066,
+          "mean": 0.5656950407985373,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.9612016472744321,
+          "applied_mean": 0.894874792160286,
+          "frac_ge_0.5": 0.9775280898876404,
+          "hi": 0.951737708951473,
+          "lo": 0.9187024443651786,
+          "mean": 0.9362161660298365,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.4210216161675022,
+          "frac_ge_0.5": 0.5917602996254682,
+          "hi": 0.6964660084326485,
+          "lo": 0.6031425888998009,
+          "mean": 0.6487097446409564,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.6852310434431862,
+          "applied_mean": 0.35431948948169834,
+          "frac_ge_0.5": 0.5580524344569289,
+          "hi": 0.6567359034236623,
+          "lo": 0.5626105545897059,
+          "mean": 0.6082387913709182,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.2842010857605521,
+          "frac_ge_0.5": 0.4943820224719101,
+          "hi": 0.6151586457548849,
+          "lo": 0.5185030319100066,
+          "mean": 0.5656950407985373,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.8331515691879615,
+          "applied_mean": 0.5707217401083142,
+          "frac_ge_0.5": 0.7078651685393258,
+          "hi": 0.7815503981258546,
+          "lo": 0.6960337571812291,
+          "mean": 0.7395390333241456,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.6383590940690457,
+          "applied_mean": 0.2857475635454558,
+          "frac_ge_0.5": 0.4943820224719101,
+          "hi": 0.6164222702752976,
+          "lo": 0.5193428456869273,
+          "mean": 0.5666333531624114,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.6373020079882256,
+          "applied_mean": 0.2842010857605521,
+          "frac_ge_0.5": 0.4943820224719101,
+          "hi": 0.6151586457548849,
+          "lo": 0.5185030319100066,
+          "mean": 0.5656950407985373,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.6422456655254322,
+          "applied_mean": 0.29143347363905814,
+          "frac_ge_0.5": 0.50187265917603,
+          "hi": 0.620111955361831,
+          "lo": 0.5232194714748271,
+          "mean": 0.5700832311967319,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.6838001378309924,
+          "applied_mean": 0.3522261275675627,
+          "frac_ge_0.5": 0.5430711610486891,
+          "hi": 0.655653029137685,
+          "lo": 0.5613113964771443,
+          "mean": 0.6069686616702066,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": false
+    },
+    "hallucinated_value": {
+      "applied_fraction": 1.0,
+      "category": "extra",
+      "description": "correct sentence with the value replaced by a number found nowhere in the context",
+      "mean_words": 22.644194756554306,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.11235955056179775,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.687112317472514,
+          "applied_mean": 0.7222682368576249,
+          "frac_ge_0.5": 0.8614232209737828,
+          "hi": 0.7469068312066348,
+          "lo": 0.6972105578968644,
+          "mean": 0.7222682368576249,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.11213226111616273,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.1229519200106826,
+          "lo": 0.10222843605141911,
+          "mean": 0.11213226111616273,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.6858267388106695,
+          "applied_mean": 0.6917822585170584,
+          "frac_ge_0.5": 0.846441947565543,
+          "hi": 0.7164737965916529,
+          "lo": 0.6684307371498301,
+          "mean": 0.6917822585170585,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.19514696495858194,
+          "frac_ge_0.5": 0.09737827715355805,
+          "hi": 0.22242696742664567,
+          "lo": 0.17017729617962452,
+          "mean": 0.19514696495858194,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.11213226111616273,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.1229519200106826,
+          "lo": 0.10222843605141911,
+          "mean": 0.11213226111616273,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.11213226111616273,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.1229519200106826,
+          "lo": 0.10222843605141911,
+          "mean": 0.11213226111616273,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.6858267388106695,
+          "applied_mean": 0.6087675546746392,
+          "frac_ge_0.5": 0.7490636704119851,
+          "hi": 0.641560586873667,
+          "lo": 0.5755226025917992,
+          "mean": 0.6087675546746392,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.11213226111616273,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.1229519200106826,
+          "lo": 0.10222843605141911,
+          "mean": 0.11213226111616273,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.12632621821947446,
+          "applied_mean": 0.11213226111616273,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.1229519200106826,
+          "lo": 0.10222843605141911,
+          "mean": 0.11213226111616273,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.12640656688583976,
+          "applied_mean": 0.11220358184248698,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.12297289393975565,
+          "lo": 0.10226410460492648,
+          "mean": 0.112203581842487,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.21330912309733205,
+          "applied_mean": 0.18934180589538463,
+          "frac_ge_0.5": 0.06741573033707865,
+          "hi": 0.21350197782482225,
+          "lo": 0.1671536170431853,
+          "mean": 0.18934180589538463,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "hedge_inline": {
+      "applied_fraction": 0.7677902621722846,
+      "category": "extra",
+      "description": "the correct value followed by '(or <wrong value>)' in the same sentence",
+      "mean_words": 23.9438202247191,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.9981136667766958,
+          "applied_mean": 0.9978192147613507,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.9990293857347562,
+          "lo": 0.9974460682327553,
+          "mean": 0.998325614329876,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.9981136667766958,
+          "applied_mean": 0.959599341229282,
+          "frac_ge_0.5": 0.9850187265917603,
+          "hi": 0.9809240959050343,
+          "lo": 0.954111751090094,
+          "mean": 0.9689807676104973,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.3848518590702484,
+          "frac_ge_0.5": 0.3295880149812734,
+          "hi": 0.564346093904037,
+          "lo": 0.49354727690642153,
+          "mean": 0.5276952476007527,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.9981136667766958,
+          "applied_mean": 0.8514777513467165,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9197434719872001,
+          "lo": 0.8485386288078668,
+          "mean": 0.8859660637680783,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.5009692201834388,
+          "applied_mean": 0.2767302691876829,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48407243610107914,
+          "lo": 0.40674300108363554,
+          "mean": 0.4446805437583334,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.7220982432670684,
+          "applied_mean": 0.5323769934355863,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.6736392124826028,
+          "lo": 0.6070214122988791,
+          "mean": 0.6409636091921168,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "hedge_right_and_wrong": {
+      "applied_fraction": 0.7677902621722846,
+      "category": "extra",
+      "description": "the correct answer followed by a contradicting one, both supported by the chunk",
+      "mean_words": 32.947565543071164,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.9957805907172996,
+          "applied_mean": 0.9951219512195122,
+          "frac_ge_0.5": 0.9962546816479401,
+          "hi": 1.0,
+          "lo": 0.9887640449438202,
+          "mean": 0.9962546816479401,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.9985985469363218,
+          "applied_mean": 0.9983797835312598,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.9994510114450239,
+          "lo": 0.9977716028523242,
+          "mean": 0.9987560135726902,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.32122097672163097,
+          "applied_mean": 0.06892376333183678,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.3339297422952323,
+          "lo": 0.23886946867792302,
+          "mean": 0.2851287321461668,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.4450421484326717,
+          "applied_mean": 0.32019470782667864,
+          "frac_ge_0.5": 0.3295880149812734,
+          "hi": 0.5185860542773352,
+          "lo": 0.4398625153162797,
+          "mean": 0.4780521164961391,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.32122097672163097,
+          "applied_mean": 0.1770453532144023,
+          "frac_ge_0.5": 0.3295880149812734,
+          "hi": 0.41692521931030935,
+          "lo": 0.3207418699674986,
+          "mean": 0.368143435988586,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.32122097672163097,
+          "applied_mean": 0.06892376333183678,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.3339297422952323,
+          "lo": 0.23886946867792302,
+          "mean": 0.2851287321461668,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.5000737803042454,
+          "applied_mean": 0.2756950533273471,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.48328385821914105,
+          "lo": 0.4058902862415708,
+          "mean": 0.4438857151015212,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.4450421484326717,
+          "applied_mean": 0.21207311794411315,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.4381706183728285,
+          "lo": 0.35472919357631266,
+          "mean": 0.3950374126537199,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.32148423320439895,
+          "applied_mean": 0.06922811350947583,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.33414884750519835,
+          "lo": 0.23913382271106676,
+          "mean": 0.2853624092488484,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.32122097672163097,
+          "applied_mean": 0.06892376333183678,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.3339297422952323,
+          "lo": 0.23886946867792302,
+          "mean": 0.2851287321461668,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.32122097672163097,
+          "applied_mean": 0.06892376333183678,
+          "frac_ge_0.5": 0.23220973782771537,
+          "hi": 0.3339297422952323,
+          "lo": 0.23886946867792302,
+          "mean": 0.2851287321461668,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.7205400109540673,
+          "applied_mean": 0.5305755248590924,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.6724449822113657,
+          "lo": 0.6050819082855405,
+          "mean": 0.6395804591614754,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "one_wrong_constant": {
+      "applied_fraction": 0.8951310861423221,
+      "category": "hack",
+      "description": "correct answer with one gold value swapped for another number from the same chunk",
+      "mean_words": 21.831460674157302,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.9831223628691983,
+          "applied_mean": 0.9832635983263598,
+          "frac_ge_0.5": 0.9850187265917603,
+          "hi": 0.9963483146067414,
+          "lo": 0.9700374531835206,
+          "mean": 0.9850187265917603,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.9952547565877012,
+          "applied_mean": 0.9952944657375951,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.9981834870797281,
+          "lo": 0.9926836521932139,
+          "mean": 0.9957879300048135,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2": {
+          "answerable_mean": 0.3033420726069585,
+          "applied_mean": 0.18364883350564506,
+          "frac_ge_0.5": 0.14606741573033707,
+          "hi": 0.3082255299241764,
+          "lo": 0.23376728635176225,
+          "mean": 0.26925869366235644,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.9906550730433975,
+          "applied_mean": 0.9579505365573687,
+          "frac_ge_0.5": 0.9850187265917603,
+          "hi": 0.9752267553289033,
+          "lo": 0.9475016048309519,
+          "mean": 0.9623602181168958,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.3033420726069585,
+          "applied_mean": 0.2763891093463393,
+          "frac_ge_0.5": 0.24344569288389514,
+          "hi": 0.3923898183950182,
+          "lo": 0.3119612049560351,
+          "mean": 0.35227339750477565,
+          "n": 267,
+          "unanswerable_mean": 0.7388308641975309
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.3194259333664522,
+          "applied_mean": 0.19959810128807184,
+          "frac_ge_0.5": 0.1647940074906367,
+          "hi": 0.32323187249812435,
+          "lo": 0.24633667369028858,
+          "mean": 0.2835353790556149,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.3033420726069585,
+          "applied_mean": 0.18364883350564506,
+          "frac_ge_0.5": 0.14606741573033707,
+          "hi": 0.3082255299241764,
+          "lo": 0.23376728635176225,
+          "mean": 0.26925869366235644,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.9547215287395999,
+          "applied_mean": 0.8295774155283899,
+          "frac_ge_0.5": 0.8539325842696629,
+          "hi": 0.8841253282411048,
+          "lo": 0.8094125424286396,
+          "mean": 0.847449446858746,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.3033420726069585,
+          "applied_mean": 0.18364883350564506,
+          "frac_ge_0.5": 0.14606741573033707,
+          "hi": 0.3082255299241764,
+          "lo": 0.23376728635176225,
+          "mean": 0.26925869366235644,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.3033420726069585,
+          "applied_mean": 0.18364883350564506,
+          "frac_ge_0.5": 0.14606741573033707,
+          "hi": 0.3082255299241764,
+          "lo": 0.23376728635176225,
+          "mean": 0.26925869366235644,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.30416554966392056,
+          "applied_mean": 0.1844654195412099,
+          "frac_ge_0.5": 0.14606741573033707,
+          "hi": 0.3090551838295824,
+          "lo": 0.2347276302334336,
+          "mean": 0.26998964520730023,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.37557865900662374,
+          "applied_mean": 0.25528092964255156,
+          "frac_ge_0.5": 0.2846441947565543,
+          "hi": 0.37505787323698087,
+          "lo": 0.2929791815746655,
+          "mean": 0.3333788096800368,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "oracle": {
+      "applied_fraction": 0.0,
+      "category": "reference",
+      "description": "the gold answer; abstains on unanswerable questions",
+      "mean_words": 20.60674157303371,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9213483146067416,
+          "lo": 0.850187265917603,
+          "mean": 0.8876404494382022,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9213483146067416,
+          "lo": 0.850187265917603,
+          "mean": 0.8876404494382022,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9213483146067416,
+          "lo": 0.850187265917603,
+          "mean": 0.8876404494382022,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 0.8876404494382022,
+          "hi": 0.9213483146067416,
+          "lo": 0.850187265917603,
+          "mean": 0.8876404494382022,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 1.0,
+          "applied_mean": null,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        }
+      },
+      "uses_gold": true
+    },
+    "paraphrase_no_tokens": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "a vague cited sentence containing no checkable token",
+      "mean_words": 10.0,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.7286075949367088,
+          "applied_mean": 0.7260674157303371,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.7314662921348315,
+          "lo": 0.7208932584269664,
+          "mean": 0.7260674157303372,
+          "n": 267,
+          "unanswerable_mean": 0.706
+        },
+        "v2": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.5950430379746835,
+          "applied_mean": 0.5932921348314606,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.6040502808988764,
+          "lo": 0.5820333146067417,
+          "mean": 0.5932921348314606,
+          "n": 267,
+          "unanswerable_mean": 0.57946
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.12978202247191012,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.1489061797752809,
+          "lo": 0.11185247191011237,
+          "mean": 0.12978202247191012,
+          "n": 267,
+          "unanswerable_mean": 0.57946
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.5190354430379747,
+          "applied_mean": 0.46071685393258427,
+          "frac_ge_0.5": 0.6292134831460674,
+          "hi": 0.4870330430711611,
+          "lo": 0.4334848595505618,
+          "mean": 0.4607168539325842,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.07286075949367089,
+          "applied_mean": 0.06467415730337078,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.06721367041198503,
+          "lo": 0.061835018726591764,
+          "mean": 0.06467415730337078,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": false
+    },
+    "parrot_question": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "restate the question with a citation to the best chunk",
+      "mean_words": 31.528089887640448,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.24050632911392406,
+          "applied_mean": 0.21348314606741572,
+          "frac_ge_0.5": 0.21348314606741572,
+          "hi": 0.26217228464419473,
+          "lo": 0.1647940074906367,
+          "mean": 0.21348314606741572,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 0.5487618908906012,
+          "applied_mean": 0.5087563791860824,
+          "frac_ge_0.5": 0.24344569288389514,
+          "hi": 0.5361773586447287,
+          "lo": 0.4803008252965839,
+          "mean": 0.5087563791860824,
+          "n": 267,
+          "unanswerable_mean": 0.19271283672038314
+        },
+        "v2": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.08006968392537689,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09315161423534832,
+          "lo": 0.06699267868803112,
+          "mean": 0.08006968392537689,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.5485814649717787,
+          "applied_mean": 0.5002544068979323,
+          "frac_ge_0.5": 0.24344569288389514,
+          "hi": 0.5298532498230863,
+          "lo": 0.47078611123011554,
+          "mean": 0.5002544068979323,
+          "n": 267,
+          "unanswerable_mean": 0.11847064811454647
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.09338099270229222,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.10801879024000745,
+          "lo": 0.0806491041287426,
+          "mean": 0.0933809927022922,
+          "n": 267,
+          "unanswerable_mean": 0.11847064811454647
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.09450906282059403,
+          "applied_mean": 0.08389006699805537,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09692930899818056,
+          "lo": 0.07093644781678951,
+          "mean": 0.08389006699805537,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.08006968392537689,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09315161423534832,
+          "lo": 0.06699267868803112,
+          "mean": 0.08006968392537689,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.49467811911161197,
+          "applied_mean": 0.43909630797547583,
+          "frac_ge_0.5": 0.21348314606741572,
+          "hi": 0.4746802024909927,
+          "lo": 0.40288215027977037,
+          "mean": 0.4390963079754758,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.09038551287272814,
+          "applied_mean": 0.08022983726905082,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09330604001518994,
+          "lo": 0.06708294843190984,
+          "mean": 0.08022983726905082,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.08006968392537689,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09315161423534832,
+          "lo": 0.06699267868803112,
+          "mean": 0.08006968392537689,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.08006968392537689,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09315161423534832,
+          "lo": 0.06699267868803112,
+          "mean": 0.08006968392537689,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0902050869539056,
+          "applied_mean": 0.08006968392537689,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.09315161423534832,
+          "lo": 0.06699267868803112,
+          "mean": 0.08006968392537689,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": false
+    },
+    "refuse_all": {
+      "applied_fraction": 0.8876404494382022,
+      "category": "hack",
+      "description": "always the abstention sentence (cite-nothing refusal)",
+      "mean_words": 8.0,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.11235955056179775,
+          "hi": 0.149812734082397,
+          "lo": 0.07865168539325842,
+          "mean": 0.11235955056179775,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        }
+      },
+      "uses_gold": false
+    },
+    "spoofed_citation": {
+      "applied_fraction": 1.0,
+      "category": "extra",
+      "description": "correct answer citing a non-existent chunk index (#999)",
+      "mean_words": 22.632958801498127,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "stuff_numbers": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "list every number/hex/identifier of the gold chunk in one cited sentence",
+      "mean_words": 11.063670411985019,
+      "scores": {
+        "v0": {
+          "answerable_mean": 1.0,
+          "applied_mean": 1.0,
+          "frac_ge_0.5": 1.0,
+          "hi": 1.0,
+          "lo": 1.0,
+          "mean": 1.0,
+          "n": 267,
+          "unanswerable_mean": 1.0
+        },
+        "v1": {
+          "answerable_mean": 0.8902117467623796,
+          "applied_mean": 0.8806607842843797,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.888830170921463,
+          "lo": 0.8727315415545752,
+          "mean": 0.8806607842843798,
+          "n": 267,
+          "unanswerable_mean": 0.8052081807081807
+        },
+        "v2": {
+          "answerable_mean": 0.2746552626548944,
+          "applied_mean": 0.24379512078355797,
+          "frac_ge_0.5": 0.1760299625468165,
+          "hi": 0.2838524282705746,
+          "lo": 0.20964677040914395,
+          "mean": 0.24379512078355803,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.8655627149397719,
+          "applied_mean": 0.8470700552100833,
+          "frac_ge_0.5": 1.0,
+          "hi": 0.8585274779297638,
+          "lo": 0.8356793923371416,
+          "mean": 0.8470700552100833,
+          "n": 267,
+          "unanswerable_mean": 0.7009780433455433
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.2746552626548944,
+          "applied_mean": 0.3225566986875516,
+          "frac_ge_0.5": 0.2883895131086142,
+          "hi": 0.3615956391828835,
+          "lo": 0.2869316371631046,
+          "mean": 0.32255669868755166,
+          "n": 267,
+          "unanswerable_mean": 0.7009780433455433
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.29134298955212096,
+          "applied_mean": 0.2586078221867141,
+          "frac_ge_0.5": 0.19101123595505617,
+          "hi": 0.29864980382603024,
+          "lo": 0.2237669719546618,
+          "mean": 0.25860782218671413,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.2746552626548944,
+          "applied_mean": 0.24379512078355797,
+          "frac_ge_0.5": 0.1760299625468165,
+          "hi": 0.2838524282705746,
+          "lo": 0.20964677040914395,
+          "mean": 0.24379512078355803,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.7550616994731709,
+          "applied_mean": 0.6702233062739382,
+          "frac_ge_0.5": 0.6666666666666666,
+          "hi": 0.706107302507106,
+          "lo": 0.6340214760684072,
+          "mean": 0.6702233062739382,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.2746552626548944,
+          "applied_mean": 0.24379512078355797,
+          "frac_ge_0.5": 0.1760299625468165,
+          "hi": 0.2838524282705746,
+          "lo": 0.20964677040914395,
+          "mean": 0.24379512078355803,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.2746552626548944,
+          "applied_mean": 0.24379512078355797,
+          "frac_ge_0.5": 0.1760299625468165,
+          "hi": 0.2838524282705746,
+          "lo": 0.20964677040914395,
+          "mean": 0.24379512078355803,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.27597538662393956,
+          "applied_mean": 0.24496691621675537,
+          "frac_ge_0.5": 0.1760299625468165,
+          "hi": 0.2849846223178003,
+          "lo": 0.21049177658420426,
+          "mean": 0.24496691621675543,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.37711002413866734,
+          "applied_mean": 0.334738111314098,
+          "frac_ge_0.5": 0.2247191011235955,
+          "hi": 0.37141659950012756,
+          "lo": 0.30229081613211695,
+          "mean": 0.33473811131409803,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "uncited_correct": {
+      "applied_fraction": 1.0,
+      "category": "extra",
+      "description": "the correct answer with no citations",
+      "mean_words": 21.288389513108616,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "unicode_obfuscation": {
+      "applied_fraction": 1.0,
+      "category": "extra",
+      "description": "correct answer written with fullwidth digits",
+      "mean_words": 22.632958801498127,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0599250936329588,
+          "frac_ge_0.5": 0.0599250936329588,
+          "hi": 0.0898876404494382,
+          "lo": 0.033707865168539325,
+          "mean": 0.0599250936329588,
+          "n": 267,
+          "unanswerable_mean": 0.5333333333333333
+        },
+        "v1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0599250936329588,
+          "frac_ge_0.5": 0.0599250936329588,
+          "hi": 0.0898876404494382,
+          "lo": 0.033707865168539325,
+          "mean": 0.0599250936329588,
+          "n": 267,
+          "unanswerable_mean": 0.5333333333333333
+        },
+        "v2": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.04595644333472049,
+          "frac_ge_0.5": 0.052434456928838954,
+          "hi": 0.07040990428630878,
+          "lo": 0.024498820918296572,
+          "mean": 0.04595644333472048,
+          "n": 267,
+          "unanswerable_mean": 0.40901234567901235
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.04595644333472049,
+          "frac_ge_0.5": 0.052434456928838954,
+          "hi": 0.07040990428630878,
+          "lo": 0.024498820918296572,
+          "mean": 0.04595644333472048,
+          "n": 267,
+          "unanswerable_mean": 0.40901234567901235
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.0,
+          "applied_mean": 0.0,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.0,
+          "lo": 0.0,
+          "mean": 0.0,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": true
+    },
+    "wrong_chunk": {
+      "applied_fraction": 1.0,
+      "category": "hack",
+      "description": "a grounded statement from a non-gold chunk",
+      "mean_words": 25.134831460674157,
+      "scores": {
+        "v0": {
+          "answerable_mean": 0.8776371308016878,
+          "applied_mean": 0.8614232209737828,
+          "frac_ge_0.5": 0.8614232209737828,
+          "hi": 0.9026217228464419,
+          "lo": 0.8239700374531835,
+          "mean": 0.8614232209737828,
+          "n": 267,
+          "unanswerable_mean": 0.7333333333333333
+        },
+        "v1": {
+          "answerable_mean": 0.9244022503516175,
+          "applied_mean": 0.9164794007490636,
+          "frac_ge_0.5": 0.9325842696629213,
+          "hi": 0.9438280274656679,
+          "lo": 0.8938826466916355,
+          "mean": 0.9164794007490636,
+          "n": 267,
+          "unanswerable_mean": 0.8538888888888889
+        },
+        "v2": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-gold-free": {
+          "answerable_mean": 0.7047549265997762,
+          "applied_mean": 0.6977283638940169,
+          "frac_ge_0.5": 0.8164794007490637,
+          "hi": 0.7315442811541606,
+          "lo": 0.664605827988272,
+          "mean": 0.697728363894017,
+          "n": 267,
+          "unanswerable_mean": 0.6422185185185185
+        },
+        "v2-no-abstention": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.1481331523637867,
+          "frac_ge_0.5": 0.08239700374531835,
+          "hi": 0.17264418992488753,
+          "lo": 0.1251529481409301,
+          "mean": 0.1481331523637867,
+          "n": 267,
+          "unanswerable_mean": 0.6422185185185185
+        },
+        "v2-no-citation": {
+          "answerable_mean": 0.09045023681249317,
+          "applied_mean": 0.08028728885603327,
+          "frac_ge_0.5": 0.003745318352059925,
+          "hi": 0.08954007557416337,
+          "lo": 0.07287884951194885,
+          "mean": 0.08028728885603327,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-consistency": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-correctness": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-length": {
+          "answerable_mean": 0.09244022503516175,
+          "applied_mean": 0.08205368289637953,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08607990012484396,
+          "lo": 0.07787141073657927,
+          "mean": 0.08205368289637953,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-redundancy": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-no-relevance": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        },
+        "v2-rev1": {
+          "answerable_mean": 0.08559070095179533,
+          "applied_mean": 0.07597376826058237,
+          "frac_ge_0.5": 0.0,
+          "hi": 0.08043481423157367,
+          "lo": 0.07148321133657522,
+          "mean": 0.07597376826058237,
+          "n": 267,
+          "unanswerable_mean": 0.0
+        }
+      },
+      "uses_gold": false
+    }
+  },
+  "reward_columns": [
+    "v0",
+    "v1",
+    "v2",
+    "v2-rev1",
+    "v2-no-abstention",
+    "v2-no-correctness",
+    "v2-no-citation",
+    "v2-no-relevance",
+    "v2-no-length",
+    "v2-no-redundancy",
+    "v2-no-consistency",
+    "v2-gold-free"
+  ],
+  "seed": 0,
+  "split": "val",
+  "task_file_sha256": "c585009e9931d97fd7d35468875ac7796a5add1bf0027f97469a542a17f54f2a"
+}
