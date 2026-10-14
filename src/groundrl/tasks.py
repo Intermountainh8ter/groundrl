@@ -271,7 +271,7 @@ def build_context(
         return not any(index.supports(c.id, f) for f in facts)
 
     same_doc = [c for d in sorted(target_docs) for c in index.by_doc[d] if usable(c)]
-    other = [c for d in split_docs if d not in target_docs for c in index.by_doc[d] if usable(c)]
+    other = [c for d in split_docs if d not in target_docs for c in index.by_doc[d]]
     chosen: list[str] = list(gold_ids)
     words = sum(word_count(index.by_id[c].text) for c in chosen)
     n_hard = 0
@@ -286,7 +286,7 @@ def build_context(
         attempts += 1
         c = rng.choice(other)
         w = word_count(c.text)
-        if c.id in chosen or words + w > max_words:
+        if c.id in chosen or words + w > max_words or not usable(c):
             continue
         chosen.append(c.id)
         words += w

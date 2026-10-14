@@ -117,3 +117,52 @@ def test_real_corpus_matches_manifest(data_dir):
     assert all(d["bytes"] > MIN_BYTES for d in manifest["documents"])
     assert all(d["source"].startswith("https://raw.githubusercontent.com/")
                for d in manifest["documents"])
+
+
+class _FakeResponse:
+    def __init__(self, data):
+        self._data = data
+
+    def read(self):
+        return self._data
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+def test_urllib_opener_returns_bytes_and_maps_404(monkeypatch):
+    import urllib.error
+    import urllib.request
+
+    url = "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1.md"
+
+    def fake_urlopen(u, timeout):
+        if u.endswith("eip-1.md"):
+            return _FakeResponse(b"hello")
+        raise urllib.error.HTTPError(u, 404, "nf", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
+    opener = urllib_opener(pause=0)
+    assert opener(url) == b"hello"
+    with pytest.raises(FileNotFoundError):
+        opener(url.replace("eip-1", "eip-2"))
+
+
+def test_urllib_opener_retries_transient_errors_then_gives_up(monkeypatch):
+    import urllib.error
+    import urllib.request
+
+    calls = []
+
+    def flaky(u, timeout):
+        calls.append(u)
+        raise urllib.error.HTTPError(u, 503, "busy", {}, None)
+
+    monkeypatch.setattr(urllib.request, "urlopen", flaky)
+    monkeypatch.setattr(corpus.time, "sleep", lambda s: None)
+    with pytest.raises(ConnectionError, match="could not fetch"):
+        urllib_opener(retries=3)("https://raw.githubusercontent.com/x/y/z.md")
+    assert len(calls) == 3
