@@ -1,0 +1,57 @@
+{
+  "answerable": {
+    "test": 239,
+    "train": 1158,
+    "val": 240
+  },
+  "by_type": {
+    "test": {
+      "comparison": 25,
+      "constant": 153,
+      "multi": 54,
+      "opcode": 7,
+      "unanswerable": 31
+    },
+    "train": {
+      "comparison": 128,
+      "constant": 744,
+      "multi": 257,
+      "opcode": 29,
+      "unanswerable": 147
+    },
+    "val": {
+      "comparison": 27,
+      "constant": 153,
+      "multi": 54,
+      "opcode": 6,
+      "unanswerable": 30
+    }
+  },
+  "chunks": 3066,
+  "documents": 130,
+  "eips_with_questions": {
+    "test": 19,
+    "train": 91,
+    "val": 20
+  },
+  "facts": 1395,
+  "generator_version": 1,
+  "k": 5,
+  "ratios": [
+    0.7,
+    0.15,
+    0.15
+  ],
+  "seed": 20260,
+  "sha256": {
+    "test": "ec95d65473c3d0ccaced11249bcb2ef103a17de8fc7391cbe0ad751dc70e774a",
+    "train": "fd8f78e637036e6ac49a931354e12f62400bcea688e4c8295b2e2c7e46362ce0",
+    "val": "2c9c6e8535c562946fc029e03f195370153d560e5a86ae033fe540f75e220d36"
+  },
+  "tasks": {
+    "test": 270,
+    "train": 1305,
+    "val": 270
+  },
+  "total": 1845
+}

@@ -1,0 +1,1047 @@
+{
+  "documents": [
+    {
+      "bytes": 34612,
+      "file": "eip-1.md",
+      "id": "eip-1",
+      "number": 1,
+      "sha256": "693f9e52618391d4d482525d5aed627efb0402f0426747e9e56b915e5d7e5745",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1.md"
+    },
+    {
+      "bytes": 6032,
+      "file": "eip-2.md",
+      "id": "eip-2",
+      "number": 2,
+      "sha256": "283af272148eb597d931cb58bd3a64e8573c781f90448ff38a7eeea4ef2c9a26",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2.md"
+    },
+    {
+      "bytes": 6008,
+      "file": "eip-5.md",
+      "id": "eip-5",
+      "number": 5,
+      "sha256": "82174f6bbc86adf630bbb7174086df69c6108ace135563b94b945e7942b6e856",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-5.md"
+    },
+    {
+      "bytes": 1915,
+      "file": "eip-6.md",
+      "id": "eip-6",
+      "number": 6,
+      "sha256": "4b415d03226756c99a8808d6d23982459cbbc6c96b8eb79b0323634f79bbb963",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6.md"
+    },
+    {
+      "bytes": 2937,
+      "file": "eip-7.md",
+      "id": "eip-7",
+      "number": 7,
+      "sha256": "39de6a4c1ab7726d5095c9dd53841e607089e83cd24054388cd0d5aaa9be889f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7.md"
+    },
+    {
+      "bytes": 18805,
+      "file": "eip-8.md",
+      "id": "eip-8",
+      "number": 8,
+      "sha256": "162f265343eca0a4a965b541504ecdd61a59558bd7fe7cffd08e45895a3b1227",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-8.md"
+    },
+    {
+      "bytes": 5601,
+      "file": "eip-20.md",
+      "id": "eip-20",
+      "number": 20,
+      "sha256": "50d0bdc535ed8987ac5c124cb5f9c39606806c97e909aae66ef4b747dd9c93dd",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-20.md"
+    },
+    {
+      "bytes": 3674,
+      "file": "eip-55.md",
+      "id": "eip-55",
+      "number": 55,
+      "sha256": "54a9b25ffcd12966c60d6abd6584734d2793734f266fbe41118e6ee52b05dc9e",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-55.md"
+    },
+    {
+      "bytes": 2105,
+      "file": "eip-100.md",
+      "id": "eip-100",
+      "number": 100,
+      "sha256": "304cec4fa8f7ca1c44ea285626363f581cb50444f44fc061afd43d91edc7e3c9",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-100.md"
+    },
+    {
+      "bytes": 17495,
+      "file": "eip-137.md",
+      "id": "eip-137",
+      "number": 137,
+      "sha256": "7a846d9f9b1b5d6bc5f08e148be2bb90dacc3976ee827eb6b43c349bda2a25ae",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-137.md"
+    },
+    {
+      "bytes": 3159,
+      "file": "eip-140.md",
+      "id": "eip-140",
+      "number": 140,
+      "sha256": "8d8259af8d26b91ae9aca1e5156f30b3d3f09a6f215c758ee23f883a1203cc87",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-140.md"
+    },
+    {
+      "bytes": 10979,
+      "file": "eip-145.md",
+      "id": "eip-145",
+      "number": 145,
+      "sha256": "0f0e109dbaaaaec10198d8e4f76a2d885e7b9c53f2ff96d4f1477c772c219da8",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-145.md"
+    },
+    {
+      "bytes": 5073,
+      "file": "eip-150.md",
+      "id": "eip-150",
+      "number": 150,
+      "sha256": "1c7919b2035588c11842e8322cb4febcf3e9c5ddf1a2621eea589ba18a5cc39c",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-150.md"
+    },
+    {
+      "bytes": 19249,
+      "file": "eip-152.md",
+      "id": "eip-152",
+      "number": 152,
+      "sha256": "5ef0b093f024a65ea850c2f0b431a6c636a5b391d24b9183755e17a8eaeea913",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-152.md"
+    },
+    {
+      "bytes": 3607,
+      "file": "eip-155.md",
+      "id": "eip-155",
+      "number": 155,
+      "sha256": "3c208813585d8fca67a92d908ece47402f87a18a14f1b20ee5ebcb3e702dcc9c",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-155.md"
+    },
+    {
+      "bytes": 4136,
+      "file": "eip-158.md",
+      "id": "eip-158",
+      "number": 158,
+      "sha256": "8f8daaf58f17bcd79ef95a825be0620c998caefba96ed110de09008ced40e84e",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-158.md"
+    },
+    {
+      "bytes": 604,
+      "file": "eip-160.md",
+      "id": "eip-160",
+      "number": 160,
+      "sha256": "83f3698effce7fe81153ae46e2cf93ca92bc46beb5683d57195ff2bc83519fe5",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-160.md"
+    },
+    {
+      "bytes": 4340,
+      "file": "eip-161.md",
+      "id": "eip-161",
+      "number": 161,
+      "sha256": "45f6beabbf885e3f95199a7ec763a9483d6de61ad689e00fd8e6121c136e991f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-161.md"
+    },
+    {
+      "bytes": 9782,
+      "file": "eip-165.md",
+      "id": "eip-165",
+      "number": 165,
+      "sha256": "f431a42854927b82c309060d017c5bd4f61abf8dc4679e466369e698a2d52396",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-165.md"
+    },
+    {
+      "bytes": 1718,
+      "file": "eip-170.md",
+      "id": "eip-170",
+      "number": 170,
+      "sha256": "f766ba8a29903b73b2d1c747be9674487977e0173ef24cd259169708d3558242",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-170.md"
+    },
+    {
+      "bytes": 5948,
+      "file": "eip-173.md",
+      "id": "eip-173",
+      "number": 173,
+      "sha256": "5aae06cc26b28683dbea5f12f8b1b50531ab36609546bec2f8854635b77bd6cd",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-173.md"
+    },
+    {
+      "bytes": 4469,
+      "file": "eip-191.md",
+      "id": "eip-191",
+      "number": 191,
+      "sha256": "245855b782987babb3dc9daaf17d5fed68eae50cef56a27c30c0a4d9c2ed19df",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-191.md"
+    },
+    {
+      "bytes": 5673,
+      "file": "eip-196.md",
+      "id": "eip-196",
+      "number": 196,
+      "sha256": "e9ad74874f464972427337230930acb506689e2cafddba5d037a800974ef0612",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-196.md"
+    },
+    {
+      "bytes": 8727,
+      "file": "eip-197.md",
+      "id": "eip-197",
+      "number": 197,
+      "sha256": "96355ab680ea8fae76e05c69009e30bd0ec87f352bec9312515b1cbabc6fe89d",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-197.md"
+    },
+    {
+      "bytes": 5847,
+      "file": "eip-198.md",
+      "id": "eip-198",
+      "number": 198,
+      "sha256": "7f38172445a27c0f77d820d00be954f54ac76710ba522adfdfb8982cfb233418",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-198.md"
+    },
+    {
+      "bytes": 5912,
+      "file": "eip-211.md",
+      "id": "eip-211",
+      "number": 211,
+      "sha256": "dccef031ad1fb0588fa3a4bf8def2b527d733216f464598accf6ff5f2dc756d1",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-211.md"
+    },
+    {
+      "bytes": 3124,
+      "file": "eip-214.md",
+      "id": "eip-214",
+      "number": 214,
+      "sha256": "9a5f743f3d670ea90561ee413e2536b5c85664761a64a27a638650a3b52a3dca",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-214.md"
+    },
+    {
+      "bytes": 5739,
+      "file": "eip-649.md",
+      "id": "eip-649",
+      "number": 649,
+      "sha256": "09dec893f29bcaf7c0108c32ccd307734f95d0ee22c7f0d431eb50ed31fc9e8d",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-649.md"
+    },
+    {
+      "bytes": 1736,
+      "file": "eip-658.md",
+      "id": "eip-658",
+      "number": 658,
+      "sha256": "dc2ae297aa9f49680d76e2589b173a7af6caf9c422dce1d198d6381c4561fe3f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-658.md"
+    },
+    {
+      "bytes": 2241,
+      "file": "eip-684.md",
+      "id": "eip-684",
+      "number": 684,
+      "sha256": "9bae89bea18d2cd0da0b94bf2bd725a9c8c4deb6bc846186fcb513a8a89128d8",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-684.md"
+    },
+    {
+      "bytes": 9172,
+      "file": "eip-706.md",
+      "id": "eip-706",
+      "number": 706,
+      "sha256": "4600f830fbf2ec0d7f459d87298c7657cef56cfa208f3ca4c42cfc6aa93365a7",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-706.md"
+    },
+    {
+      "bytes": 22637,
+      "file": "eip-712.md",
+      "id": "eip-712",
+      "number": 712,
+      "sha256": "459086f5a0b2d6a0ac4e404faebf3660a49aa4b1712711521093380689f02304",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-712.md"
+    },
+    {
+      "bytes": 30325,
+      "file": "eip-721.md",
+      "id": "eip-721",
+      "number": 721,
+      "sha256": "238787165c08ac748928ffad57a24045802174bb38220af9e7b63c44778b7372",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-721.md"
+    },
+    {
+      "bytes": 56039,
+      "file": "eip-777.md",
+      "id": "eip-777",
+      "number": 777,
+      "sha256": "ecfc54b909c7959efd93d58dfecb0046d35de0cd9cdad6180222115c02b83f8b",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-777.md"
+    },
+    {
+      "bytes": 5480,
+      "file": "eip-1014.md",
+      "id": "eip-1014",
+      "number": 1014,
+      "sha256": "c6b6b95eecf9979593921ee2fdf1986eb1671e43b9a312111072ad040f7290ac",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1014.md"
+    },
+    {
+      "bytes": 3447,
+      "file": "eip-1052.md",
+      "id": "eip-1052",
+      "number": 1052,
+      "sha256": "9cf87c650190580d5402ade6122bf14293e02799894e05ce914eb7fb3978778f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1052.md"
+    },
+    {
+      "bytes": 11144,
+      "file": "eip-1108.md",
+      "id": "eip-1108",
+      "number": 1108,
+      "sha256": "2102dbff8439cd56641914f5dd55fc076d11d6959e364454129b259c21ec595e",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1108.md"
+    },
+    {
+      "bytes": 16925,
+      "file": "eip-1153.md",
+      "id": "eip-1153",
+      "number": 1153,
+      "sha256": "c0e7a2e793f3fa44f048b772a3fb4779199d29b6d240c97e3723ace1e46e1c40",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1153.md"
+    },
+    {
+      "bytes": 56174,
+      "file": "eip-1155.md",
+      "id": "eip-1155",
+      "number": 1155,
+      "sha256": "beac04fc902314ec0d60000e3bcb73cb7080d586f6a718b6b35a6d68a8ac98b1",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1155.md"
+    },
+    {
+      "bytes": 7824,
+      "file": "eip-1167.md",
+      "id": "eip-1167",
+      "number": 1167,
+      "sha256": "ee0c37bfa19af63e2a104724177152471c2f9b4f4dfe166160ef609b1b3c9c19",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1167.md"
+    },
+    {
+      "bytes": 6278,
+      "file": "eip-1191.md",
+      "id": "eip-1191",
+      "number": 1191,
+      "sha256": "c141c663167c8e85f20febf66768d82c915975b69135bfc175439180ada85993",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1191.md"
+    },
+    {
+      "bytes": 8115,
+      "file": "eip-1271.md",
+      "id": "eip-1271",
+      "number": 1271,
+      "sha256": "99641cf0c535eed30843e61e3202bd8824b9d50004abe147532400b3f4f632ea",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1271.md"
+    },
+    {
+      "bytes": 15303,
+      "file": "eip-1283.md",
+      "id": "eip-1283",
+      "number": 1283,
+      "sha256": "f6bfab7edd5d4538d7ebece5d8b916daf1fd25c2d64ab4cffffd1cc8b56709db",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1283.md"
+    },
+    {
+      "bytes": 5441,
+      "file": "eip-1344.md",
+      "id": "eip-1344",
+      "number": 1344,
+      "sha256": "387dbfab6056f34fac5455d19605884da29a8b2a5e10c4d2a0190b5c60c61122",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1344.md"
+    },
+    {
+      "bytes": 21053,
+      "file": "eip-1559.md",
+      "id": "eip-1559",
+      "number": 1559,
+      "sha256": "4460ad966a22d8501e12d75165c2c784c61748d8128229f115ebac1bfccac59f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1559.md"
+    },
+    {
+      "bytes": 61087,
+      "file": "eip-1820.md",
+      "id": "eip-1820",
+      "number": 1820,
+      "sha256": "d443362a7379d69d999c979e094481ee8e993c6081be715ece13fbe1ac3bed62",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1820.md"
+    },
+    {
+      "bytes": 8091,
+      "file": "eip-1884.md",
+      "id": "eip-1884",
+      "number": 1884,
+      "sha256": "ea2933ccfa3f7df96b1b796b0bad7f36178329762bbe6845b741b5a8c8a7bc96",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-1884.md"
+    },
+    {
+      "bytes": 21794,
+      "file": "eip-1967.md",
+      "id": "eip-1967",
+      "number": 1967,
+      "sha256": "42384396793e9e220e8ce8a918c92e0cd70808df6f55db27bb82e09c0c2af44a",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-1967.md"
+    },
+    {
+      "bytes": 7450,
+      "file": "eip-2028.md",
+      "id": "eip-2028",
+      "number": 2028,
+      "sha256": "765afb0a066eb847eccaa02726cefa2995f1b6a0e13564936219eed1a8123e88",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2028.md"
+    },
+    {
+      "bytes": 4654,
+      "file": "eip-2098.md",
+      "id": "eip-2098",
+      "number": 2098,
+      "sha256": "5f6c0b9326d5d430c00dd484d5361d88cf91a98c85b905ee1c63d56651332b5f",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-2098.md"
+    },
+    {
+      "bytes": 19229,
+      "file": "eip-2124.md",
+      "id": "eip-2124",
+      "number": 2124,
+      "sha256": "9d97750212fc6bbf366aacdfc3c3a1df6879da9693dfb7ad53472399beea8e32",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2124.md"
+    },
+    {
+      "bytes": 14433,
+      "file": "eip-2200.md",
+      "id": "eip-2200",
+      "number": 2200,
+      "sha256": "ae8cb7fd68026b17cda1ecb22178bdaff91424939c1198dfc5a9f421df5db19a",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2200.md"
+    },
+    {
+      "bytes": 9303,
+      "file": "eip-2309.md",
+      "id": "eip-2309",
+      "number": 2309,
+      "sha256": "35defad575269e8513e5259f980485a69b6205b18543aa0933a37df9fbace734",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-2309.md"
+    },
+    {
+      "bytes": 22001,
+      "file": "eip-2315.md",
+      "id": "eip-2315",
+      "number": 2315,
+      "sha256": "93163cf7d1538da83aec4e696dcdd69059aa42c438d2ac848741101cd655a9dc",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2315.md"
+    },
+    {
+      "bytes": 2836,
+      "file": "eip-2384.md",
+      "id": "eip-2384",
+      "number": 2384,
+      "sha256": "480b17bf76ea606fd8935c7720377d3178fc4a55805a38f95abc07c541921c3d",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2384.md"
+    },
+    {
+      "bytes": 21894,
+      "file": "eip-2481.md",
+      "id": "eip-2481",
+      "number": 2481,
+      "sha256": "3454883b8640595802380d71fcab43f9511f78d144346e7fc5b4fa3a67aa3dcc",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2481.md"
+    },
+    {
+      "bytes": 28187,
+      "file": "eip-2535.md",
+      "id": "eip-2535",
+      "number": 2535,
+      "sha256": "45bc9867b617df090af68a1a23d8865b0049a18c192389e092e9f88dbe2572d0",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-2535.md"
+    },
+    {
+      "bytes": 23215,
+      "file": "eip-2537.md",
+      "id": "eip-2537",
+      "number": 2537,
+      "sha256": "7071929b494198ebe39125c190f3442edb3c55192135b62ed2795072b87e9e53",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2537.md"
+    },
+    {
+      "bytes": 6093,
+      "file": "eip-2565.md",
+      "id": "eip-2565",
+      "number": 2565,
+      "sha256": "a3a75622403e775d4e6fa0b298545d0e93fe5f7d92ffcebe8404ee9570651d7d",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2565.md"
+    },
+    {
+      "bytes": 9642,
+      "file": "eip-2612.md",
+      "id": "eip-2612",
+      "number": 2612,
+      "sha256": "7e84b4834dc4b55362c79fac29aa55e0372deea2a129a024bd147cc662bd8683",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-2612.md"
+    },
+    {
+      "bytes": 6825,
+      "file": "eip-2718.md",
+      "id": "eip-2718",
+      "number": 2718,
+      "sha256": "876de14066ad67c9a1c0a87dc3bd18695325dcfc7d4b8326734de0bc174e4bf4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2718.md"
+    },
+    {
+      "bytes": 17374,
+      "file": "eip-2929.md",
+      "id": "eip-2929",
+      "number": 2929,
+      "sha256": "177b2040bf0376b1182eb5571c7fda7a41b6f594083fa816506d65cfcf2acc4a",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2929.md"
+    },
+    {
+      "bytes": 8313,
+      "file": "eip-2930.md",
+      "id": "eip-2930",
+      "number": 2930,
+      "sha256": "691f06ecd80a1f5ec71f169553b808c837f68e06860ffac68dd44649e93b804b",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2930.md"
+    },
+    {
+      "bytes": 11019,
+      "file": "eip-2935.md",
+      "id": "eip-2935",
+      "number": 2935,
+      "sha256": "3237f773d610420fb50438e690c9317e0f13244cb29f8f8dc357d179f1f89103",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-2935.md"
+    },
+    {
+      "bytes": 15197,
+      "file": "eip-2981.md",
+      "id": "eip-2981",
+      "number": 2981,
+      "sha256": "7f9c7d2ac9245fbcdbd1058eb69e41fa1e8bdf4873e06c71e97c977be40681c3",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-2981.md"
+    },
+    {
+      "bytes": 27573,
+      "file": "eip-3074.md",
+      "id": "eip-3074",
+      "number": 3074,
+      "sha256": "9e77e050b0863826e597d9c020ead6155852bda0bb92d9ffb4e041cc3092c544",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3074.md"
+    },
+    {
+      "bytes": 22940,
+      "file": "eip-3156.md",
+      "id": "eip-3156",
+      "number": 3156,
+      "sha256": "5a6d84516fa65e7be9f0e235498fdcb6a81c9770b09b0ac6cb633d4a07769e22",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-3156.md"
+    },
+    {
+      "bytes": 2470,
+      "file": "eip-3198.md",
+      "id": "eip-3198",
+      "number": 3198,
+      "sha256": "7cb24d49e35a2c2fd7a8cc1fae9df390cf6ff62dbe7410a044c9db34568524cc",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3198.md"
+    },
+    {
+      "bytes": 30677,
+      "file": "eip-3525.md",
+      "id": "eip-3525",
+      "number": 3525,
+      "sha256": "8c8fff18a53638a7c3e4696f35a0947f08cc562ce4bcd91d4b5d69a18d2213c5",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-3525.md"
+    },
+    {
+      "bytes": 12429,
+      "file": "eip-3529.md",
+      "id": "eip-3529",
+      "number": 3529,
+      "sha256": "0446476577d3ebfd307e4524b565d0868b7aa2f078911908e5383ebff1ad6f3b",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3529.md"
+    },
+    {
+      "bytes": 4900,
+      "file": "eip-3541.md",
+      "id": "eip-3541",
+      "number": 3541,
+      "sha256": "dff418f1ed441352ee656eb5ba1d96c12acdefc788251e4d63149cfb442fba07",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3541.md"
+    },
+    {
+      "bytes": 2682,
+      "file": "eip-3554.md",
+      "id": "eip-3554",
+      "number": 3554,
+      "sha256": "43e009658d0158580ea1aafc9b336271449cd51a761dda1624017cbbfd43afac",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3554.md"
+    },
+    {
+      "bytes": 6820,
+      "file": "eip-3607.md",
+      "id": "eip-3607",
+      "number": 3607,
+      "sha256": "2c3789bcbb7fd59f03db7d2f179e185f3debcf8c58180ac0db62cb77af738fc7",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3607.md"
+    },
+    {
+      "bytes": 1828,
+      "file": "eip-3651.md",
+      "id": "eip-3651",
+      "number": 3651,
+      "sha256": "dfb73b4e9122cb490dde61309a995defbe7428209f5cae20db1ef05d6ee759f4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3651.md"
+    },
+    {
+      "bytes": 22848,
+      "file": "eip-3675.md",
+      "id": "eip-3675",
+      "number": 3675,
+      "sha256": "7345c394b8726383a667b3e5114fa0916410c95de3c1a031663a8e07cbe40e03",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3675.md"
+    },
+    {
+      "bytes": 3490,
+      "file": "eip-3855.md",
+      "id": "eip-3855",
+      "number": 3855,
+      "sha256": "07d51ed796b48c67e4b431125404de4fcc55dd5ec62b91ac70f4e46644e25055",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3855.md"
+    },
+    {
+      "bytes": 8442,
+      "file": "eip-3860.md",
+      "id": "eip-3860",
+      "number": 3860,
+      "sha256": "c28b1da260cde50902ea7dcff35fb15b394131d2fa76ff35beaa797f487b44fc",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-3860.md"
+    },
+    {
+      "bytes": 48990,
+      "file": "eip-4337.md",
+      "id": "eip-4337",
+      "number": 4337,
+      "sha256": "baaa07330dcb67838234774ee8cf8022b5e16e68ddbfa4958913505dc7d44562",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-4337.md"
+    },
+    {
+      "bytes": 3026,
+      "file": "eip-4345.md",
+      "id": "eip-4345",
+      "number": 4345,
+      "sha256": "5ff3a75a0a1391b7dba37bf3dca8442a6108a4d40d7f7c245e1fd75954376bd5",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4345.md"
+    },
+    {
+      "bytes": 12136,
+      "file": "eip-4399.md",
+      "id": "eip-4399",
+      "number": 4399,
+      "sha256": "3cabb6092e244042e56e28b9ce3a2920d8244cf65299c5a99ed7c8e20aeccf60",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4399.md"
+    },
+    {
+      "bytes": 24417,
+      "file": "eip-4626.md",
+      "id": "eip-4626",
+      "number": 4626,
+      "sha256": "698c05bff73bfb796f59cd7c4732edccdf7e40176f9bb027c19a0bbe7251e10a",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-4626.md"
+    },
+    {
+      "bytes": 11401,
+      "file": "eip-4750.md",
+      "id": "eip-4750",
+      "number": 4750,
+      "sha256": "0821da5e000788e52ea8668f7668a9b7f8b1a32d83ede9b0324fad32fe784a48",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4750.md"
+    },
+    {
+      "bytes": 10962,
+      "file": "eip-4788.md",
+      "id": "eip-4788",
+      "number": 4788,
+      "sha256": "491e6afa5695e0f9a5df1e0a2009cc928a5bd938aab8b39e6187b8127c7810d2",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4788.md"
+    },
+    {
+      "bytes": 24604,
+      "file": "eip-4844.md",
+      "id": "eip-4844",
+      "number": 4844,
+      "sha256": "2772bdb675d90d89ebb4bf74269e48c8ea46745e78161c8574ffa78328b31885",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4844.md"
+    },
+    {
+      "bytes": 7950,
+      "file": "eip-4895.md",
+      "id": "eip-4895",
+      "number": 4895,
+      "sha256": "f7766f0bd9bb14f76479c01e77388fd1a8823cb17c2919a317d51038a9e1be69",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-4895.md"
+    },
+    {
+      "bytes": 10780,
+      "file": "eip-4907.md",
+      "id": "eip-4907",
+      "number": 4907,
+      "sha256": "f356d0ff86966966c26999df1fa0ae54ab5322ba9753daad26eff0b99e90cb65",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-4907.md"
+    },
+    {
+      "bytes": 3117,
+      "file": "eip-5133.md",
+      "id": "eip-5133",
+      "number": 5133,
+      "sha256": "91abfeb43b0fbff7f59ac42b52a42ec876e660216f73fd8a2db8fe9d8610eb72",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-5133.md"
+    },
+    {
+      "bytes": 9166,
+      "file": "eip-5267.md",
+      "id": "eip-5267",
+      "number": 5267,
+      "sha256": "39a53be4ce9669ad2dafa1607e74a9821111e50eadae0b9394978d4bb1baf2aa",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-5267.md"
+    },
+    {
+      "bytes": 7124,
+      "file": "eip-5656.md",
+      "id": "eip-5656",
+      "number": 5656,
+      "sha256": "c4d74510c645c13d8f3daace25f3bfa061e5f906bd088d14faf735327b6a4a0b",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-5656.md"
+    },
+    {
+      "bytes": 3283,
+      "file": "eip-5793.md",
+      "id": "eip-5793",
+      "number": 5793,
+      "sha256": "1dcf6c3fffa50c5fdd35d9b6570f24d957cec84192c6f197d71505775e199cbb",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-5793.md"
+    },
+    {
+      "bytes": 1272,
+      "file": "eip-6049.md",
+      "id": "eip-6049",
+      "number": 6049,
+      "sha256": "9f1c2e73c859be2379002276386f14b0099204cce79ab0396948c8e8ac726971",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6049.md"
+    },
+    {
+      "bytes": 14823,
+      "file": "eip-6110.md",
+      "id": "eip-6110",
+      "number": 6110,
+      "sha256": "5e3d603bbf83dd7da977825475c2f0214704bc64a1e6426cbba6421344211962",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6110.md"
+    },
+    {
+      "bytes": 4783,
+      "file": "eip-6372.md",
+      "id": "eip-6372",
+      "number": 6372,
+      "sha256": "ab569bc8ba455aa11c20033a607cfbc9b8b0b987d9eccc72549c5c9fcb57a086",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-6372.md"
+    },
+    {
+      "bytes": 31235,
+      "file": "eip-6551.md",
+      "id": "eip-6551",
+      "number": 6551,
+      "sha256": "315055a2cc230ddb30fa93bac6dc053cac0d961c2b10ad694593740278355815",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-6551.md"
+    },
+    {
+      "bytes": 5908,
+      "file": "eip-6780.md",
+      "id": "eip-6780",
+      "number": 6780,
+      "sha256": "3941eed8379cc93abb7342c5b186bd883e8b1518b0025d94a49be068f8ea2101",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6780.md"
+    },
+    {
+      "bytes": 15478,
+      "file": "eip-6800.md",
+      "id": "eip-6800",
+      "number": 6800,
+      "sha256": "41dc40c62e4e2034d95a5762d0ed40339356bba4757efb123ff124279767aab9",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6800.md"
+    },
+    {
+      "bytes": 22369,
+      "file": "eip-6909.md",
+      "id": "eip-6909",
+      "number": 6909,
+      "sha256": "5f65ed1db122a04547c413bc46ec18f59bfef4b2a148d20295e97999c6c7f299",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-6909.md"
+    },
+    {
+      "bytes": 18949,
+      "file": "eip-6963.md",
+      "id": "eip-6963",
+      "number": 6963,
+      "sha256": "a5d0745c154be2e0a6fdafac1e778a228725e835539084a42c7667bc2fdbbea4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-6963.md"
+    },
+    {
+      "bytes": 28503,
+      "file": "eip-7002.md",
+      "id": "eip-7002",
+      "number": 7002,
+      "sha256": "33c151fb3589f3e09fa7f3dcf6fe897f982c7c0e95fc17baa00e14776986b1ee",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7002.md"
+    },
+    {
+      "bytes": 3938,
+      "file": "eip-7044.md",
+      "id": "eip-7044",
+      "number": 7044,
+      "sha256": "9e4d1027348064aee6c23aabe2f65b92ac26212e7c99daf37e65544edfd9da68",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7044.md"
+    },
+    {
+      "bytes": 4798,
+      "file": "eip-7045.md",
+      "id": "eip-7045",
+      "number": 7045,
+      "sha256": "e823f42f075fbf22a3daa151862a7d6e4e2dc1d4720047b452d9b3bd75c08ecb",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7045.md"
+    },
+    {
+      "bytes": 7664,
+      "file": "eip-7201.md",
+      "id": "eip-7201",
+      "number": 7201,
+      "sha256": "03485015b57d824e4018a4c47c91ccd3b90c03087f6d9d004a7a4c0e1abfa8c1",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-7201.md"
+    },
+    {
+      "bytes": 27722,
+      "file": "eip-7251.md",
+      "id": "eip-7251",
+      "number": 7251,
+      "sha256": "2a29b8d474d92c04b077f7acdb40da0cb5ba3e2e78e1e8be94c862a77c58ea5a",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7251.md"
+    },
+    {
+      "bytes": 6055,
+      "file": "eip-7514.md",
+      "id": "eip-7514",
+      "number": 7514,
+      "sha256": "142c667da8a7137d663bfa086fa11e32ed1c87b1cd956a15f2191650238baf6a",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7514.md"
+    },
+    {
+      "bytes": 2888,
+      "file": "eip-7516.md",
+      "id": "eip-7516",
+      "number": 7516,
+      "sha256": "91ec406457498fecbbbe27ec801963b2b8de1099fdd3ded7ba7950fad8b4e2f4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7516.md"
+    },
+    {
+      "bytes": 4201,
+      "file": "eip-7523.md",
+      "id": "eip-7523",
+      "number": 7523,
+      "sha256": "574cc98ddb22e5b84da47902005fce5353f6335be1444e2283c7aea15ba2fa72",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7523.md"
+    },
+    {
+      "bytes": 5994,
+      "file": "eip-7549.md",
+      "id": "eip-7549",
+      "number": 7549,
+      "sha256": "0233807c2c680e936d4f8812875b92562cec69f781755d99935095c43f11557c",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7549.md"
+    },
+    {
+      "bytes": 11153,
+      "file": "eip-7594.md",
+      "id": "eip-7594",
+      "number": 7594,
+      "sha256": "34b8426335cfd3f6f335ac2e3d3d0ef42bd0b007b0cc653fef130e29e3b212e4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7594.md"
+    },
+    {
+      "bytes": 6342,
+      "file": "eip-7623.md",
+      "id": "eip-7623",
+      "number": 7623,
+      "sha256": "b991940be17e3265684047d49b0f5758742c3873b88efaa9aa30e4229ea92c33",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7623.md"
+    },
+    {
+      "bytes": 5739,
+      "file": "eip-7642.md",
+      "id": "eip-7642",
+      "number": 7642,
+      "sha256": "e8d5e02d30e5c38f3273514f9737a09267da4dcd57b9ec44fd55a0a29ceeb2b8",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7642.md"
+    },
+    {
+      "bytes": 5336,
+      "file": "eip-7685.md",
+      "id": "eip-7685",
+      "number": 7685,
+      "sha256": "99b3272f275293fd5e9af5f45d673132a909dbf28816a7ea7804c247485622a2",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7685.md"
+    },
+    {
+      "bytes": 6262,
+      "file": "eip-7691.md",
+      "id": "eip-7691",
+      "number": 7691,
+      "sha256": "12205332a3d2e78a6e3847028cd613c7a2e448c6bdee258e46794838ff537c83",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7691.md"
+    },
+    {
+      "bytes": 1936,
+      "file": "eip-7692.md",
+      "id": "eip-7692",
+      "number": 7692,
+      "sha256": "9287f145cc1bebbfa6871387029db2879ca43d03ede7f059cf9dafbd31406e9a",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7692.md"
+    },
+    {
+      "bytes": 29313,
+      "file": "eip-7702.md",
+      "id": "eip-7702",
+      "number": 7702,
+      "sha256": "3d46953e13ebc7ebe229971b301ede853aad6e29f4faf4db1eb9a2085accde1b",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7702.md"
+    },
+    {
+      "bytes": 28769,
+      "file": "eip-7732.md",
+      "id": "eip-7732",
+      "number": 7732,
+      "sha256": "2643d9659d74804788ce758a6223ba17b51d8669c12fb3a1004aea1626263bd4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7732.md"
+    },
+    {
+      "bytes": 40875,
+      "file": "eip-7745.md",
+      "id": "eip-7745",
+      "number": 7745,
+      "sha256": "4575d34433c05876f7519c621238b699ef0fdafb0666e9907999bd4a153ae4a1",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7745.md"
+    },
+    {
+      "bytes": 16222,
+      "file": "eip-7805.md",
+      "id": "eip-7805",
+      "number": 7805,
+      "sha256": "81096dd37cab86a5007e50d9357f0230f2f3dcbdf4df16b9afd44da6c74098a1",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7805.md"
+    },
+    {
+      "bytes": 4026,
+      "file": "eip-7823.md",
+      "id": "eip-7823",
+      "number": 7823,
+      "sha256": "4c61592322a2a20b0f54b2fda8390de95f8632ac80cfa37f7b32007d50059806",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7823.md"
+    },
+    {
+      "bytes": 4414,
+      "file": "eip-7825.md",
+      "id": "eip-7825",
+      "number": 7825,
+      "sha256": "86e82af6cfba9593efb3f8cc16ccc23f13bb0e82c4e7782679cf71b95fcc2fe3",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7825.md"
+    },
+    {
+      "bytes": 2099,
+      "file": "eip-7840.md",
+      "id": "eip-7840",
+      "number": 7840,
+      "sha256": "151ed7c2261c71c9e987ef1967ccf58ffc3cbc0f735bc69f60efca2aae35b6e8",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7840.md"
+    },
+    {
+      "bytes": 13254,
+      "file": "eip-7861.md",
+      "id": "eip-7861",
+      "number": 7861,
+      "sha256": "f1200199eb43af3ee9538453f67c4c01f8a92a850df80c67bbf018b77f7f221d",
+      "source": "https://raw.githubusercontent.com/ethereum/ERCs/master/ERCS/erc-7861.md"
+    },
+    {
+      "bytes": 7525,
+      "file": "eip-7883.md",
+      "id": "eip-7883",
+      "number": 7883,
+      "sha256": "daf859b96db1a3c61a140b6377b94573193e9e9c0c2807586dce54cfefb07c65",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7883.md"
+    },
+    {
+      "bytes": 3733,
+      "file": "eip-7903.md",
+      "id": "eip-7903",
+      "number": 7903,
+      "sha256": "53a0cbc9141b3d700b7a389666830c5eb875e6168dd2322fabffac0ff3309f49",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7903.md"
+    },
+    {
+      "bytes": 7087,
+      "file": "eip-7907.md",
+      "id": "eip-7907",
+      "number": 7907,
+      "sha256": "5ab7597f76df7da70806003e7a3a4ee1167442a766af868d4d321429fe38de6b",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7907.md"
+    },
+    {
+      "bytes": 18123,
+      "file": "eip-7918.md",
+      "id": "eip-7918",
+      "number": 7918,
+      "sha256": "a6aa9e0972cf2f629b5d47d3cf9bdeca416e30c58479c21651d02518ea7522e4",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7918.md"
+    },
+    {
+      "bytes": 31164,
+      "file": "eip-7928.md",
+      "id": "eip-7928",
+      "number": 7928,
+      "sha256": "abc475389f99e5e821d6426f13eab8152ad7d5d4e839300f71960633587eac30",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7928.md"
+    },
+    {
+      "bytes": 3541,
+      "file": "eip-7934.md",
+      "id": "eip-7934",
+      "number": 7934,
+      "sha256": "99528dc7d4af27ac450b6d845f5617f395036a98222bc523e1af88255dcd62a9",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7934.md"
+    },
+    {
+      "bytes": 6232,
+      "file": "eip-7939.md",
+      "id": "eip-7939",
+      "number": 7939,
+      "sha256": "9225adee53a3c38d173da26c97273cda06859db508ab818802104d5ff1f65f3f",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7939.md"
+    },
+    {
+      "bytes": 12210,
+      "file": "eip-7951.md",
+      "id": "eip-7951",
+      "number": 7951,
+      "sha256": "ea599f929ceaa420d83fb90ac27a1370c2c1e150a339a68a15dc721d42d50323",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7951.md"
+    },
+    {
+      "bytes": 1866,
+      "file": "eip-7954.md",
+      "id": "eip-7954",
+      "number": 7954,
+      "sha256": "517a9070147a45d010372f09c8473c5162500769f7b7cb41b5fed3db12d18ac6",
+      "source": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-7954.md"
+    }
+  ],
+  "license": "CC0-1.0 (Ethereum Improvement Proposals)",
+  "min_bytes": 300,
+  "skipped": []
+}
