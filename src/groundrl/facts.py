@@ -29,6 +29,7 @@ from .tokens import (
     number_variants,
     numeric_tokens,
     sentences,
+    suspicious_chars,
 )
 
 CONSTANT, OPCODE, TYPE_BYTE = "constant", "opcode", "type_byte"
@@ -208,7 +209,7 @@ def cloze_candidates(chunk: Chunk) -> list[tuple[str, str, str]]:
         words = len(s.split())
         if not 8 <= words <= 45 or not s[0].isupper() or "http" in s or "|" in s or "](" in s:
             continue
-        if "..." in s or "\u2026" in s:
+        if "..." in s or "\u2026" in s or suspicious_chars(s) or sentences(s) != [s]:
             continue
         if len(numeric_tokens(s)) > 4 or len(claim_tokens(s) - numeric_tokens(s)) > 4:
             continue

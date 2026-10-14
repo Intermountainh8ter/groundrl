@@ -1,29 +1,29 @@
 {
   "answerable": {
-    "test": 239,
-    "train": 1158,
-    "val": 240
+    "test": 237,
+    "train": 1139,
+    "val": 237
   },
   "by_type": {
     "test": {
-      "comparison": 25,
+      "comparison": 26,
       "constant": 153,
-      "multi": 54,
+      "multi": 51,
       "opcode": 7,
       "unanswerable": 31
     },
     "train": {
-      "comparison": 128,
-      "constant": 744,
-      "multi": 257,
+      "comparison": 130,
+      "constant": 741,
+      "multi": 239,
       "opcode": 29,
       "unanswerable": 147
     },
     "val": {
-      "comparison": 27,
-      "constant": 153,
-      "multi": 54,
-      "opcode": 6,
+      "comparison": 30,
+      "constant": 152,
+      "multi": 48,
+      "opcode": 7,
       "unanswerable": 30
     }
   },
@@ -34,7 +34,7 @@
     "train": 91,
     "val": 20
   },
-  "facts": 1395,
+  "facts": 1392,
   "generator_version": 1,
   "k": 5,
   "ratios": [
@@ -44,14 +44,14 @@
   ],
   "seed": 20260,
   "sha256": {
-    "test": "f738b1b4a77f0c837fd3a8665ceccb0648f4e8c402d2cec414852f28cb7a1135",
-    "train": "0436c1f2d2a9a47c069284d750283f46ce3dfdbf68f421ca819c2401f4c07024",
-    "val": "23cd611d78e20fdda8c3024f0d0b2a78c8da7d8a3225a152cd17f28620d98091"
+    "test": "08db4da6d29aa36a82c5a0ee0e02e3dc7e415c7d98995cc845d423ba77ef516f",
+    "train": "7f6a278a170227c09b64c0f6328deba047256e32719f4d61e4c1152f0eb02c9c",
+    "val": "c585009e9931d97fd7d35468875ac7796a5add1bf0027f97469a542a17f54f2a"
   },
   "tasks": {
-    "test": 270,
-    "train": 1305,
-    "val": 270
+    "test": 268,
+    "train": 1286,
+    "val": 267
   },
-  "total": 1845
+  "total": 1821
 }

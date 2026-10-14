@@ -30,6 +30,7 @@ from .corpus import sha256_hex
 from .facts import CLOZE, CONSTANT, METADATA, OPCODE, TYPE_BYTE, Fact, supports
 from .protocol import ABSTAIN_TEXT
 from .tokens import claim_tokens, content_words, word_count
+from .verifier import verify_answer
 
 SPLITS = ("train", "val", "test")
 QTYPES = ("constant", "opcode", "multi", "comparison", "unanswerable")
@@ -186,8 +187,6 @@ def _fact_sentence(f: Fact) -> str:
     if f.kind == METADATA:
         reqs = ", ".join(f"EIP-{x.strip()}" for x in f.value.split(","))
         return f"{n} requires {reqs}."
-    if f.kind == OPCODE:
-        return f"In {n}, {f.name} is opcode {f.value}."
     return f"In {n}, {f.name} is {f.value}."
 
 
@@ -313,6 +312,8 @@ def _make_task(
     tokens = sorted({t for f in facts for t in f.tokens})
     if answerable:
         answer = oracle_answer(facts, [f.chunk_id for f in facts])
+        if not verify_answer(answer, {c: index.by_id[c].text for c in ctx}, ctx).ok:
+            return None  # the oracle itself must pass the verifier
     else:
         answer = ABSTAIN_TEXT
     return Task(
@@ -428,7 +429,8 @@ def _multi_groups(pool: Sequence[Fact], rng: random.Random, cap: int) -> list[li
             while len(facts) >= 2 and made < cap:
                 size = 3 if len(facts) >= 3 and rng.random() < 0.4 else 2
                 grp, facts = facts[:size], facts[size:]
-                if len({f.name for f in grp}) == len(grp) or family == "cloze":
+                distinct = {f.sentence if family == "cloze" else f.name for f in grp}
+                if len(distinct) == len(grp):
                     groups.append(sorted(grp, key=lambda x: x.chunk_id))
                     made += 1
     return groups
