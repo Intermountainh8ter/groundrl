@@ -78,7 +78,8 @@ def _units(chunk_text: str) -> list[str]:
 
     body = _body(chunk_text)
     table = [ln for ln in body.splitlines() if ln.count("|") >= 2 and not set(ln) <= set("|- :")]
-    prose = [ln for ln in body.splitlines() if ln.count("|") < 2 and not ln.strip().startswith("```")]
+    prose = [ln for ln in body.splitlines()
+             if ln.count("|") < 2 and not ln.strip().startswith("```")]
     return [_clean_line(u) for u in table + paragraph_sentences("\n".join(prose)) if _clean_line(u)]
 
 
@@ -134,11 +135,14 @@ def _is_numeric(tok: str) -> bool:
     return tok[:1].isdigit()
 
 
-def _substitute_constant(ex: Example, rng: random.Random, answer: str) -> str | None:
+def _substitute_constant(
+    ex: Example, rng: random.Random, answer: str,
+) -> tuple[str, str] | None:
     """Replace one gold value in ``answer`` by another number from the same gold chunk.
 
     The replacement is chosen so that it still occurs in the chunk (the verifier cannot tell).
-    Returns ``None`` if the answer has no gold value or the chunk has no alternative number.
+    Returns ``(new answer, replacement)``, or ``None`` if the answer has no gold value or the
+    chunk has no alternative number.
     """
     gold = list(ex.task.gold_tokens)
     cid = gold_chunk(ex)
@@ -153,7 +157,7 @@ def _substitute_constant(ex: Example, rng: random.Random, answer: str) -> str | 
             same_form = [t for t in pool if t.lower().startswith("0x") == match.group(0).lower()
                          .startswith("0x")]
             repl = rng.choice(same_form or pool)
-            return answer[:match.start()] + repl + answer[match.end():]
+            return answer[:match.start()] + repl + answer[match.end():], repl
     return None
 
 
@@ -242,16 +246,28 @@ def p_wrong_chunk(ex: Example, rng: random.Random) -> str:
 def p_one_wrong_constant(ex: Example, rng: random.Random) -> str:
     if not ex.task.answerable:
         return generic_guess(ex)
-    wrong = _substitute_constant(ex, rng, oracle_text(ex))
-    return wrong if wrong is not None else generic_guess(ex)
+    swapped = _substitute_constant(ex, rng, oracle_text(ex))
+    return swapped[0] if swapped is not None else generic_guess(ex)
 
 
 def p_hedge_right_and_wrong(ex: Example, rng: random.Random) -> str:
     if not ex.task.answerable:
         return generic_guess(ex)
     first = _first_sentence(oracle_text(ex))
-    wrong = _substitute_constant(ex, rng, first)
-    return f"{oracle_text(ex)} {wrong}" if wrong is not None else oracle_text(ex)
+    swapped = _substitute_constant(ex, rng, first)
+    return f"{oracle_text(ex)} {swapped[0]}" if swapped is not None else oracle_text(ex)
+
+
+def p_hedge_inline(ex: Example, rng: random.Random) -> str:
+    if not ex.task.answerable:
+        return generic_guess(ex)
+    first = _first_sentence(oracle_text(ex))
+    swapped = _substitute_constant(ex, rng, first)
+    if swapped is None:
+        return oracle_text(ex)
+    hedged = strip_citations(first).replace(" .", ".").rstrip(".") + f" (or {swapped[1]})"
+    rest = oracle_text(ex)[len(first):].strip()
+    return " ".join(p for p in (_with_cite(hedged, [gold_chunk(ex)]), rest) if p)
 
 
 def p_paraphrase_no_tokens(ex: Example, rng: random.Random) -> str:
@@ -324,6 +340,9 @@ POLICIES: tuple[PolicySpec, ...] = (
     PolicySpec("hedge_right_and_wrong", EXTRA,
                "the correct answer followed by a contradicting one, both supported by the chunk",
                True, p_hedge_right_and_wrong),
+    PolicySpec("hedge_inline", EXTRA,
+               "the correct value followed by '(or <wrong value>)' in the same sentence", True,
+               p_hedge_inline),
     PolicySpec("spoofed_citation", EXTRA, "correct answer citing a non-existent chunk index (#999)",
                True, p_spoofed_citation),
     PolicySpec("hallucinated_value", EXTRA, "correct sentence with the value replaced by a number "
@@ -347,8 +366,10 @@ def run_policy(spec: PolicySpec, ex: Example, seed: int = 0) -> str:
 
 def reward_columns() -> dict[str, tuple[str, V2Config | None]]:
     """Column name -> (reward version, v2 config)."""
-    cols: dict[str, tuple[str, V2Config | None]] = {"v0": ("v0", None), "v1": ("v1", None),
-                                                    "v2": ("v2", V2Config())}
+    cols: dict[str, tuple[str, V2Config | None]] = {
+        "v0": ("v0", None), "v1": ("v1", None), "v2": ("v2", V2Config()),
+        "v2-rev1": ("v2", V2Config.rev1()),
+    }
     for term in V2_TERMS:
         cols[f"v2-no-{term}"] = ("v2", V2Config().without(term))
     cols["v2-gold-free"] = ("v2", V2Config(abstention=False, correctness=False, citation=False))
@@ -423,10 +444,12 @@ def render_markdown(result: dict, split: str = "test") -> str:
         cells = " | ".join(_cell(p["scores"][c], flag) for c in ("v0", "v1", "v2"))
         lines.append(f"| `{name}` | {p['category']} | {'yes' if p['uses_gold'] else 'no'} | "
                      f"{cells} |")
-    lines += ["", "Which v2 term closes which hole (mean reward with one term removed; compare with "
-              "the full-v2 column):", ""]
+    lines += ["", "Which v2 term closes which hole: mean reward with one term removed (compare "
+              "with the full-v2 column), the first v2 design (rev1), and v2 without any "
+              "gold-label term (gold-free):", ""]
     terms = [c for c in result["reward_columns"] if c.startswith("v2-")]
-    lines.append("| policy | v2 | " + " | ".join(t.replace("v2-no-", "no ") for t in terms) + " |")
+    heads = [t.replace("v2-no-", "no ").replace("v2-", "") for t in terms]
+    lines.append("| policy | v2 | " + " | ".join(heads) + " |")
     lines.append("|---|---|" + "---|" * len(terms))
     for name, p in result["policies"].items():
         if p["category"] == REFERENCE:

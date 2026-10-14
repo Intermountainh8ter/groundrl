@@ -19,10 +19,16 @@ Every reward is a pure function ``(completion, example) -> (score, breakdown)`` 
   ``relevance``    share of the question's claim tokens that the answer repeats
   ``length``       penalty for answers longer than 1.5x the gold answer plus a small allowance
   ``redundancy``   penalty for repeated sentences and repeated citation markers
+  ``consistency``  penalty when two near-identical sentences assign different numbers (hedging)
 
-  ``score = length * redundancy * grounding * (floor + (1 - floor) * correctness * citation
-  * (0.7 + 0.3 * relevance))`` where ``grounding`` is the v1 score and ``floor`` keeps a small
-  gradient for well-formed, grounded answers that are not yet correct.
+  ``score = consistency * length * redundancy * grounding * (floor + (1 - floor) * correctness
+  * citation * (0.7 + 0.3 * relevance))`` where ``grounding`` is the v1 score and ``floor`` keeps
+  a small gradient for well-formed, grounded answers that are not yet correct. ``correctness`` is
+  ``recall * precision ** 2``: a wrong extra claim costs more than a missing one.
+
+  v2 has two revisions. Revision 1 (``V2Config.rev1()``) had no consistency term and used
+  ``recall * precision``; the audit showed it could be exploited by answering twice with
+  contradicting values, so revision 2 (the default) added both changes.
 
 Training wrappers (:func:`make_trl_reward`) have the signature ``fn(prompts, completions,
 **kwargs) -> list[float]`` expected by TRL and need no TRL import.
@@ -36,7 +42,14 @@ from statistics import fmean
 
 from .example import Example
 from .protocol import CITATION, is_abstention
-from .tokens import claim_tokens, number_variants, sentences, strip_citations, word_count
+from .tokens import (
+    claim_tokens,
+    content_words,
+    number_variants,
+    sentences,
+    strip_citations,
+    word_count,
+)
 from .verifier import VerificationResult, verify_answer
 
 Breakdown = dict[str, float | int | bool | str]
@@ -125,10 +138,18 @@ class V2Config:
     relevance: bool = True
     length: bool = True
     redundancy: bool = True
+    consistency: bool = True
     floor: float = 0.10
     length_slack: float = 1.5
     length_pad: int = 15
     relevance_weight: float = 0.3
+    precision_power: float = 2.0
+    consistency_factor: float = 0.25
+
+    @classmethod
+    def rev1(cls) -> V2Config:
+        """The first v2 design, kept so the audit can show what revision 2 changed."""
+        return cls(consistency=False, precision_power=1.0)
 
     def without(self, term: str) -> V2Config:
         if term not in V2_TERMS:
@@ -136,7 +157,8 @@ class V2Config:
         return replace(self, **{term: False})
 
 
-V2_TERMS = ("abstention", "correctness", "citation", "relevance", "length", "redundancy")
+V2_TERMS = ("abstention", "correctness", "citation", "relevance", "length", "redundancy",
+            "consistency")
 
 
 def token_equiv(a: str, b: str) -> bool:
@@ -150,8 +172,10 @@ def _in(tok: str, bag: set[str]) -> bool:
     return any(token_equiv(tok, other) for other in bag)
 
 
-def correctness(answer: str, ex: Example) -> tuple[float, float, float]:
-    """``(recall x precision, recall, precision)`` of the answer's claim tokens vs the gold tokens.
+def correctness(
+    answer: str, ex: Example, precision_power: float = 1.0,
+) -> tuple[float, float, float]:
+    """``(recall x precision**power, recall, precision)`` of claim tokens vs the gold tokens.
 
     Tokens that also occur in the question, and the numbers of the EIPs involved, are neutral:
     repeating them neither earns credit nor counts as an unsupported extra.
@@ -166,7 +190,7 @@ def correctness(answer: str, ex: Example) -> tuple[float, float, float]:
     recall = sum(_in(g, answer_tokens) for g in gold) / len(gold)
     denom = len(matched) + len(extras)
     precision = len(matched) / denom if denom else 0.0
-    return recall * precision, recall, precision
+    return recall * precision**precision_power, recall, precision
 
 
 def citation_quality(cited: list[str], ex: Example) -> tuple[float, float, float]:
@@ -223,6 +247,37 @@ def redundancy_factor(answer: str) -> tuple[float, float, float]:
     return (1.0 - dup_sentences) * (1.0 - dup_cites), dup_sentences, dup_cites
 
 
+def _canon(tok: str) -> str:
+    """Decimal spelling of a numeric token when one exists (0x40 -> 64), else the token."""
+    dec = [v for v in number_variants(tok) if v.isdigit()]
+    return dec[0] if dec else tok
+
+
+def contradictions(answer: str, ex: Example) -> int:
+    """Pairs of near-identical sentences that give different numbers (answering twice).
+
+    Two sentences are near-identical if their non-numeric content words overlap by at least 80%
+    (Jaccard). They contradict if both carry numeric claims and the sets differ. EIP numbers are
+    ignored. Legitimate multi-fact answers differ in their words, so they do not trigger this.
+    """
+    eips = {e.split("-", 1)[1] for e in ex.task.eips}
+    rows: list[tuple[set[str], set[str]]] = []
+    for s in sentences(answer):
+        body = strip_citations(s)
+        words = {w for w in content_words(body) if not w[:1].isdigit()}
+        nums = {_canon(t) for t in claim_tokens(body) if t[:1].isdigit()} - eips
+        rows.append((words, nums))
+    count = 0
+    for i, (wi, ni) in enumerate(rows):
+        for wj, nj in rows[i + 1:]:
+            union = wi | wj
+            if not union or not ni or not nj or ni == nj:
+                continue
+            if len(wi & wj) / len(union) >= 0.8:
+                count += 1
+    return count
+
+
 def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tuple[float, Breakdown]:
     cfg = cfg or V2Config()
     task = ex.task
@@ -244,7 +299,7 @@ def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tupl
     rel = 1.0
     if task.answerable or not cfg.abstention:
         if cfg.correctness and task.answerable:
-            c, rc, pc = correctness(completion, ex)
+            c, rc, pc = correctness(completion, ex, cfg.precision_power)
         if cfg.citation and task.answerable:
             k, kp, kr = citation_quality(res.cited_chunks, ex)
     if cfg.relevance:
@@ -252,13 +307,16 @@ def reward_v2(completion: str, ex: Example, cfg: V2Config | None = None) -> tupl
     rf = (1.0 - cfg.relevance_weight) + cfg.relevance_weight * rel if cfg.relevance else 1.0
     lf, words, budget = length_factor(completion, ex, cfg) if cfg.length else (1.0, 0, 0.0)
     df, dup_s, dup_c = redundancy_factor(completion) if cfg.redundancy else (1.0, 0.0, 0.0)
+    conflicts = contradictions(completion, ex) if cfg.consistency else 0
+    cf = cfg.consistency_factor if conflicts else 1.0
     inner = cfg.floor + (1.0 - cfg.floor) * c * k * rf
-    score = max(0.0, min(1.0, lf * df * g * inner))
+    score = max(0.0, min(1.0, cf * lf * df * g * inner))
     bd.update({
         "verified": res.ok, "grounded": g, "correctness": c, "recall": rc, "precision": pc,
         "citation_quality": k, "cite_precision": kp, "cite_recall": kr, "relevance": rel,
         "length_factor": lf, "words": words, "word_budget": budget, "redundancy_factor": df,
-        "dup_sentences": dup_s, "dup_citations": dup_c,
+        "dup_sentences": dup_s, "dup_citations": dup_c, "contradictions": conflicts,
+        "consistency_factor": cf,
         "hallucinated_citations": len(res.invalid_citations), "support_ratio": res.support_ratio,
         "n_sentences": len(res.sentences),
     })
