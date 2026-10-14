@@ -141,4 +141,4 @@ Source: `baseline_test.json` (test split). Scripted policies, no learning.
 
 ## Training results
 
-**Training results: NOT YET RUN.** No `kind: eval` result file from a real run exists in `/home/user/groundrl/results`.
+**Training results: NOT YET RUN.** No `kind: eval` result file from a real run exists in the `results/` directory.

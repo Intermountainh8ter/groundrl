@@ -108,8 +108,8 @@ def render_report(results_dir: Path) -> str:
                        f"adapter `{d.get('adapter_dir')}`, commit {d.get('git_commit')}")
         out.append("")
     else:
-        out += [f"**{NOT_RUN}.** No `kind: eval` result file from a real run exists in "
-                f"`{Path(results_dir)}`.", ""]
+        out += [f"**{NOT_RUN}.** No `kind: eval` result file from a real run exists in the "
+                f"`{Path(results_dir).name}/` directory.", ""]
     if trains:
         out.append("Training runs on record:")
         out.append("")
