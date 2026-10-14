@@ -20,3 +20,5 @@ wandb/
 *.bin
 # raw downloads are re-creatable from data/MANIFEST.json; derived task files are committed
 data/raw/.cache/
+# gfx906 TunableOp per-run cache (reproducible, local to the GPU)
+tunableop_results*.csv

@@ -31,10 +31,12 @@ def test_without_any_real_eval_the_report_says_not_yet_run(tmp_path):
     assert NOT_RUN in text and "No audit file found" in text and "No baseline file" in text
 
 
-def test_committed_results_directory_does_not_claim_training_results(root):
+def test_committed_results_directory_renders_the_sft_training_results(root):
     text = render_report(root / "results")
-    assert NOT_RUN in text
+    # The first SFT run on gfx906 is committed under results/groundrl-sft/.
+    assert NOT_RUN not in text
     assert "Reward-hacking audit" in text and "Scripted baselines" in text
+    assert "sft" in text  # label of the trained-adapter eval
 
 
 def test_audit_and_baseline_sections_render_from_their_files(tmp_path):

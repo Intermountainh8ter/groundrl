@@ -12,11 +12,11 @@ Ethereum EIPs with correct, grounded citations.**
   matters. No background assumed.
 - [GLOSSARY.md](GLOSSARY.md) &mdash; every abbreviation this repo uses, defined.
 
-> **Training results: NOT YET RUN.** No model has been trained or fine-tuned in this repository.
-> It was built in a container with no GPU. Everything under "Results" below is either a scripted,
-> model-free result that anyone can regenerate with one command, or an explicit placeholder.
-> `scripts/make_report.py` renders only from `results/*.json` files produced by real runs, and
-> says "NOT YET RUN" until one exists.
+> **Training results: SFT on Qwen3-0.6B, 2 epochs, LoRA (r=16), AMD gfx906.** Trained
+> on 1,262 EIP tasks and evaluated on 265 held-out EIP tasks from a strictly document-separated
+> split (zero EIP overlap, zero fact-id overlap — see
+> `results/groundrl-sft/LEAKAGE_CHECK.md`). The adapter and merged weights live under
+> `results/groundrl-sft/`. GRPO is still unrun. See `## Results` §3 for the full table.
 
 ## The idea
 
@@ -148,16 +148,19 @@ groundrl baseline-eval --split test
 | `eip_id_shortcut` | 57.4% (51.1-63.8) | 98.3% (96.6-99.6) | 50.0% (18.2-81.5) | 0.0% (0.0-0.0) | 0.928 | 0.931 | 0.670 (0.622-0.716) |
 | `refuse_all` | 0.0% (0.0-0.0) | 0.0% (0.0-0.0) | 100.0% (100.0-100.0) | 0.0% (0.0-0.0) | 0.000 | 0.000 | 0.113 (0.079-0.151) |
 
-### 3. Training results: NOT YET RUN
+### 3. Training results (test split, n=265, 235 answerable; 95% percentile-bootstrap CI)
 
 | run | grounded-correct | verified | abstain precision / recall | hallucinated cite | v2 |
 |---|---|---|---|---|---|
-| base Qwen3-0.6B | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN |
-| SFT baseline | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN |
+| base Qwen3-0.6B | 27.2% (21.7-33.2) | 40.4% (34.0-46.4) | 25.2% (13.9-39.5) / 93.3% (75.9-100.0) | 0.8% (0.0-1.9) | 0.357 (0.305-0.412) |
+| SFT (LoRA r=16, 2 epochs) | **98.7% (97.0-100.0)** | **99.6% (98.7-100.0)** | **100.0% (100.0-100.0)** / 93.3% (70.8-100.0) | **0.4% (0.0-1.1)** | **0.985 (0.971-0.996)** |
 | GRPO, reward v2 | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN | NOT YET RUN |
 
-These rows are placeholders, not estimates. They will be replaced by numbers only through
-`python scripts/make_report.py` after `train/eval.py` has written real `results/eval_*.json` files.
+Trained on AMD gfx906 (Vega 20, 32 GiB) under torch 2.4.1+rocm6.0; 156 optimizer steps, 39.3 min
+wall-clock, mean train loss 0.0184. Environment, log history and hashes are in
+`results/groundrl-sft/summary_sft.json`. The 95% CIs for `grounded_correct_rate` do not overlap
+between baseline and SFT. See `results/groundrl-sft/LEAKAGE_CHECK.md` for the held-out-split
+check that confirms zero EIP and zero fact-id overlap between train and test.
 
 ## Quickstart
 

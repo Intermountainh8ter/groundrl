@@ -1,0 +1,234 @@
+{
+  "adapter_dir": "/home/ammo/bench/results/groundrl-sft/adapter",
+  "bootstrap": 2000,
+  "by_qtype": {
+    "comparison": {
+      "grounded_correct_rate": 0.9583333333333334,
+      "mean_v2": 0.9812500000000001,
+      "n": 24
+    },
+    "constant": {
+      "grounded_correct_rate": 1.0,
+      "mean_v2": 0.9994323557237464,
+      "n": 151
+    },
+    "multi": {
+      "grounded_correct_rate": 0.9622641509433962,
+      "mean_v2": 0.9753077268643306,
+      "n": 53
+    },
+    "opcode": {
+      "grounded_correct_rate": 1.0,
+      "mean_v2": 1.0,
+      "n": 7
+    },
+    "unanswerable": {
+      "grounded_correct_rate": null,
+      "mean_v2": 0.9333333333333333,
+      "n": 30
+    }
+  },
+  "config": "qwen3-0.6b-gfx906",
+  "environment": {
+    "datasets": "5.0.1",
+    "gpu": "AMD Radeon Graphics",
+    "gpu_memory_gb": 34.3,
+    "peft": "0.21.2",
+    "torch": "2.4.1+rocm6.0",
+    "transformers": "4.56.2",
+    "trl": "0.17.0"
+  },
+  "git_commit": "28b7524fc8f25c5ec1a4509d022978e1082ca5a4",
+  "kind": "eval",
+  "label": "sft",
+  "metrics": {
+    "abstain_rate": {
+      "hi": 0.1471698113207547,
+      "lo": 0.07169811320754717,
+      "mean": 0.10566037735849057,
+      "n": 265
+    },
+    "abstention_precision": {
+      "hi": 1.0,
+      "lo": 1.0,
+      "n": 265,
+      "value": 1.0
+    },
+    "abstention_recall": {
+      "hi": 1.0,
+      "lo": 0.7083333333333334,
+      "n": 265,
+      "value": 0.9333333333333333
+    },
+    "correct_rate": {
+      "hi": 1.0,
+      "lo": 0.9787234042553191,
+      "mean": 0.9914893617021276,
+      "n": 235
+    },
+    "empty_rate": {
+      "hi": 0.0,
+      "lo": 0.0,
+      "mean": 0.0,
+      "n": 265
+    },
+    "format_drift_rate": {
+      "hi": 0.0,
+      "lo": 0.0,
+      "mean": 0.0,
+      "n": 265
+    },
+    "grounded_correct_rate": {
+      "hi": 1.0,
+      "lo": 0.9702127659574468,
+      "mean": 0.9872340425531915,
+      "n": 235
+    },
+    "hallucinated_citation_rate": {
+      "hi": 0.011320754716981131,
+      "lo": 0.0,
+      "mean": 0.0037735849056603774,
+      "n": 265
+    },
+    "invalid_citation_share": {
+      "hi": 0.015527950310559006,
+      "lo": 0.0,
+      "n": 265,
+      "value": 0.003048780487804878
+    },
+    "length_tokens": {
+      "max": 225,
+      "mean": 54.950943396226414,
+      "p95": 123.0
+    },
+    "length_words": {
+      "max": 100,
+      "mean": 21.932075471698113,
+      "median": 17.0,
+      "p95": 58.79999999999998
+    },
+    "mean_reward": {
+      "v0": {
+        "hi": 0.9207547169811321,
+        "lo": 0.8415094339622642,
+        "mean": 0.8830188679245283,
+        "n": 265
+      },
+      "v1": {
+        "hi": 0.9216342093441151,
+        "lo": 0.8467214734950584,
+        "mean": 0.8861814914645103,
+        "n": 265
+      },
+      "v2": {
+        "hi": 0.9963611859838275,
+        "lo": 0.9711952717879604,
+        "mean": 0.9854928122192271,
+        "n": 265
+      }
+    },
+    "suspicious_character_rate": {
+      "hi": 0.0,
+      "lo": 0.0,
+      "mean": 0.0,
+      "n": 265
+    },
+    "verified_rate": {
+      "hi": 1.0,
+      "lo": 0.9872340425531915,
+      "mean": 0.9957446808510638,
+      "n": 235
+    }
+  },
+  "mock": false,
+  "model_path": "Qwen/Qwen3-0.6B",
+  "n": 265,
+  "n_answerable": 235,
+  "n_unanswerable": 30,
+  "prompt_version": 1,
+  "samples": [
+    {
+      "completion": "EIP-100 was created on 2016-04-28 [eip-100#000].",
+      "id": "test-00000"
+    },
+    {
+      "completion": "Changing the denominator from 10 to 9 ensures that the block time remains roughly the same (in fact, it should decrease by ~3% given the current uncle rate of 7%) [eip-100#004].",
+      "id": "test-00001"
+    },
+    {
+      "completion": "Changing the denominator from 10 to 9 ensures that the block time remains roughly the same (in fact, it should decrease by ~3% given the current uncle rate of 7%) [eip-100#004].",
+      "id": "test-00002"
+    },
+    {
+      "completion": "EIP-1153 was created on 2018-06-15 [eip-1153#000].",
+      "id": "test-00003"
+    },
+    {
+      "completion": "In EIP-1153, TLOAD is 0x5c [eip-1153#001].",
+      "id": "test-00004"
+    },
+    {
+      "completion": "Storage refunds accumulated due to inter frame communication are also limited to 20% of gas spent by a transaction due to EIP-3529 (introduced in the London hard fork) [eip-1153#003].",
+      "id": "test-00005"
+    },
+    {
+      "completion": "Two new opcodes are added to EVM, TLOAD (0x5c) and TSTORE (0x5d) [eip-1153#007].",
+      "id": "test-00006"
+    },
+    {
+      "completion": "Two new opcodes are added to EVM, TLOAD (0x5c) and TSTORE (0x5d) [eip-1153#007].",
+      "id": "test-00007"
+    },
+    {
+      "completion": "They use the same arguments on stack as SLOAD (0x54) and SSTORE (0x55) [eip-1153#007].",
+      "id": "test-00008"
+    },
+    {
+      "completion": "They use the same arguments on stack as SLOAD (0x54) and SSTORE (0x55) [eip-1153#007].",
+      "id": "test-00009"
+    },
+    {
+      "completion": "TLOAD pops one 32-byte word from the top of the stack, treats this value as the address, fetches 32-byte word from the transient storage at that address, and pushes the value on top of the stack [eip-1153#007].",
+      "id": "test-00010"
+    },
+    {
+      "completion": "TLOAD pops one 32-byte word from the top of the stack, treats this value as the address, fetches 32-byte word from the transient storage at that address, and pushes the value on top of the stack [eip-1153#007].",
+      "id": "test-00011"
+    },
+    {
+      "completion": "In EIP-1153, SLOAD is 0x54 [eip-1153#007].",
+      "id": "test-00012"
+    },
+    {
+      "completion": "In EIP-1153, SSTORE is 0x55 [eip-1153#007].",
+      "id": "test-00013"
+    },
+    {
+      "completion": "Addressing is the same as SLOAD and SSTORE. i.e. each 32-byte address points to a unique 32-byte word [eip-1153#008].",
+      "id": "test-00014"
+    },
+    {
+      "completion": "The behavior of the opcodes for transient storage differs from the opcodes for storage in that TSTORE does not require _gasleft_, as defined in EIP-2200, to be less than or equal to the gas stipend (currently 2,300) [eip-1153#011].",
+      "id": "test-00015"
+    },
+    {
+      "completion": "However, EIP-3529 reduced the maximum refund to only 20% of the transaction gas cost, which means the use of transient storage is severely limited [eip-1153#012].",
+      "id": "test-00016"
+    },
+    {
+      "completion": "For example, the 20% refund cap must be applied to the gas used _after_ subtracting the uncapped gas refund [eip-1153#013].",
+      "id": "test-00017"
+    },
+    {
+      "completion": "Otherwise, the refund amount available subject to the 20% refund cap could be increased by executing transient storage writes [eip-1153#013].",
+      "id": "test-00018"
+    },
+    {
+      "completion": "On entry to a call frame, a call marker is added to the list - O(1) [eip-1153#021].",
+      "id": "test-00019"
+    }
+  ],
+  "seconds": 334.1,
+  "split": "test",
+  "temperature": 0.0
+}

@@ -93,7 +93,10 @@ def test_readme_baseline_table_matches_the_baseline_file(root, results):
 def test_readme_claims_and_counts(root, results):
     readme = (root / "README.md").read_text()
     summary = json.loads((root / "data" / "tasks" / "SUMMARY.json").read_text())
-    assert "Training results: NOT YET RUN" in readme
+    # SFT has run on gfx906; the README advertises that fact and keeps GRPO
+    # listed as unrun.
+    assert "SFT on Qwen3-0.6B" in readme
+    assert "| GRPO, reward v2 | NOT YET RUN" in readme
     for key in ("train", "val", "test"):
         assert f"`{summary['tasks'][key]}` {key}" in readme
     assert f"{summary['total']} seeded questions" in readme
