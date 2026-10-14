@@ -187,3 +187,11 @@ def has_negation(text: str) -> bool:
 
 def word_count(text: str) -> int:
     return len(strip_citations(text).split())
+
+
+def raw_claims(text: str) -> list[str]:
+    """Claim tokens as written (``0x03``, ``2**17``, ``FIELD_ELEMENTS_PER_BLOB``), in order."""
+    text = normalize_text(strip_citations(text))
+    spans = [(m.start(), m.group(0).strip()) for m in _NUM.finditer(text)]
+    spans += [(m.start(), m.group(0)) for m in _IDENT.finditer(text) if m.group(0) not in STOP_CAPS]
+    return [s for _, s in sorted(spans)]
