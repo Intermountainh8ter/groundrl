@@ -1,0 +1,56 @@
+{
+  "exploit_success_rate": {
+    "by_version": {
+      "dup_key": 0.569811320754717,
+      "first_number": 1.0,
+      "skip_denominator": 0.8867924528301887,
+      "strict": 0.0
+    }
+  },
+  "mean_reward": {
+    "exploit": {
+      "dup_key": 0.7040327806365542,
+      "first_number": 0.9999999999999999,
+      "skip_denominator": 0.8867924528301886,
+      "strict": 0.0
+    },
+    "honest": {
+      "dup_key": 0.9999999999999999,
+      "first_number": 0.9999999999999999,
+      "skip_denominator": 0.9999999999999999,
+      "strict": 0.9999999999999999
+    }
+  },
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/strictness_ladder.py --split test --seed 7 --out results/50-strictness-ladder.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-25T23:28:18Z",
+    "wall_s": 0.155
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ],
+  "zero_spread_share": {
+    "by_version": {
+      "dup_key": 0.569811320754717,
+      "first_number": 1.0,
+      "skip_denominator": 0.8867924528301887,
+      "strict": 0.0
+    }
+  }
+}

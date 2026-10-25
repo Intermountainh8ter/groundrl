@@ -208,3 +208,17 @@ from a small number of EIPs, and nothing has been trained. Read
 
 MIT, Copyright (c) 2026 Ammon Jackson. The EIP texts in `data/raw` are CC0. The verifier is adapted
 from `ethresearch-rag` (MIT, same author).
+
+### 2. Verifier-strictness ladder (SIMULATED exploiter, no model)
+
+`src/groundrl/ladder.py` defines four grader rungs (`first_number`, `dup_key`, `skip_denominator`,
+`strict`) and scores a scripted exploiting policy (self-printed pass line, duplicate-key spray,
+skipped items) on the TEST split. The strict rung rejects it by construction, so that zero is a
+check on the grader, not a finding about any model. Exploit success rate by rung, from
+`results/50-strictness-ladder.json`: `first_number` 1.0, `dup_key` 0.569811320754717,
+`skip_denominator` 0.8867924528301887, `strict` 0.0. The zero-reward-spread share equals the same
+values here.
+
+```
+python3 scripts/strictness_ladder.py --split test --seed 7 --out results/50-strictness-ladder.json
+```
