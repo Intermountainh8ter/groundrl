@@ -236,3 +236,10 @@ exploiter, not a finding about any trained model.
 ```
 python3 scripts/exploit_advantage_noisy_honest.py --split test --group-size 8 --groups-per-task 20 --qs 0.25 0.5 0.75 --probs 0.5 --seed 7 --out results/53-noisy-honest-advantage.json
 ```
+
+### Group-size sweep (SIMULATED, no model)
+
+`python3 scripts/group_size_sweep.py --split test --group-sizes 2 4 8 16 --groups-per-task 20 --q 0.5 --prob 0.5 --seed 7 --out results/55-group-size-sweep.json`
+
+With exploit probability 0.5 and honest-success probability 0.5, the strict rung's share of groups with positive exploit advantage is 0.0 at every G in {2, 4, 8, 16}. The first_number rung rises from 0.24018867924528303 at G=2 to 0.9543396226415094 at G=16
+(`results/55-group-size-sweep.json`).

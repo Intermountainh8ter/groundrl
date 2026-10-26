@@ -1,0 +1,81 @@
+{
+  "exploit_advantage_positive_share": {
+    "G_16": {
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.5635849056603773,
+          "first_number": 0.9543396226415094,
+          "skip_denominator": 0.8773584905660378,
+          "strict": 0.0
+        }
+      }
+    },
+    "G_2": {
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.13905660377358492,
+          "first_number": 0.24018867924528303,
+          "skip_denominator": 0.219811320754717,
+          "strict": 0.0
+        }
+      }
+    },
+    "G_4": {
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.3569811320754717,
+          "first_number": 0.6077358490566038,
+          "skip_denominator": 0.5545283018867925,
+          "strict": 0.0
+        }
+      }
+    },
+    "G_8": {
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.5132075471698113,
+          "first_number": 0.8711320754716981,
+          "skip_denominator": 0.7977358490566038,
+          "strict": 0.0
+        }
+      }
+    }
+  },
+  "exploit_probs": [
+    0.5
+  ],
+  "group_sizes": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "groups_per_task": 20,
+  "honest_success_probs": [
+    0.5
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/group_size_sweep.py --split test --group-sizes 2 4 8 16 --groups-per-task 20 --q 0.5 --prob 0.5 --seed 7 --out results/55-group-size-sweep.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-26T23:48:23Z",
+    "wall_s": 0.675
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}
