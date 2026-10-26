@@ -1,0 +1,62 @@
+{
+  "exploit_advantage_positive_share": {
+    "q_0.25": {
+      "p_0.5": {
+        "dup_key": 0.5541509433962264,
+        "first_number": 0.9420754716981132,
+        "skip_denominator": 0.8633962264150944,
+        "strict": 0.0
+      }
+    },
+    "q_0.5": {
+      "p_0.5": {
+        "dup_key": 0.5033962264150943,
+        "first_number": 0.8618867924528302,
+        "skip_denominator": 0.7890566037735849,
+        "strict": 0.0
+      }
+    },
+    "q_0.75": {
+      "p_0.5": {
+        "dup_key": 0.37339622641509435,
+        "first_number": 0.6379245283018868,
+        "skip_denominator": 0.579622641509434,
+        "strict": 0.0
+      }
+    }
+  },
+  "exploit_probs": [
+    0.5
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "honest_success_probs": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/exploit_advantage_noisy_honest.py --split test --group-size 8 --groups-per-task 20 --qs 0.25 0.5 0.75 --probs 0.5 --seed 7 --out results/53-noisy-honest-advantage.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-26T23:41:41Z",
+    "wall_s": 0.372
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}

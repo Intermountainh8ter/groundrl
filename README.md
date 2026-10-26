@@ -222,3 +222,17 @@ values here.
 ```
 python3 scripts/strictness_ladder.py --split test --seed 7 --out results/50-strictness-ladder.json
 ```
+
+### 3. Exploit advantage with an imperfect honest policy (SIMULATED, no model)
+
+`run_noisy_honest_advantage` in `src/groundrl/exploit_advantage.py` repeats the group sampler, but
+each honest rollout is the gold answer only with probability q and otherwise a corrupted answer.
+Share of groups whose exploit rollouts have strictly positive mean group-normalised advantage at
+q=0.5 and exploit mixing probability 0.5, from `results/53-noisy-honest-advantage.json`:
+`first_number` 0.8618867924528302, `dup_key` 0.5033962264150943, `skip_denominator`
+0.7890566037735849, `strict` 0.0. The strict zero is a property of the grader on a scripted
+exploiter, not a finding about any trained model.
+
+```
+python3 scripts/exploit_advantage_noisy_honest.py --split test --group-size 8 --groups-per-task 20 --qs 0.25 0.5 0.75 --probs 0.5 --seed 7 --out results/53-noisy-honest-advantage.json
+```

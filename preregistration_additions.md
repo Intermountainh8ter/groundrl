@@ -29,3 +29,13 @@ Metric: `/exploit_advantage_positive_share/p_0.5/strict` in `results/52-exploit-
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung.
 
 Falsifier: a strict-rung exploit-positive-advantage share above 0.05 at p=0.5, or both dup_key and skip_denominator below 0.20.
+
+## 2026-10-26T23:40:52Z noisy-honest-advantage proposal:bb2cc27c9e417d42c4967f16051128fd77b3491b72cdfa4a975175c96902dbb2
+
+Hypothesis: on the TEST split with group size 8, 20 seeded groups per task, exploit mixing probability 0.5 and honest-success probability q=0.5, the share of SIMULATED groups whose exploit rollouts have strictly positive mean group-normalised advantage is at most 0.05 on the strict rung and at least 0.20 on at least one of first_number, dup_key and skip_denominator. Each honest rollout is the gold answer with probability q, else a corrupted gold answer (first item replaced, pass line dropped; abstention replaced by a non-abstaining answer for unanswerable tasks).
+
+Metric: `/exploit_advantage_positive_share/q_0.5/p_0.5/strict` in `results/53-noisy-honest-advantage.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; at least one looser rung at least 0.20.
+
+Falsifier: a strict-rung share above 0.05 at q=0.5, p=0.5, or all three looser rungs below 0.20.
