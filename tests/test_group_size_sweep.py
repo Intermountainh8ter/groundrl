@@ -22,3 +22,11 @@ def test_sweep_deterministic_and_keyed():
 def test_sweep_rejects_empty_sizes():
     with pytest.raises(ValueError):
         run_group_size_sweep([], None, group_sizes=())
+
+
+@pytest.mark.skipif(not (DATA / "chunks.jsonl").exists(), reason="no dataset")
+def test_sweep_multiple_q_keys():
+    ds = load_dataset(DATA)
+    r = run_group_size_sweep(ds.tasks["test"][:10], ds.index, group_sizes=(4,),
+                             groups_per_task=2, qs=(0.1, 0.9), seed=7)
+    assert set(r["exploit_advantage_positive_share"]["G_4"]) == {"q_0.1", "q_0.9"}

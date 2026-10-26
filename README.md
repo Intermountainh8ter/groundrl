@@ -243,3 +243,7 @@ python3 scripts/exploit_advantage_noisy_honest.py --split test --group-size 8 --
 
 With exploit probability 0.5 and honest-success probability 0.5, the strict rung's share of groups with positive exploit advantage is 0.0 at every G in {2, 4, 8, 16}. The first_number rung rises from 0.24018867924528303 at G=2 to 0.9543396226415094 at G=16
 (`results/55-group-size-sweep.json`).
+
+#### Honest-success sweep (SIMULATED, no model)
+
+`results/57-honest-success-sweep.json`: at G=8, p=0.5, the strict rung's share of groups with positive exploit advantage is 0.0 at every q in {0.1, 0.25, 0.5, 0.75, 0.9}. The first_number rung falls from 0.9554716981132075 at q=0.1 to 0.3383018867924528 at q=0.9, so it stays at or above the pre-registered 0.20.

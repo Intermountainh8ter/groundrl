@@ -1,0 +1,84 @@
+{
+  "exploit_advantage_positive_share": {
+    "G_8": {
+      "q_0.1": {
+        "p_0.5": {
+          "dup_key": 0.5628301886792453,
+          "first_number": 0.9554716981132075,
+          "skip_denominator": 0.8756603773584906,
+          "strict": 0.0
+        }
+      },
+      "q_0.25": {
+        "p_0.5": {
+          "dup_key": 0.550377358490566,
+          "first_number": 0.9375471698113208,
+          "skip_denominator": 0.86,
+          "strict": 0.0
+        }
+      },
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.5088679245283019,
+          "first_number": 0.8658490566037735,
+          "skip_denominator": 0.7918867924528302,
+          "strict": 0.0
+        }
+      },
+      "q_0.75": {
+        "p_0.5": {
+          "dup_key": 0.36566037735849055,
+          "first_number": 0.6194339622641509,
+          "skip_denominator": 0.569433962264151,
+          "strict": 0.0
+        }
+      },
+      "q_0.9": {
+        "p_0.5": {
+          "dup_key": 0.19773584905660377,
+          "first_number": 0.3383018867924528,
+          "skip_denominator": 0.30792452830188677,
+          "strict": 0.0
+        }
+      }
+    }
+  },
+  "exploit_probs": [
+    0.5
+  ],
+  "group_sizes": [
+    8
+  ],
+  "groups_per_task": 20,
+  "honest_success_probs": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/group_size_sweep.py --split test --group-sizes 8 --prob 0.5 --q 0.1 0.25 0.5 0.75 0.9 --groups-per-task 20 --seed 7 --out results/57-honest-success-sweep.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-26T23:55:33Z",
+    "wall_s": 0.546
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}
