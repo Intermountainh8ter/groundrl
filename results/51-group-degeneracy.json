@@ -1,0 +1,53 @@
+{
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/group_degeneracy.py --split test --group-size 8 --groups-per-task 20 --seed 7 --out results/51-group-degeneracy.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-26T23:33:20Z",
+    "wall_s": 0.203
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ],
+  "zero_variance_group_share": {
+    "p_0.1": {
+      "dup_key": 0.7579245283018868,
+      "first_number": 1.0,
+      "skip_denominator": 0.9341509433962264,
+      "strict": 0.43339622641509434
+    },
+    "p_0.5": {
+      "dup_key": 0.5730188679245283,
+      "first_number": 1.0,
+      "skip_denominator": 0.8881132075471698,
+      "strict": 0.008490566037735849
+    },
+    "p_0.9": {
+      "dup_key": 0.7573584905660378,
+      "first_number": 1.0,
+      "skip_denominator": 0.9343396226415094,
+      "strict": 0.4367924528301887
+    }
+  }
+}
