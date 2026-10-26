@@ -1,0 +1,76 @@
+{
+  "exploit_advantage_positive_share": {
+    "G_8": {
+      "q_0.5": {
+        "p_0.1": {
+          "dup_key": 0.3205660377358491,
+          "first_number": 0.5447169811320755,
+          "skip_denominator": 0.49981132075471696,
+          "strict": 0.0
+        },
+        "p_0.25": {
+          "dup_key": 0.5060377358490566,
+          "first_number": 0.8594339622641509,
+          "skip_denominator": 0.7871698113207547,
+          "strict": 0.0
+        },
+        "p_0.5": {
+          "dup_key": 0.5088679245283019,
+          "first_number": 0.8658490566037735,
+          "skip_denominator": 0.7918867924528302,
+          "strict": 0.0
+        },
+        "p_0.75": {
+          "dup_key": 0.36698113207547167,
+          "first_number": 0.6281132075471698,
+          "skip_denominator": 0.5720754716981132,
+          "strict": 0.0
+        },
+        "p_0.9": {
+          "dup_key": 0.1939622641509434,
+          "first_number": 0.3290566037735849,
+          "skip_denominator": 0.3022641509433962,
+          "strict": 0.0
+        }
+      }
+    }
+  },
+  "exploit_probs": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "group_sizes": [
+    8
+  ],
+  "groups_per_task": 20,
+  "honest_success_probs": [
+    0.5
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/group_size_sweep.py --split test --group-sizes 8 --groups-per-task 20 --q 0.5 --prob 0.1 0.25 0.5 0.75 0.9 --seed 7 --out results/56-mixing-prob-sweep.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-10-26T23:52:07Z",
+    "wall_s": 0.667
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}

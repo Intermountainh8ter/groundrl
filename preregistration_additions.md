@@ -49,3 +49,13 @@ Metric: `/exploit_advantage_positive_share/G_16/q_0.5/p_0.5/strict` in `results/
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung at G=16.
 
 Falsifier: a strict-rung share above 0.05 at any G in {2, 4, 8, 16}, or a first_number-rung share below 0.20 at any G.
+
+## 2026-10-26T23:52:05Z mixing-prob-sweep proposal:e8cc328283ca23e3b2c30348c267197b99ac165a2ca2fd5b7de1817af43af367
+
+Hypothesis: on the TEST split with G=8, 20 seeded groups per task and honest-success probability q=0.5, the strict-rung share of SIMULATED groups with strictly positive exploit mean group-normalised advantage is at most 0.05 at every exploit mixing probability p in {0.1, 0.25, 0.5, 0.75, 0.9}, while the first_number rung share is at least 0.20 at every p.
+
+Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.9/strict` in `results/56-mixing-prob-sweep.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung at p=0.9.
+
+Falsifier: a strict-rung share above 0.05 at any p in the sweep, or a first_number-rung share below 0.20 at any p.
