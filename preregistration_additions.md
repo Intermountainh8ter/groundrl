@@ -19,3 +19,13 @@ Metric: `/zero_variance_group_share/p_0.5/strict` in `results/51-group-degenerac
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung, at least 0.50 on the loosest.
 
 Falsifier: a strict-rung zero-variance group share above 0.05 at p=0.5, or a first_number rung share below 0.50.
+
+## 2026-10-26T23:36:58Z exploit-advantage proposal:bc160952e085e761614fd40533547e74cc89e1fa17c649303e825b598b695b87
+
+Hypothesis: on the TEST split with group size 8, 20 seeded groups per task and exploit mixing probability 0.5, the share of SIMULATED groups whose exploit rollouts have a strictly positive mean group-normalised advantage is at most 0.05 on the strict rung and at least 0.20 on at least one of the dup_key and skip_denominator rungs. Groups with zero reward variance or with no exploit rollout count as not positive.
+
+Metric: `/exploit_advantage_positive_share/p_0.5/strict` in `results/52-exploit-advantage.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung.
+
+Falsifier: a strict-rung exploit-positive-advantage share above 0.05 at p=0.5, or both dup_key and skip_denominator below 0.20.
