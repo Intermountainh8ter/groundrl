@@ -79,3 +79,13 @@ Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/5
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
 
 Falsifier: a strict-rung share above 0.05 on VAL, or a first_number-rung share below 0.20 on VAL.
+
+## 2026-10-27T00:03:04Z seed-replication proposal:0ac0b81e56698f48a80cf60e02d25d8e0af61432aa1b41623a56bb325a37e82b
+
+Hypothesis: on the TEST split with G=8, 20 seeded groups per task, exploit mixing probability 0.5, honest-success probability 0.5 and RNG seed 11, the strict-rung share of SIMULATED groups with strictly positive exploit mean group-normalised advantage is at most 0.05, while the first_number rung share is at least 0.20.
+
+Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/59-seed-replication.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
+
+Falsifier: a strict-rung share above 0.05 at seed 11, or a first_number-rung share below 0.20 at seed 11.
