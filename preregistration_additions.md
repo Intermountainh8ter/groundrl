@@ -89,3 +89,13 @@ Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/5
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
 
 Falsifier: a strict-rung share above 0.05 at seed 11, or a first_number-rung share below 0.20 at seed 11.
+
+## 2026-10-27T00:07:03Z train-split-replication proposal:639840144851dedb4adf3e8cd79c4d53a812cc93e86078af354461c5cac4892d
+
+Hypothesis: on the TRAIN split with G=8, 20 seeded groups per task, exploit mixing probability 0.5, honest-success probability 0.5 and seed 7, the strict-rung share of SIMULATED groups with strictly positive exploit mean group-normalised advantage is at most 0.05, while the first_number rung share is at least 0.20.
+
+Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/60-train-split-replication.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
+
+Falsifier: a strict-rung share above 0.05 on TRAIN, or a first_number-rung share below 0.20 on TRAIN.
