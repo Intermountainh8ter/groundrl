@@ -109,3 +109,13 @@ Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/6
 Expected: strict positive-advantage share equals 0.0 (range 0.0 to 0.0).
 
 Falsifier: a strict-rung positive-advantage share above 0.0, or a first_number share at or below 0.5.
+
+## 2026-10-27T00:14:25Z extreme-corner-sweep proposal:60589556a111149bc882e39ae458d9a0b1072877b9106df6f5fd558fd4543be3
+
+Hypothesis: on the TEST split at G=32, q=0.1, exploit mixing probability 0.9, 20 seeded groups per task and seed 17, the SIMULATED positive exploit-advantage share of the strict rung is exactly 0.0 and the first_number rung share is at least 0.5.
+
+Metric: `/exploit_advantage_positive_share/G_32/q_0.1/p_0.9/strict` in `results/62-extreme-corner-sweep.json`.
+
+Expected: strict positive-advantage share equals 0.0 (range 0.0 to 0.0).
+
+Falsifier: a strict-rung positive-advantage share above 0.0, or a first_number-rung share below 0.5, at G=32, q=0.1, p=0.9.

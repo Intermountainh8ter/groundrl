@@ -1,0 +1,59 @@
+{
+  "exploit_advantage_positive_share": {
+    "G_2": {
+      "q_0.1": {
+        "p_0.9": {
+          "dup_key": 0.09226415094339623,
+          "first_number": 0.15490566037735848,
+          "skip_denominator": 0.1428301886792453,
+          "strict": 0.0
+        }
+      }
+    },
+    "G_32": {
+      "q_0.1": {
+        "p_0.9": {
+          "dup_key": 0.5432075471698113,
+          "first_number": 0.920188679245283,
+          "skip_denominator": 0.8466037735849057,
+          "strict": 0.0
+        }
+      }
+    }
+  },
+  "exploit_probs": [
+    0.9
+  ],
+  "group_sizes": [
+    2,
+    32
+  ],
+  "groups_per_task": 20,
+  "honest_success_probs": [
+    0.1
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/group_size_sweep.py --split test --group-sizes 2 32 --prob 0.9 --q 0.1 --groups-per-task 20 --seed 17 --out results/62-extreme-corner-sweep.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      17
+    ],
+    "started_at": "2026-10-27T00:14:27Z",
+    "wall_s": 0.459
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}
