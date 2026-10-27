@@ -99,3 +99,13 @@ Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/6
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
 
 Falsifier: a strict-rung share above 0.05 on TRAIN, or a first_number-rung share below 0.20 on TRAIN.
+
+## 2026-10-27T00:10:40Z train-seed13-replication proposal:25e47480fae647d35dcc601afcd27dd96b6c8953235b5df91f70e236bb30e882
+
+Hypothesis: on the TRAIN split with seed 13 and 40 groups per task, the SIMULATED positive-advantage share of the strict rung stays exactly 0.0 while the first_number rung stays above 0.5.
+
+Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/61-train-seed13-replication.json`.
+
+Expected: strict positive-advantage share equals 0.0 (range 0.0 to 0.0).
+
+Falsifier: a strict-rung positive-advantage share above 0.0, or a first_number share at or below 0.5.

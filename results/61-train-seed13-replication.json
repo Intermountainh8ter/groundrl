@@ -1,0 +1,48 @@
+{
+  "exploit_advantage_positive_share": {
+    "G_8": {
+      "q_0.5": {
+        "p_0.5": {
+          "dup_key": 0.48734152139461173,
+          "first_number": 0.8500792393026941,
+          "skip_denominator": 0.7942551505546751,
+          "strict": 0.0
+        }
+      }
+    }
+  },
+  "exploit_probs": [
+    0.5
+  ],
+  "group_sizes": [
+    8
+  ],
+  "groups_per_task": 40,
+  "honest_success_probs": [
+    0.5
+  ],
+  "n_tasks": 1262,
+  "provenance": {
+    "command": "python3 scripts/group_size_sweep.py --split train --group-sizes 8 --prob 0.5 --q 0.5 --groups-per-task 40 --seed 13 --out results/61-train-seed13-replication.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      13
+    ],
+    "started_at": "2026-10-27T00:10:40Z",
+    "wall_s": 1.404
+  },
+  "simulated": true,
+  "split": "train",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}
