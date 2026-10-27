@@ -25,7 +25,7 @@ NOT_RUN = "Training results: NOT YET RUN"
 
 def load_results(results_dir: Path) -> list[tuple[Path, dict[str, Any]]]:
     out = []
-    for path in sorted(Path(results_dir).glob("*.json")):
+    for path in sorted(Path(results_dir).rglob("*.json")):
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:

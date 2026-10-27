@@ -1,0 +1,23 @@
+# Training stack for AMD gfx906 (Vega 20: Radeon VII, Radeon Pro Vega II, MI50/MI60).
+#
+# Install with:
+#   pip install -r train/requirements-rocm-gfx906.txt
+#
+# torch 2.4.1+rocm6.0 is the NEWEST PyTorch release that still ships rocBLAS
+# GEMM kernels for gfx906 (TensileLibrary_lazy_gfx906.dat). With any newer
+# ROCm wheel, torch.cuda.is_available() returns True and then the first matrix
+# multiply aborts the process. See docs/ROCM_GFX906.md.
+#
+# The pin forces the rest down with it: current transformers wants torch>=2.5.
+# The versions below are this repo's declared floors and are known to work
+# together with torch 2.4.1 on this architecture.
+--extra-index-url https://download.pytorch.org/whl/rocm6.0
+
+torch==2.4.1+rocm6.0
+transformers==4.56.2
+# trl 1.14+ needs torch >= 2.5 (imports CheckpointPolicy/DTensor). 0.17 is
+# the last release that works with the torch 2.4.1 wheel pinned above.
+trl==0.17.0
+peft>=0.13
+datasets>=4.7
+accelerate>=1.4

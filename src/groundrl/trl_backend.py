@@ -84,6 +84,11 @@ def load_model(stack: SimpleNamespace, cfg: dict[str, Any], path: str | None = N
             load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=dtype,
             bnb_4bit_use_double_quant=True)
         kwargs["device_map"] = {"": 0}
+    elif getattr(getattr(stack.torch, "cuda", None), "is_available", lambda: False)():
+        # ``run_eval`` calls ``model.generate`` directly, so the full-precision
+        # path must land on GPU here; SFTTrainer/GRPOTrainer place the model
+        # themselves and are happy to receive it already on the device.
+        kwargs["device_map"] = {"": 0}
     return stack.AutoModelForCausalLM.from_pretrained(
         path or m["init_from"] or m["name_or_path"], **kwargs)
 
@@ -239,8 +244,19 @@ def run_grpo(cfg: dict[str, Any], out_dir: Path, stack: SimpleNamespace | None =
     keep = prompt_budget_filter(tok, prompts, cfg["data"]["max_prompt_tokens"])
     rows = [grpo_record(train[i], prompts[i]) for i in keep]
     _require_rows(rows, cfg["data"]["max_prompt_tokens"])
-    args = stack.GRPOConfig(output_dir=str(out_dir / "trainer"),
-                            **{"remove_unused_columns": False, **g})
+    import inspect as _inspect
+    _params = _inspect.signature(stack.GRPOConfig.__init__).parameters
+    _accepts_var_kw = any(p.kind == _inspect.Parameter.VAR_KEYWORD for p in _params.values())
+    _kw = {"remove_unused_columns": False, **g}
+    if _accepts_var_kw:
+        _kept, _dropped = _kw, {}
+    else:
+        _kept = {k: v for k, v in _kw.items() if k in _params}
+        _dropped = {k: v for k, v in _kw.items() if k not in _params}
+    if _dropped:
+        print(f"groundrl.trl_backend: dropped GRPOConfig kwargs not supported by TRL "
+              f"{getattr(__import__('trl'), '__version__', '?')}: {sorted(_dropped)}")
+    args = stack.GRPOConfig(output_dir=str(out_dir / "trainer"), **_kept)
     trainer = stack.GRPOTrainer(
         model=load_model(stack, cfg), reward_funcs=make_trl_reward(cfg["grpo"]["reward"]),
         args=args, train_dataset=stack.Dataset.from_list(rows), processing_class=tok,

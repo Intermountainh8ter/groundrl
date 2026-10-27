@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import random
 import string
+import subprocess
 import sys
+import textwrap
+from pathlib import Path
 
 import pytest
 
@@ -29,6 +32,8 @@ from groundrl.rewards import (
 )
 from groundrl.tasks import Task
 from groundrl.verifier import verify_answer
+
+ROOT = Path(__file__).resolve().parents[1]
 
 BLOB = ("EIP-4844: Shard Blob Transactions / Parameters\n"
         "| `FIELD_ELEMENTS_PER_BLOB` | `4096` |\n| `GAS_PER_BLOB` | `2**17` |\n"
@@ -402,8 +407,21 @@ def test_trl_wrapper_custom_column_and_config():
 
 
 def test_reward_module_does_not_import_trl_or_torch():
-    for heavy in ("trl", "torch", "transformers", "peft", "datasets"):
-        assert heavy not in sys.modules
+    # In a child interpreter: sys.modules is session-global, so checking it here
+    # would silently stop testing anything once another test imports torch.
+    source = textwrap.dedent(
+        """
+        import sys
+        sys.path.insert(0, {src!r})
+        import groundrl.rewards  # noqa: F401
+        heavy = [m for m in ("trl", "torch", "transformers", "peft", "datasets")
+                 if m in sys.modules]
+        print(",".join(heavy))
+        """
+    ).format(src=str(ROOT / "src"))
+    r = subprocess.run([sys.executable, "-c", source], capture_output=True, text=True, timeout=300)
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "", f"groundrl.rewards imported: {r.stdout.strip()}"
 
 
 def test_example_json_roundtrip():
