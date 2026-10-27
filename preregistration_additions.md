@@ -69,3 +69,13 @@ Metric: `/exploit_advantage_positive_share/G_8/q_0.9/p_0.5/strict` in `results/5
 Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung at q=0.9.
 
 Falsifier: a strict-rung share above 0.05 at any q in the sweep, or a first_number-rung share below 0.20 at any q.
+
+## 2026-10-26T23:59:27Z val-split-replication proposal:ba9d2f23fbc101bc1463c62813dbf7d2d3ef436bfd2b1855189515064f4f3390
+
+Hypothesis: on the VAL split with G=8, 20 seeded groups per task, exploit mixing probability 0.5 and honest-success probability 0.5, the strict-rung share of SIMULATED groups with strictly positive exploit mean group-normalised advantage is at most 0.05, while the first_number rung share is at least 0.20.
+
+Metric: `/exploit_advantage_positive_share/G_8/q_0.5/p_0.5/strict` in `results/58-val-split-replication.json`.
+
+Expected: at most 0.05 (range 0.0 to 0.05) on the strict rung; first_number rung at least 0.20.
+
+Falsifier: a strict-rung share above 0.05 on VAL, or a first_number-rung share below 0.20 on VAL.
