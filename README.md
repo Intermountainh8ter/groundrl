@@ -1,8 +1,9 @@
 # groundrl
 
 **A deterministic citation-grounding verifier used as a verifiable reward (RLVR), a reward-hacking
-audit of it, and an unrun LoRA + GRPO pipeline for training small models to answer questions about
-Ethereum EIPs with correct, grounded citations.**
+audit of it, and a LoRA SFT + GRPO pipeline for training small models to answer questions about
+Ethereum EIPs with correct, grounded citations. One SFT run has real results (one seed, one model
+size, one machine); the one GRPO run was degenerate and is a null result.**
 
 
 ## For the lay reader
@@ -36,7 +37,7 @@ correctly in the first place. The verifier accepts an answer only if
 A verifier like that is cheap, exact and reproducible, and it is also easy to game: it checks token
 presence, not meaning. The contribution of this repository is therefore (1) the reward design and
 its reward-hacking analysis, which is real and reproducible here, and (2) the training and
-evaluation pipeline, which is complete but unrun.
+evaluation pipeline, which has produced one SFT result and one degenerate GRPO run (Section 3).
 
 ## Related work
 
@@ -66,9 +67,10 @@ evaluation pipeline, which is complete but unrun.
   answer-correctness against gold, citation precision/recall, length and redundancy penalties, a
   consistency term against hedging, and abstention calibration. Pure functions returning
   `(score, breakdown)`, with TRL wrappers (`make_trl_reward`) importable without TRL.
-* **Pipeline (unrun).** SFT baseline with LoRA, adapter merge, GRPO with reward v2 on a fresh
-  LoRA, evaluation on TEST with bootstrap intervals. JSON configs for Qwen3-0.6B and 1.7B at 24 GB
-  and 12 GB, `--dry-run` that needs no torch, and `--mock` plumbing runs labelled MOCK.
+* **Pipeline.** SFT baseline with LoRA, adapter merge, GRPO with reward v2 on a fresh LoRA,
+  evaluation on TEST with bootstrap intervals. JSON configs for Qwen3-0.6B and 1.7B at 24 GB and
+  12 GB plus one for AMD gfx906, `--dry-run` that needs no torch, and `--mock` plumbing runs
+  labelled MOCK. The SFT and GRPO stages have each been run once, on the gfx906 config (Section 3).
 * The core library uses only the standard library and numpy; torch, transformers, trl, peft,
   datasets and vllm are optional extras imported lazily and never required by the tests.
 
@@ -136,9 +138,10 @@ What it shows, in plain terms:
 
 ### 2. Scripted baselines (real, not trained models)
 
-The same evaluation pipeline that will score a trained model, applied to scripted policies on TEST
-(95% bootstrap intervals over tasks). `extractive` takes the single best-matching line and cites
-it; it is the bar a trained model has to clear to show it learned more than locate-and-copy.
+The same evaluation pipeline that scores the trained models in Section 3, applied to scripted
+policies on TEST (95% bootstrap intervals over tasks). `extractive` takes the single best-matching
+line and cites it; it is the bar a trained model has to clear to show it learned more than
+locate-and-copy.
 
 ```
 groundrl baseline-eval --split test
@@ -159,8 +162,9 @@ groundrl baseline-eval --split test
 | SFT (LoRA r=16, 2 epochs) | **98.7% (97.0-100.0)** | **99.6% (98.7-100.0)** | **100.0% (100.0-100.0)** / 93.3% (70.8-100.0) | **0.4% (0.0-1.1)** | **0.985 (0.971-0.996)** |
 | GRPO, reward v2 | DEGENERATE (†) | DEGENERATE (†) | DEGENERATE (†) | DEGENERATE (†) | DEGENERATE (†) |
 
-Trained on AMD gfx906 (Vega 20, 32 GiB) under torch 2.4.1+rocm6.0; 156 optimizer steps, 39.3 min
-wall-clock, mean train loss 0.0184. Environment, log history and hashes are in
+Trained on AMD gfx906 (Vega 20, 32 GiB) under torch 2.4.1+rocm6.0; 156 optimizer steps, 39.4 min
+wall-clock (2,361 s), mean train loss 0.0184, 1,244 training examples (the 1,262 TRAIN tasks minus
+18 prompts over the token budget). Environment, log history and hashes are in
 `results/groundrl-sft/summary_sft.json`. The 95% CIs for `grounded_correct_rate` do not overlap
 between baseline and SFT. See `results/groundrl-sft/LEAKAGE_CHECK.md` for the held-out-split
 check that confirms zero EIP and zero fact-id overlap between train and test.
@@ -174,6 +178,17 @@ summary with full log history is in `results/groundrl-grpo/summary_grpo.json`. T
 hypothesis (`<think>`-shortcut interacts badly with the SFT policy's cite format)
 is in `docs/METHODOLOGY.md` §6; the pre-registration is unchanged and the GRPO
 settings in `train/configs/qwen3-0.6b-24gb.json` are frozen.
+
+**What the training table does not show.** The questions are synthetic templates about 130 EIPs,
+and train and test questions come from the same templates: EIPs and facts are held out, the question
+form is not, so the SFT model learned a template's answer pattern that the test questions share.
+It is one seed, one model size and one machine, and the intervals are bootstrap intervals over test
+tasks, not over seeds. The verifier checks that tokens appear in the cited text, not entailment. The
+base model abstained on 41.9% of test questions although only 11.3% are unanswerable, so its row is
+a weak comparison, and no other baseline (few-shot, a larger model) was run. The no-model
+`extractive` policy (57.4% grounded-correct, 0.613 v2, Section 2) is the bar a trained model has to
+clear; SFT clears it on this test, which is on-template. GRPO was not shown to work or to fail, no
+benefit from RL is claimed, and v2 has not been tested against a policy optimised on it.
 
 ## Quickstart
 
@@ -219,13 +234,14 @@ for Windows PowerShell and Linux instructions and rented-GPU notes.
 | `src/groundrl/evaluate.py`, `report.py` | metrics with bootstrap CIs, report renderer |
 | `train/` | `sft.py`, `grpo.py`, `eval.py` and `configs/*.json` |
 | `data/` | raw EIPs, manifest, chunks, facts, task splits |
-| `results/` | audit, baselines, report (no training results) |
+| `results/` | audit, scripted baselines, SFT evaluations and summary, the degenerate GRPO run, report |
 | `docs/` | methodology, threats to validity, runbook, flowcharts, launch copy |
 
 ## Limits
 
 The verifier is lexical, the questions are synthetic templates, the TEST split has 265 tasks
-from a small number of EIPs, and nothing has been trained. Read
+from 19 EIPs, the one SFT result is a single seed on one model size and one machine, and the GRPO
+run was degenerate, so nothing here shows that RL helps or hurts. Read
 [`docs/THREATS_TO_VALIDITY.md`](docs/THREATS_TO_VALIDITY.md) before drawing any conclusion.
 
 ## License

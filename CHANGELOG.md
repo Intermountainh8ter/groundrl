@@ -2,6 +2,16 @@
 
 All notable changes. Dates are ISO. Version 0.1.0 is the first and only release so far.
 
+## Unreleased
+
+### Changed
+
+* Launch copy (`docs/launch/`) rewritten around the real results: one SFT run (Qwen3-0.6B, LoRA,
+  AMD gfx906) and one degenerate GRPO run reported as a null result, with the limits stated next
+  to the numbers. The launch-copy tests now derive the quoted numbers from `results/`.
+* README, threats to validity, runbook and flowchart text no longer say that nothing has been
+  trained; `results/REPORT.md` lists the GRPO run on record.
+
 ## 0.1.0 - 2026-10-14
 
 First public state of the repository. **No model has been trained.**

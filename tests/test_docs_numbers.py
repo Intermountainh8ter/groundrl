@@ -108,6 +108,7 @@ def test_readme_claims_and_counts(root, results):
                   f"{t['n_unanswerable']} unanswerable)")
     assert split_line in readme
     assert f"{score(t, 'hedge_inline'):.3f}" in readme
+    assert f"from {summary['eips_with_questions']['test']} EIPs" in " ".join(readme.split())
 
 
 def test_diagram_text_quotes_current_counts(root):
@@ -141,3 +142,95 @@ def test_threats_quote_current_corpus_and_budget_numbers(root, dataset):
         share = 100 * plan["dropped"] / plan["examples"]
         assert f"{share:.1f}%" in tokens
         assert tokens in doc
+
+
+def _pct(x):
+    return f"{x * 100:.1f}"
+
+
+def _interval(metric, key="mean"):
+    return f"{_pct(metric[key])}% ({_pct(metric['lo'])}-{_pct(metric['hi'])})"
+
+
+def _training_files(root):
+    sft_dir = root / "results" / "groundrl-sft"
+    return (json.loads((sft_dir / "eval_baseline.json").read_text()),
+            json.loads((sft_dir / "eval_sft.json").read_text()),
+            json.loads((sft_dir / "summary_sft.json").read_text()),
+            json.loads((root / "results" / "groundrl-grpo" / "summary_grpo.json").read_text()))
+
+
+def test_readme_training_table_matches_the_eval_files(root):
+    readme = " ".join((root / "README.md").read_text().replace("**", "").split())
+    base, sft, train, _ = _training_files(root)
+    for data in (base, sft):
+        m = data["metrics"]
+        v2 = m["mean_reward"]["v2"]
+        cells = [_interval(m["grounded_correct_rate"]), _interval(m["verified_rate"]),
+                 _interval(m["hallucinated_citation_rate"]),
+                 f"{_interval(m['abstention_precision'], 'value')} / "
+                 f"{_interval(m['abstention_recall'], 'value')}",
+                 f"{v2['mean']:.3f} ({v2['lo']:.3f}-{v2['hi']:.3f})"]
+        for cell in cells:
+            assert cell in readme, cell
+    steps = max(r["step"] for r in train["log_history"] if "step" in r)
+    final = train["log_history"][-1]
+    assert f"{steps} optimizer steps, {train['seconds'] / 60:.1f} min" in readme
+    assert f"{final['train_loss']:.4f}" in readme
+    assert f"{train['train_examples']:,} training examples" in readme
+    assert f"{train['dropped_by_prompt_budget']} prompts over the token budget" in readme
+
+
+def test_readme_and_docs_describe_the_grpo_run_as_the_log_shows(root):
+    _, _, _, grpo = _training_files(root)
+    rows = [r for r in grpo["log_history"] if "completions/mean_length" in r]
+    assert rows and all(r["completions/mean_length"] == 0 and r["reward"] == 0
+                        and r["grad_norm"] == 0 for r in rows)
+    steps = max(r["step"] for r in grpo["log_history"] if "step" in r)
+    readme = " ".join((root / "README.md").read_text().split())
+    assert f"across all {steps} optimizer steps" in readme
+    assert "null result" in readme and "not shown to work or to fail" in readme
+    threats = " ".join((root / "docs" / "THREATS_TO_VALIDITY.md").read_text().split())
+    assert f"All {steps} steps reported zero reward, zero completion length" in threats
+
+
+def test_docs_do_not_say_nothing_has_been_trained(root):
+    for rel in ("README.md", "docs/THREATS_TO_VALIDITY.md", "docs/RUNBOOK.md",
+                "docs/FLOWCHARTS.md", "docs/diagrams/usage.mmd", "docs/METHODOLOGY.md"):
+        low = " ".join((root / rel).read_text().split()).lower()
+        for stale in ("unrun", "nothing has been trained", "no model has been trained",
+                      "never been run", "never run in this repository", "training is unrun"):
+            assert stale not in low, (rel, stale)
+
+
+def _template(question: str) -> str:
+    """The question with quoted text, EIP numbers, identifiers, hex values and numbers masked."""
+    import re
+
+    q = re.sub(r'"[^"]*"', '"X"', question)
+    q = re.sub(r"EIP-\d+", "EIP-N", q)
+    q = re.sub(r"\b0x[0-9a-fA-F]+\b", "H", q)
+    q = re.sub(r"\b[A-Z][A-Z0-9_]{2,}\b", "ID", q)
+    return re.sub(r"\d+", "N", q)
+
+
+def test_threats_quote_the_template_overlap_and_base_model_numbers(root):
+    from collections import Counter
+
+    def questions(split):
+        path = root / "data" / "tasks" / f"{split}.jsonl"
+        return [json.loads(line)["question"] for line in path.read_text().splitlines()]
+
+    train, test = Counter(map(_template, questions("train"))), Counter(
+        map(_template, questions("test")))
+    assert set(test) <= set(train)
+    blank = max(test.values())
+    doc = " ".join((root / "docs" / "THREATS_TO_VALIDITY.md").read_text().split())
+    assert (f"every one of the {sum(test.values())} TEST questions follows a template that also "
+            f"occurs in TRAIN ({len(test)} templates in TEST, {len(train)} in TRAIN); {blank} of "
+            f"the {sum(test.values())} use the single") in doc
+    base, _, _, _ = _training_files(root)
+    m = base["metrics"]
+    assert f"abstained on {_pct(m['abstain_rate']['mean'])}% of TEST questions" in doc
+    assert f"only {_pct(base['n_unanswerable'] / base['n'])}% are unanswerable" in doc
+    assert f"drifted from the answer format on {_pct(m['format_drift_rate']['mean'])}%" in doc
