@@ -177,7 +177,7 @@ gradient to update from. No numbers are published for the GRPO row — the raw
 summary with full log history is in `results/groundrl-grpo/summary_grpo.json`. The
 hypothesis (`<think>`-shortcut interacts badly with the SFT policy's cite format)
 is in `docs/METHODOLOGY.md` §6; the pre-registration is unchanged and the GRPO
-settings in `train/configs/qwen3-0.6b-24gb.json` are frozen.
+settings in `train/configs/qwen3-0.6b-gfx906.json` (the config recorded in `summary_grpo.json`) are frozen.
 
 **What the training table does not show.** The questions are synthetic templates about 130 EIPs,
 and train and test questions come from the same templates: EIPs and facts are held out, the question
