@@ -151,4 +151,5 @@ Source: `baseline_test.json` (test split). Scripted policies, no learning.
 
 Training runs on record:
 
+* `summary_grpo.json`: stage grpo, config qwen3-0.6b-gfx906, seed 0, 31 log rows
 * `summary_sft.json`: stage sft, config qwen3-0.6b-gfx906, seed 0, 32 log rows

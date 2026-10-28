@@ -1,14 +1,15 @@
 # Runbook: training and evaluating a groundrl model
 
-**Status: SFT has been run on gfx906; GRPO has been run and the run was degenerate (null result).**
-committed under `results/groundrl-sft/` (`eval_baseline.json`, `eval_sft.json`, `summary_sft.json`,
-`LEAKAGE_CHECK.md`). The GRPO row in the README now reads DEGENERATE with a daggered footnote pointing at `results/groundrl-grpo/summary_grpo.json` and the diagnostic in METHODOLOGY §6a. Hyperparameters in
-`train/configs/*.json` for the configs that have not been exercised are still untuned defaults,
-their memory figures are formulas rather than measurements, and no timing or cost estimate is
-given for them. What is verified without a GPU: the configs validate, the keyword arguments they
-pass exist in the pinned TRL / transformers / PEFT sources (checked by `tests/test_trainconf.py`
-against `tests/api_fields.json`), the dry run works without torch, and the whole control flow
-runs against a fake stack (`--mock`, labelled MOCK).
+**Status: SFT has been run once on gfx906; GRPO has been run once and was degenerate (null
+result).** The SFT results are committed under `results/groundrl-sft/` (`eval_baseline.json`,
+`eval_sft.json`, `summary_sft.json`, `LEAKAGE_CHECK.md`). The GRPO row in the README reads
+DEGENERATE with a daggered footnote pointing at `results/groundrl-grpo/summary_grpo.json` and the
+diagnostic in METHODOLOGY section 6a. Hyperparameters in `train/configs/*.json` are untuned
+defaults, the memory figures of the configs that have not been exercised are formulas rather than
+measurements, and no cost estimate is given. What is verified without a GPU: the configs validate,
+the keyword arguments they pass exist in the pinned TRL / transformers / PEFT sources (checked by
+`tests/test_trainconf.py` against `tests/api_fields.json`), the dry run works without torch, and
+the whole control flow runs against a fake stack (`--mock`, labelled MOCK).
 
 Training results are not claimed in the README or REPORT until `results/**/eval_*.json` files
 from real runs exist; `scripts/make_report.py` renders only from those files.

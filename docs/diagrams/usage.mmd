@@ -8,7 +8,7 @@ flowchart TB
         E --> C
         D -- "no" --> F["Scripted baselines<br/>groundrl baseline-eval"]
     end
-    subgraph train ["Train (GPU, never run in this repository)"]
+    subgraph train ["Train (GPU; SFT run, GRPO null result)"]
         direction LR
         G["4. SFT baseline<br/>train/sft.py<br/>LoRA, then merge"] --> H["5. GRPO, reward v2<br/>train/grpo.py<br/>--init-from merged"]
         H --> I{"verified rate up,<br/>correctness down?"}

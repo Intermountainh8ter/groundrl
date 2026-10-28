@@ -6,7 +6,8 @@ regenerated with `scripts/render_diagrams.sh` (needs node 18+ and a Chromium; se
 
 ## Usage: from corpus to report
 
-Blue nodes run on a laptop; yellow nodes need a GPU and have never been run in this repository.
+Blue nodes run on a laptop; yellow nodes need a GPU. SFT has been run once on an AMD gfx906 card and
+GRPO once, degenerately (a null result).
 
 ![Usage flowchart](diagrams/usage.svg)
 
@@ -21,7 +22,7 @@ flowchart TB
         E --> C
         D -- "no" --> F["Scripted baselines<br/>groundrl baseline-eval"]
     end
-    subgraph train ["Train (GPU, never run in this repository)"]
+    subgraph train ["Train (GPU; SFT run, GRPO null result)"]
         direction LR
         G["4. SFT baseline<br/>train/sft.py<br/>LoRA, then merge"] --> H["5. GRPO, reward v2<br/>train/grpo.py<br/>--init-from merged"]
         H --> I{"verified rate up,<br/>correctness down?"}
