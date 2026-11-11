@@ -119,3 +119,13 @@ Metric: `/exploit_advantage_positive_share/G_32/q_0.1/p_0.9/strict` in `results/
 Expected: strict positive-advantage share equals 0.0 (range 0.0 to 0.0).
 
 Falsifier: a strict-rung positive-advantage share above 0.0, or a first_number-rung share below 0.5, at G=32, q=0.1, p=0.9.
+
+## 2026-11-11T09:50:02Z seam-errors proposal:cd526d10c57ac6a82023fc16270206e96a319e770a5b4d5354f1eb64a6f56b71
+
+Hypothesis: at the same marginal false-positive rate (0.10), SIMULATED groups (G=8, TEST split, 20 groups per task, seed 7) where false positives are shared by every sample hitting the same grader seam show a higher share of groups whose advantage sign flips against the strict grader than groups with independent per-sample false positives.
+
+Metric: `/advantage_sign_flip_share/shared_seam` in `results/90-seam-errors.json`.
+
+Expected: shared_seam sign-flip share exceeds the independent share by at least 0.02 absolute (range 0.02 to 1.0).
+
+Falsifier: shared_seam sign-flip share minus independent sign-flip share is below 0.02, or the bootstrap interval of the difference includes zero.

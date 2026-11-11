@@ -1,0 +1,42 @@
+{
+  "advantage_sign_flip_share": {
+    "independent": 0.0,
+    "shared_seam": 0.0
+  },
+  "degenerate_difference_ci": {
+    "hi": 0.10037735849056605,
+    "lo": 0.08396226415094339,
+    "point": 0.09245283018867925
+  },
+  "degenerate_group_share": {
+    "independent": 0.009622641509433962,
+    "shared_seam": 0.10207547169811322
+  },
+  "fp_rate": 0.1,
+  "group_size": 8,
+  "groups_per_task": 20,
+  "honest_prob": 0.5,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/seam_errors.py --split test --group-size 8 --groups-per-task 20 --fp-rate 0.10 --seed 7 --out results/90-seam-errors.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-11T09:50:21Z",
+    "wall_s": 0.241
+  },
+  "sign_flip_difference_ci": {
+    "hi": 0.0,
+    "lo": 0.0,
+    "point": 0.0
+  },
+  "simulated": true,
+  "split": "test"
+}
