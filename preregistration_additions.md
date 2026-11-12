@@ -129,3 +129,13 @@ Metric: `/advantage_sign_flip_share/shared_seam` in `results/90-seam-errors.json
 Expected: shared_seam sign-flip share exceeds the independent share by at least 0.02 absolute (range 0.02 to 1.0).
 
 Falsifier: shared_seam sign-flip share minus independent sign-flip share is below 0.02, or the bootstrap interval of the difference includes zero.
+
+## 2026-11-12T11:23:40Z fuzz-candidates proposal:2f168b7a014e8f90ed3e7102de9483a3cb36895745f4489d063f4977547e11f6
+
+Hypothesis: on the TEST split with seed 7 and 5 mutation classes per task, the SIMULATED exploit-candidate rate (accepted at reward 1.0 by the rung, rejected by the strict rung) of the first_number rung is at least 0.50, while the strict rung is exactly 0.0 by construction and the dup_key rate is strictly lower than the first_number rate.
+
+Metric: `/exploit_candidate_rate/by_rung/first_number` in `results/128-fuzz-candidates.json`.
+
+Expected: first_number exploit-candidate rate at least 0.50 (range 0.5 to 1.0).
+
+Falsifier: a first_number exploit-candidate rate below 0.50, or a dup_key rate not below the first_number rate.

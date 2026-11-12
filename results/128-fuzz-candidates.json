@@ -1,0 +1,84 @@
+{
+  "exploit_candidate_rate": {
+    "by_rung": {
+      "dup_key": 0.26339622641509436,
+      "first_number": 0.7320754716981132,
+      "skip_denominator": 0.26339622641509436,
+      "strict": 0.0
+    },
+    "by_rung_and_mutation": {
+      "dup_key": {
+        "dropped_item": 0.3169811320754717,
+        "dup_key_spray": 0.8867924528301887,
+        "forged_passed": 0.0,
+        "padding": 0.11320754716981132,
+        "wrong_value": 0.0
+      },
+      "first_number": {
+        "dropped_item": 0.8867924528301887,
+        "dup_key_spray": 0.8867924528301887,
+        "forged_passed": 1.0,
+        "padding": 0.0,
+        "wrong_value": 0.8867924528301887
+      },
+      "skip_denominator": {
+        "dropped_item": 0.3169811320754717,
+        "dup_key_spray": 0.8867924528301887,
+        "forged_passed": 0.0,
+        "padding": 0.11320754716981132,
+        "wrong_value": 0.0
+      },
+      "strict": {
+        "dropped_item": 0.0,
+        "dup_key_spray": 0.0,
+        "forged_passed": 0.0,
+        "padding": 0.0,
+        "wrong_value": 0.0
+      }
+    },
+    "wilson_95": {
+      "dup_key": [
+        0.24038711298521825,
+        0.2877733539959479
+      ],
+      "first_number": [
+        0.7075826807874638,
+        0.7552264305467989
+      ],
+      "skip_denominator": [
+        0.24038711298521825,
+        0.2877733539959479
+      ],
+      "strict": [
+        0.0,
+        0.002890938995287324
+      ]
+    }
+  },
+  "mutation_classes": [
+    "wrong_value",
+    "dup_key_spray",
+    "dropped_item",
+    "forged_passed",
+    "padding"
+  ],
+  "n_mutated_outputs": 1325,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/fuzz_candidates.py --split test --seed 7 --out results/128-fuzz-candidates.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-12T11:24:27Z",
+    "wall_s": 0.097
+  },
+  "simulated": true,
+  "split": "test"
+}
