@@ -1,0 +1,109 @@
+{
+  "exploit_prob": 0.5,
+  "group_size": 2,
+  "groups_per_task": 20,
+  "groups_with_hack_per_hack": {
+    "citation_spam": 4010,
+    "cite_everything": 3977,
+    "copy_chunk": 3997,
+    "one_wrong_constant": 3969,
+    "paraphrase_no_tokens": 3940,
+    "stuff_numbers": 3920,
+    "wrong_chunk": 3907
+  },
+  "hacks": [
+    "copy_chunk",
+    "cite_everything",
+    "stuff_numbers",
+    "citation_spam",
+    "wrong_chunk",
+    "one_wrong_constant",
+    "paraphrase_no_tokens"
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/sign_flip_by_reward.py --split test --group-size 2 --groups-per-task 20 --prob 0.5 --seed 7 --out results/293-sign-flip-group-size2.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T19:32:34Z",
+    "wall_s": 4.574
+  },
+  "sign_flip_share": {
+    "v0_vs_v1": {
+      "mean_share": 0.1754020649674263,
+      "mean_strict_reversal_share": 0.0,
+      "per_hack": {
+        "citation_spam": 0.002743142144638404,
+        "cite_everything": 0.0,
+        "copy_chunk": 0.00825619214410808,
+        "one_wrong_constant": 0.04938271604938271,
+        "paraphrase_no_tokens": 0.583248730964467,
+        "stuff_numbers": 0.5841836734693877,
+        "wrong_chunk": 0.0
+      },
+      "per_hack_strict": {
+        "citation_spam": 0.0,
+        "cite_everything": 0.0,
+        "copy_chunk": 0.0,
+        "one_wrong_constant": 0.0,
+        "paraphrase_no_tokens": 0.0,
+        "stuff_numbers": 0.0,
+        "wrong_chunk": 0.0
+      }
+    },
+    "v0_vs_v2": {
+      "mean_share": 0.6383885286791867,
+      "mean_strict_reversal_share": 0.07579640463071512,
+      "per_hack": {
+        "citation_spam": 0.6713216957605985,
+        "cite_everything": 0.663816947447825,
+        "copy_chunk": 0.6049537152864648,
+        "one_wrong_constant": 0.5684051398337112,
+        "paraphrase_no_tokens": 0.6583756345177665,
+        "stuff_numbers": 0.6681122448979592,
+        "wrong_chunk": 0.6337343230099821
+      },
+      "per_hack_strict": {
+        "citation_spam": 0.07231920199501247,
+        "cite_everything": 0.07191350264018104,
+        "copy_chunk": 0.07005253940455342,
+        "one_wrong_constant": 0.07558578987150416,
+        "paraphrase_no_tokens": 0.0751269035532995,
+        "stuff_numbers": 0.08392857142857142,
+        "wrong_chunk": 0.0816483235218838
+      }
+    },
+    "v1_vs_v2": {
+      "mean_share": 0.4641659197323473,
+      "mean_strict_reversal_share": 0.07697586065130199,
+      "per_hack": {
+        "citation_spam": 0.6685785536159601,
+        "cite_everything": 0.663816947447825,
+        "copy_chunk": 0.6049537152864648,
+        "one_wrong_constant": 0.5190224237843285,
+        "paraphrase_no_tokens": 0.0751269035532995,
+        "stuff_numbers": 0.08392857142857142,
+        "wrong_chunk": 0.6337343230099821
+      },
+      "per_hack_strict": {
+        "citation_spam": 0.07231920199501247,
+        "cite_everything": 0.07191350264018104,
+        "copy_chunk": 0.0783087315486615,
+        "one_wrong_constant": 0.07558578987150416,
+        "paraphrase_no_tokens": 0.0751269035532995,
+        "stuff_numbers": 0.08392857142857142,
+        "wrong_chunk": 0.0816483235218838
+      }
+    }
+  },
+  "simulated": true,
+  "split": "test"
+}

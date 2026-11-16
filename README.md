@@ -271,3 +271,11 @@ identical (zero group-normalised advantage), averaged over the seven hacks
 (`results/282-degenerate-group-by-reward.json`): v0 0.8765498652291106, v1 0.6115363881401618,
 v2 0.038733153638814015. The pre-registered v2 bound (at most 0.10) held and v0 was higher than v2.
 Per-hack values are in the results file.
+
+### Hack-advantage sign change at group size 2 (SIMULATED, no model)
+
+`scripts/sign_flip_by_reward.py` at G=2 (20 groups per task, mixing probability 0.5, seed 7, TEST
+split) gives a mean v0-vs-v2 sign-change share of 0.6383885286791867, averaged over the seven hacks
+(`results/293-sign-flip-group-size2.json`, `/sign_flip_share/v0_vs_v2/mean_share`). This is below
+the G=4 value 0.8958503586543898 and above the pre-registered floor of 0.50, so the hypothesis held.
+The mean strict-reversal share is 0.07579640463071512. Per-hack values are in the results file.
