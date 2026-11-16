@@ -261,3 +261,13 @@ Metric: `/sign_flip_share/v0_vs_v2/mean_share` in `results/293-sign-flip-group-s
 Expected: metric decreases below 0.8958503586543898 but stays at least 0.50.
 
 Falsifier: the mean v0-vs-v2 sign-change share at G=2 is at or above the G=4 value 0.8958503586543898, or below 0.50.
+
+## 2026-11-16T19:46:50Z sign-flip-prob025 proposal:6ce1ca96c709ff0e02f8c967a9f83c9f7f09643290e49c4e57a5af7a022ca7c9
+
+Hypothesis: on the TEST split with G=8, 20 seeded groups per task, hack mixing probability 0.25 and seed 7, averaged over the seven required audit hack policies, the SIMULATED share of groups containing a hack rollout whose mean hack-rollout group-normalised advantage has a different sign (negative, zero or positive; tolerance 1e-9) under reward v0 than under reward v2 is at least 0.85.
+
+Metric: `/sign_flip_share/v0_vs_v2/mean_share` in `results/296-sign-flip-prob025.json`.
+
+Expected: metric stays at or above 0.85 at mixing probability 0.25 (range 0.85 to 1.0).
+
+Falsifier: the mean v0-vs-v2 sign-change share across the seven hacks is below 0.85 at mixing probability 0.25, G=8.
