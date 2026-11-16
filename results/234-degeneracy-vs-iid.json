@@ -1,0 +1,179 @@
+{
+  "cells": {
+    "p_0.1": {
+      "dup_key": {
+        "per_task_ci95": [
+          0.718457380452829,
+          0.7893803304150935
+        ],
+        "per_task_prediction": 0.7549934455849044,
+        "pooled_minus_per_task": -0.05155353946397978,
+        "pooled_prediction": 0.7034399061209247,
+        "simulated": 0.7539622641509433,
+        "simulated_inside_per_task_ci": true
+      },
+      "first_number": {
+        "per_task_ci95": [
+          1.0,
+          1.0
+        ],
+        "per_task_prediction": 1.0,
+        "pooled_minus_per_task": 0.0,
+        "pooled_prediction": 1.0,
+        "simulated": 1.0,
+        "simulated_inside_per_task_ci": true
+      },
+      "skip_denominator": {
+        "per_task_ci95": [
+          0.9118836076226412,
+          0.9548672136603772
+        ],
+        "per_task_prediction": 0.9355245909433959,
+        "pooled_minus_per_task": -0.02258227192607687,
+        "pooled_prediction": 0.912942319017319,
+        "simulated": 0.9394339622641511,
+        "simulated_inside_per_task_ci": true
+      },
+      "strict": {
+        "per_task_ci95": [
+          0.430467219999998,
+          0.430467219999998
+        ],
+        "per_task_prediction": 0.430467219999998,
+        "pooled_minus_per_task": 1.6986412276764895e-14,
+        "pooled_prediction": 0.43046722000001497,
+        "simulated": 0.4309433962264153,
+        "simulated_inside_per_task_ci": false
+      }
+    },
+    "p_0.5": {
+      "dup_key": {
+        "per_task_ci95": [
+          0.5132665094339622,
+          0.6368219339622642
+        ],
+        "per_task_prediction": 0.5731721698113208,
+        "pooled_minus_per_task": -0.42910882275456275,
+        "pooled_prediction": 0.14406334705675805,
+        "simulated": 0.5737735849056609,
+        "simulated_inside_per_task_ci": true
+      },
+      "first_number": {
+        "per_task_ci95": [
+          1.0,
+          1.0
+        ],
+        "per_task_prediction": 1.0,
+        "pooled_minus_per_task": 0.0,
+        "pooled_prediction": 1.0,
+        "simulated": 1.0,
+        "simulated_inside_per_task_ci": true
+      },
+      "skip_denominator": {
+        "per_task_ci95": [
+          0.8539799528301887,
+          0.921373820754717
+        ],
+        "per_task_prediction": 0.8876768867924528,
+        "pooled_minus_per_task": -0.26026451534524486,
+        "pooled_prediction": 0.627412371447208,
+        "simulated": 0.8881132075471702,
+        "simulated_inside_per_task_ci": true
+      },
+      "strict": {
+        "per_task_ci95": [
+          0.0078125,
+          0.0078125
+        ],
+        "per_task_prediction": 0.0078125,
+        "pooled_minus_per_task": 0.0,
+        "pooled_prediction": 0.0078125,
+        "simulated": 0.006981132075471702,
+        "simulated_inside_per_task_ci": false
+      }
+    },
+    "p_0.9": {
+      "dup_key": {
+        "per_task_ci95": [
+          0.7206065607547159,
+          0.7893803304150934
+        ],
+        "per_task_prediction": 0.7549934455849044,
+        "pooled_minus_per_task": -0.7345945794953932,
+        "pooled_prediction": 0.020398866089511282,
+        "simulated": 0.7516981132075469,
+        "simulated_inside_per_task_ci": true
+      },
+      "first_number": {
+        "per_task_ci95": [
+          1.0,
+          1.0
+        ],
+        "per_task_prediction": 1.0,
+        "pooled_minus_per_task": 0.0,
+        "pooled_prediction": 1.0,
+        "simulated": 1.0,
+        "simulated_inside_per_task_ci": true
+      },
+      "skip_denominator": {
+        "per_task_ci95": [
+          0.9140327879245279,
+          0.9548672136603772
+        ],
+        "per_task_prediction": 0.9355245909433959,
+        "pooled_minus_per_task": -0.5122241928839066,
+        "pooled_prediction": 0.42330039805948927,
+        "simulated": 0.9320754716981131,
+        "simulated_inside_per_task_ci": true
+      },
+      "strict": {
+        "per_task_ci95": [
+          0.430467219999998,
+          0.430467219999998
+        ],
+        "per_task_prediction": 0.430467219999998,
+        "pooled_minus_per_task": 3.885780586188048e-16,
+        "pooled_prediction": 0.4304672199999984,
+        "simulated": 0.4445283018867922,
+        "simulated_inside_per_task_ci": false
+      }
+    }
+  },
+  "degeneracy": {
+    "cells_simulated_inside_ci": 9,
+    "n_cells": 12,
+    "pooled_exceeds_per_task_cells": 0,
+    "pooled_minus_heterogeneous_max_gap": 1.6986412276764895e-14
+  },
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/degeneracy_vs_iid.py --split test --group-size 8 --groups-per-task 20 --seed 7 --out results/234-degeneracy-vs-iid.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T11:47:06Z",
+    "wall_s": 1.18
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}

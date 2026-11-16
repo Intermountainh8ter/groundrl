@@ -139,3 +139,13 @@ Metric: `/exploit_candidate_rate/by_rung/first_number` in `results/128-fuzz-cand
 Expected: first_number exploit-candidate rate at least 0.50 (range 0.5 to 1.0).
 
 Falsifier: a first_number exploit-candidate rate below 0.50, or a dup_key rate not below the first_number rate.
+
+## 2026-11-16T11:46:46Z degeneracy-vs-iid proposal:09b6907ffaa00b8169c41b8e2d160077123474ab2b2488126ad1efb0af333752
+
+Hypothesis: on the TEST split with group size 8, for every ladder rung and every exploit mixing probability, the zero-variance group share predicted from per-task success rates is at least the share predicted from the pooled success rate, so the maximum over cells of (pooled minus per-task) is not positive; the simulated share lies inside the bootstrap interval of the per-task prediction.
+
+Metric: `/degeneracy/pooled_minus_heterogeneous_max_gap` in `results/234-degeneracy-vs-iid.json`.
+
+Expected: metric is at most 0 (range -1.0 to 0.0).
+
+Falsifier: any rung and mixing-probability cell where the pooled prediction exceeds the per-task prediction by more than 1e-9, or a simulated share outside the bootstrap interval of the per-task prediction in most cells.
