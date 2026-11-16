@@ -1,0 +1,75 @@
+{
+  "exploit_advantage_by_reward": {
+    "v0": {
+      "mean_positive_share": 0.1106199460916442,
+      "per_hack": {
+        "citation_spam": 0.11245283018867924,
+        "cite_everything": 0.1120754716981132,
+        "copy_chunk": 0.1009433962264151,
+        "one_wrong_constant": 0.11245283018867924,
+        "paraphrase_no_tokens": 0.11188679245283019,
+        "stuff_numbers": 0.11264150943396227,
+        "wrong_chunk": 0.11188679245283019
+      }
+    },
+    "v1": {
+      "mean_positive_share": 0.11223719676549866,
+      "per_hack": {
+        "citation_spam": 0.11245283018867924,
+        "cite_everything": 0.1120754716981132,
+        "copy_chunk": 0.11226415094339623,
+        "one_wrong_constant": 0.11245283018867924,
+        "paraphrase_no_tokens": 0.11188679245283019,
+        "stuff_numbers": 0.11264150943396227,
+        "wrong_chunk": 0.11188679245283019
+      }
+    },
+    "v2": {
+      "mean_positive_share": 0.0,
+      "per_hack": {
+        "citation_spam": 0.0,
+        "cite_everything": 0.0,
+        "copy_chunk": 0.0,
+        "one_wrong_constant": 0.0,
+        "paraphrase_no_tokens": 0.0,
+        "stuff_numbers": 0.0,
+        "wrong_chunk": 0.0
+      }
+    }
+  },
+  "exploit_prob": 0.5,
+  "group_size": 8,
+  "groups_per_task": 20,
+  "hacks": [
+    "copy_chunk",
+    "cite_everything",
+    "stuff_numbers",
+    "citation_spam",
+    "wrong_chunk",
+    "one_wrong_constant",
+    "paraphrase_no_tokens"
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/reward_version_advantage.py --split test --group-size 8 --groups-per-task 20 --prob 0.5 --seed 7 --out results/277-reward-version-advantage.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T17:00:00Z",
+    "wall_s": 5.283
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "v0",
+    "v1",
+    "v2"
+  ]
+}

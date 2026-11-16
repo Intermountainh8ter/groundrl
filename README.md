@@ -253,3 +253,12 @@ With exploit probability 0.5 and honest-success probability 0.5, the strict rung
 `python3 scripts/verifier_error_asymmetry.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --seed 7 --out results/236-verifier-error-asymmetry.json`
 
 One error direction is injected at a time at the same rate: false positives accept an exploit rollout the rung rejects, false negatives reject an honest rollout the rung accepts. At the pre-registered cell (strict rung, exploit probability 0.5, error rate 0.2) the exploit share of reinforced rollouts is 0.1653428751179616 higher under false positives than under false negatives, with a 95% interval of 0.16061935185453666 to 0.1698299811591728 (`results/236-verifier-error-asymmetry.json`, `/asymmetry/exploit_share_fp_minus_fn`). The strict rung's false-negative exploit share is 0.0 by construction, because the strict rung never reinforces the exploit. The sign reverses on the three weaker rungs: at exploit probability 0.5 the difference is -0.0515 for first_number, -0.0229 for dup_key and -0.052 for skip_denominator, so the asymmetry holds only where the exploit is rejected by the base grader. "Reward v0" is mapped to the strict rung (see `preregistration_additions.md`).
+
+### Reward-version advantage replay (SIMULATED, no model)
+
+`scripts/reward_version_advantage.py` mixes the oracle with each of seven audit hack policies in
+GRPO groups (G=8, 20 groups per task, mixing probability 0.5, seed 7, TEST split) and scores them
+under the real reward versions. Share of groups whose hack rollouts have positive mean
+group-normalised advantage, averaged over the seven hacks (`results/277-reward-version-advantage.json`):
+v0 0.1106, v1 0.1122, v2 0.0. The pre-registered v2 bound (at most 0.05) held; the pre-registered
+v0 bound (at least 0.30) did not (0.1106). Per-hack values are in the results file.

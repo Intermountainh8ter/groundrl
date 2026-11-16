@@ -191,3 +191,13 @@ Metric: `/rank_agreement/spearman_audit_vs_exploit_candidate_rate` in `results/2
 Expected: metric is at least 0.80 (range 0.8 to 1.0).
 
 Falsifier: the Spearman correlation is below 0.80, or the lower bound of the joint probe-and-task 95% bootstrap interval is at or below 0.5, at the pre-registered 20-cell comparison.
+
+## 2026-11-16T16:59:58Z reward-version-advantage proposal:62193a9d11a8ecc6c55e49fade153a682e4bf6e915aeeb190709d625e24ee2dd
+
+Hypothesis: on the TEST split with G=8, 20 seeded groups per task, hack mixing probability 0.5 and seed 7, each group mixing the scripted oracle policy with one of the seven required audit hack policies (copy_chunk, cite_everything, stuff_numbers, citation_spam, wrong_chunk, one_wrong_constant, paraphrase_no_tokens), the SIMULATED share of groups whose hack rollouts have strictly positive mean group-normalised advantage, averaged over those seven hacks, is at most 0.05 under reward v2 and at least 0.30 under reward v0.
+
+Metric: `/exploit_advantage_by_reward/v2/mean_positive_share` in `results/277-reward-version-advantage.json`.
+
+Expected: metric at most 0.05 under v2 (range 0.0 to 0.05); v0 share at least 0.30.
+
+Falsifier: the v2 mean positive-advantage share across the seven hacks exceeds 0.05, or the v0 share is below 0.30, at the pre-registered cell.
