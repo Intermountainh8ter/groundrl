@@ -201,3 +201,13 @@ Metric: `/exploit_advantage_by_reward/v2/mean_positive_share` in `results/277-re
 Expected: metric at most 0.05 under v2 (range 0.0 to 0.05); v0 share at least 0.30.
 
 Falsifier: the v2 mean positive-advantage share across the seven hacks exceeds 0.05, or the v0 share is below 0.30, at the pre-registered cell.
+
+## 2026-11-16T17:24:31Z degenerate-group-by-reward proposal:410b61e356a4eb30708e8a2901cf7718059a315318083b7a5b82d8823952fd92
+
+Hypothesis: on the TEST split with G=8, 20 seeded groups per task, hack mixing probability 0.5 and seed 7, averaged over the seven required audit hack policies, the SIMULATED share of groups with all-identical rewards (zero group-normalised advantage) is at most 0.10 under reward v2 and strictly higher under reward v0 than under v2.
+
+Metric: `/degenerate_group_fraction_by_reward/v2/mean_share` in `results/282-degenerate-group-by-reward.json`.
+
+Expected: metric at most 0.10 under v2 (range 0.0 to 0.10); v0 share strictly greater than v2 share.
+
+Falsifier: the v2 mean zero-advantage group share exceeds 0.10, or the v0 mean share is not strictly greater than the v2 share, at the pre-registered cell.

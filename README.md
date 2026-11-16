@@ -262,3 +262,12 @@ under the real reward versions. Share of groups whose hack rollouts have positiv
 group-normalised advantage, averaged over the seven hacks (`results/277-reward-version-advantage.json`):
 v0 0.1106, v1 0.1122, v2 0.0. The pre-registered v2 bound (at most 0.05) held; the pre-registered
 v0 bound (at least 0.30) did not (0.1106). Per-hack values are in the results file.
+
+### Degenerate-group share by reward version (SIMULATED, no model)
+
+`scripts/degenerate_group_by_reward.py` uses the same oracle/hack groups (G=8, 20 groups per task,
+mixing probability 0.5, seed 7, TEST split) and reports the share of groups whose rewards are all
+identical (zero group-normalised advantage), averaged over the seven hacks
+(`results/282-degenerate-group-by-reward.json`): v0 0.8765498652291106, v1 0.6115363881401618,
+v2 0.038733153638814015. The pre-registered v2 bound (at most 0.10) held and v0 was higher than v2.
+Per-hack values are in the results file.
