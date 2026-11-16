@@ -331,3 +331,13 @@ Metric: `/leakiness/spearman_vs_hack_rate` in `results/322-leakiness-train-g2-se
 Expected: metric stays at or above 0.80 (range 0.80 to 1.0).
 
 Falsifier: the Spearman correlation across the 20 cells at group size 2 on TRAIN with seed 13 is below 0.80.
+
+## 2026-11-16T22:59:07Z strictness-seeds proposal:b894dc81701e43470fee9cab9deadd7e7741fac0940d5f7e25e4f50927ce767b
+
+Hypothesis: on the SIMULATED strictness-diversity ladder (first_number, dup_key, skip_denominator, strict; TEST split, group size 8, 20 groups per task, exploit mixing probability 0.5), the distinct-output gap between the weakest rung (first_number) and the strict rung is at least 0.95 in the mean over seeds 7, 13 and 21, and the max-minus-min across those seeds is below 0.02.
+
+Metric: `/strictness_seeds/gap_p0.5_mean` in `results/325-strictness-seeds.json`.
+
+Expected: metric stays at or above 0.95 (range 0.95 to 1.0).
+
+Falsifier: mean gap at p=0.5 below 0.95, or a spread across the three seeds of 0.02 or more.

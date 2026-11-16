@@ -1,0 +1,53 @@
+{
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "provenance": {
+    "command": "python3 scripts/strictness_diversity_seeds.py --split test --group-size 8 --groups-per-task 20 --seeds 7 13 21 --out results/325-strictness-seeds.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7,
+      13,
+      21
+    ],
+    "started_at": "2026-11-16T22:59:17Z",
+    "wall_s": 0.787
+  },
+  "simulated": true,
+  "split": "test",
+  "strictness_seeds": {
+    "gap_p0.1_mean": 0.5676729559748427,
+    "gap_p0.1_spread": 0.0073584905660377675,
+    "gap_p0.5_mean": 0.9922641509433962,
+    "gap_p0.5_spread": 0.0013207547169811207,
+    "gap_p0.9_mean": 0.5667295597484276,
+    "gap_p0.9_spread": 0.0116981132075471,
+    "per_seed": {
+      "13": {
+        "gap_p0.1": 0.5718867924528301,
+        "gap_p0.5": 0.9924528301886792,
+        "gap_p0.9": 0.5626415094339623
+      },
+      "21": {
+        "gap_p0.1": 0.5645283018867924,
+        "gap_p0.5": 0.9928301886792452,
+        "gap_p0.9": 0.5743396226415094
+      },
+      "7": {
+        "gap_p0.1": 0.5666037735849057,
+        "gap_p0.5": 0.9915094339622641,
+        "gap_p0.9": 0.5632075471698113
+      }
+    }
+  }
+}
