@@ -149,3 +149,15 @@ Metric: `/degeneracy/pooled_minus_heterogeneous_max_gap` in `results/234-degener
 Expected: metric is at most 0 (range -1.0 to 0.0).
 
 Falsifier: any rung and mixing-probability cell where the pooled prediction exceeds the per-task prediction by more than 1e-9, or a simulated share outside the bootstrap interval of the per-task prediction in most cells.
+
+## 2026-11-16T12:02:08Z verifier-error-asymmetry proposal:726555a62f0e4ba8770ff4783cf27b68069d7979c35fe91ad875daa391f87bfb
+
+Hypothesis: at matched injected error rate, false-positive injection yields a higher exploit share among full-reward rollouts than false-negative injection on the SIMULATED exploit/honest ladder simulator, and the paired bootstrap interval of the difference excludes zero at exploit mixing probability 0.5 under reward v0.
+
+Metric: `/asymmetry/exploit_share_fp_minus_fn` in `results/236-verifier-error-asymmetry.json`.
+
+Expected: metric increases to at least 0.05 (range 0.05 to 1.0).
+
+Falsifier: the 95% bootstrap interval of exploit_share_fp_minus_fn includes zero or lies below zero at the pre-registered cell (v0, mixing probability 0.5, error rate 0.2).
+
+Clarification (written before the run): "reward v0" is mapped to the ladder rung `strict`, the rung that mirrors the binary verifier pass. The pre-registered cell is rung `strict`, exploit mixing probability 0.5, error rate 0.2; all other rungs are reported as secondary cells.

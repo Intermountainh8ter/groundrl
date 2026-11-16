@@ -247,3 +247,9 @@ With exploit probability 0.5 and honest-success probability 0.5, the strict rung
 #### Honest-success sweep (SIMULATED, no model)
 
 `results/57-honest-success-sweep.json`: at G=8, p=0.5, the strict rung's share of groups with positive exploit advantage is 0.0 at every q in {0.1, 0.25, 0.5, 0.75, 0.9}. The first_number rung falls from 0.9554716981132075 at q=0.1 to 0.3383018867924528 at q=0.9, so it stays at or above the pre-registered 0.20.
+
+### Verifier error direction (SIMULATED, no model)
+
+`python3 scripts/verifier_error_asymmetry.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --seed 7 --out results/236-verifier-error-asymmetry.json`
+
+One error direction is injected at a time at the same rate: false positives accept an exploit rollout the rung rejects, false negatives reject an honest rollout the rung accepts. At the pre-registered cell (strict rung, exploit probability 0.5, error rate 0.2) the exploit share of reinforced rollouts is 0.1653428751179616 higher under false positives than under false negatives, with a 95% interval of 0.16061935185453666 to 0.1698299811591728 (`results/236-verifier-error-asymmetry.json`, `/asymmetry/exploit_share_fp_minus_fn`). The strict rung's false-negative exploit share is 0.0 by construction, because the strict rung never reinforces the exploit. The sign reverses on the three weaker rungs: at exploit probability 0.5 the difference is -0.0515 for first_number, -0.0229 for dup_key and -0.052 for skip_denominator, so the asymmetry holds only where the exploit is rejected by the base grader. "Reward v0" is mapped to the strict rung (see `preregistration_additions.md`).
