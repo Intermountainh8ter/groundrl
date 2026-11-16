@@ -1,0 +1,75 @@
+{
+  "degenerate_group_fraction_by_reward": {
+    "v0": {
+      "mean_share": 0.9364150943396227,
+      "per_hack": {
+        "citation_spam": 0.9452830188679245,
+        "cite_everything": 0.9460377358490566,
+        "copy_chunk": 0.9432075471698114,
+        "one_wrong_constant": 0.9381132075471698,
+        "paraphrase_no_tokens": 0.9441509433962264,
+        "stuff_numbers": 0.9379245283018868,
+        "wrong_chunk": 0.900188679245283
+      }
+    },
+    "v1": {
+      "mean_share": 0.8062803234501347,
+      "per_hack": {
+        "citation_spam": 0.9432075471698114,
+        "cite_everything": 0.9460377358490566,
+        "copy_chunk": 0.9369811320754717,
+        "one_wrong_constant": 0.9011320754716982,
+        "paraphrase_no_tokens": 0.5105660377358491,
+        "stuff_numbers": 0.5058490566037736,
+        "wrong_chunk": 0.900188679245283
+      }
+    },
+    "v2": {
+      "mean_share": 0.5160646900269541,
+      "per_hack": {
+        "citation_spam": 0.4920754716981132,
+        "cite_everything": 0.5018867924528302,
+        "copy_chunk": 0.5398113207547169,
+        "one_wrong_constant": 0.5690566037735849,
+        "paraphrase_no_tokens": 0.5105660377358491,
+        "stuff_numbers": 0.5058490566037736,
+        "wrong_chunk": 0.4932075471698113
+      }
+    }
+  },
+  "exploit_prob": 0.5,
+  "group_size": 2,
+  "groups_per_task": 20,
+  "hacks": [
+    "copy_chunk",
+    "cite_everything",
+    "stuff_numbers",
+    "citation_spam",
+    "wrong_chunk",
+    "one_wrong_constant",
+    "paraphrase_no_tokens"
+  ],
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/degenerate_group_by_reward.py --split test --group-size 2 --groups-per-task 20 --prob 0.5 --seed 7 --out results/285-degenerate-group-size2.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T18:43:41Z",
+    "wall_s": 4.686
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "v0",
+    "v1",
+    "v2"
+  ]
+}

@@ -36,3 +36,12 @@ def test_bad_args():
         run_degenerate_group_by_reward(_examples(2), group_size=1)
     with pytest.raises(ValueError):
         run_degenerate_group_by_reward(_examples(2), hacks=())
+
+
+def test_group_size_two_more_degenerate_than_eight():
+    kw = dict(groups_per_task=5, seed=7)
+    two = run_degenerate_group_by_reward(_examples(20), group_size=2, **kw)
+    eight = run_degenerate_group_by_reward(_examples(20), group_size=8, **kw)
+    f2 = two["degenerate_group_fraction_by_reward"]["v2"]["mean_share"]
+    f8 = eight["degenerate_group_fraction_by_reward"]["v2"]["mean_share"]
+    assert f2 > f8
