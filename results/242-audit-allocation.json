@@ -1,0 +1,173 @@
+{
+  "audit": {
+    "exploit_share_none": 0.4983254716981132,
+    "exploit_share_random": 0.4720146151001189,
+    "exploit_share_random_minus_targeted": 0.0,
+    "exploit_share_random_minus_targeted_ci95": [
+      0.0,
+      0.0
+    ],
+    "exploit_share_targeted": 0.4720146151001189,
+    "primary_cell": {
+      "audit_fraction": 0.1,
+      "exploit_prob": 0.5,
+      "rung": "first_number"
+    }
+  },
+  "audit_fraction": 0.1,
+  "cells": {
+    "p_0.1": {
+      "dup_key": {
+        "eligible_task_share": 0.569811320754717,
+        "exploit_share": {
+          "none": 0.05906268480189237,
+          "random": 0.053472237713877796,
+          "targeted": 0.049633761483498094
+        },
+        "exploit_share_random_minus_targeted": 0.003838476230379702,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0032582833931438246,
+          0.004458316592502601
+        ]
+      },
+      "first_number": {
+        "eligible_task_share": 1.0,
+        "exploit_share": {
+          "none": 0.09898584905660378,
+          "random": 0.08997791821401943,
+          "targeted": 0.08997791821401943
+        },
+        "exploit_share_random_minus_targeted": 0.0,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "skip_denominator": {
+        "eligible_task_share": 0.8867924528301887,
+        "exploit_share": {
+          "none": 0.08932363115829656,
+          "random": 0.08111582403720698,
+          "targeted": 0.08016441727069412
+        },
+        "exploit_share_random_minus_targeted": 0.000951406766512855,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0006268389299465902,
+          0.0012617435079437854
+        ]
+      }
+    },
+    "p_0.5": {
+      "dup_key": {
+        "eligible_task_share": 0.569811320754717,
+        "exploit_share": {
+          "none": 0.36362815884476535,
+          "random": 0.3396146893819483,
+          "targeted": 0.33011447358927515
+        },
+        "exploit_share_random_minus_targeted": 0.009500215792673128,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.007664789517035793,
+          0.011591947998377594
+        ]
+      },
+      "first_number": {
+        "eligible_task_share": 1.0,
+        "exploit_share": {
+          "none": 0.4983254716981132,
+          "random": 0.4720146151001189,
+          "targeted": 0.4720146151001189
+        },
+        "exploit_share_random_minus_targeted": 0.0,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "skip_denominator": {
+        "eligible_task_share": 0.8867924528301887,
+        "exploit_share": {
+          "none": 0.4686446392447741,
+          "random": 0.4425185709232402,
+          "targeted": 0.4407333669882152
+        },
+        "exploit_share_random_minus_targeted": 0.0017852039350250148,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.001210906821398762,
+          0.0025376644012810035
+        ]
+      }
+    },
+    "p_0.9": {
+      "dup_key": {
+        "eligible_task_share": 0.569811320754717,
+        "exploit_share": {
+          "none": 0.8377275701474154,
+          "random": 0.8228906299229137,
+          "targeted": 0.8216616141543228
+        },
+        "exploit_share_random_minus_targeted": 0.001229015768590913,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0008970475435240127,
+          0.00169570442390696
+        ]
+      },
+      "first_number": {
+        "eligible_task_share": 1.0,
+        "exploit_share": {
+          "none": 0.8986556603773584,
+          "random": 0.888649043656727,
+          "targeted": 0.888649043656727
+        },
+        "exploit_share_random_minus_targeted": 0.0,
+        "exploit_share_random_minus_targeted_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "skip_denominator": {
+        "eligible_task_share": 0.8867924528301887,
+        "exploit_share": {
+          "none": 0.8885738290275152,
+          "random": 0.8777072119319033,
+          "targeted": 0.8775522268039891
+        },
+        "exploit_share_random_minus_targeted": 0.0001549851279141201,
+        "exploit_share_random_minus_targeted_ci95": [
+          9.432074382169642e-05,
+          0.00022658958310490805
+        ]
+      }
+    }
+  },
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/audit_allocation.py --split test --group-size 8 --groups-per-task 20 --audit-fraction 0.1 --seed 7 --out results/242-audit-allocation.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T12:33:20Z",
+    "wall_s": 0.89
+  },
+  "rungs": [
+    "first_number",
+    "dup_key",
+    "skip_denominator"
+  ],
+  "simulated": true,
+  "split": "test"
+}

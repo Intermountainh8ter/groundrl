@@ -161,3 +161,13 @@ Expected: metric increases to at least 0.05 (range 0.05 to 1.0).
 Falsifier: the 95% bootstrap interval of exploit_share_fp_minus_fn includes zero or lies below zero at the pre-registered cell (v0, mixing probability 0.5, error rate 0.2).
 
 Clarification (written before the run): "reward v0" is mapped to the ladder rung `strict`, the rung that mirrors the binary verifier pass. The pre-registered cell is rung `strict`, exploit mixing probability 0.5, error rate 0.2; all other rungs are reported as secondary cells.
+
+## 2026-11-16T12:32:10Z audit-allocation proposal:251604506f6baca6fd46fe3f911a19002bd5c650b425f9ab367084ae77169b60
+
+Hypothesis: on the SIMULATED exploit/honest ladder simulator (TEST split, group size 8, 20 groups per task, seed 7, exploit mixing probability 0.5, weak rung first_number, audit fraction 0.1 of full-reward rollouts), the exploit share among rewarded rollouts after audit is lower under targeted audit than under random audit at equal audit budget, and the paired bootstrap interval of (random minus targeted) excludes zero.
+
+Metric: `/audit/exploit_share_random_minus_targeted` in `results/242-audit-allocation.json`.
+
+Expected: metric increases to at least 0.05 (range 0.05 to 1.0).
+
+Falsifier: the 95% bootstrap interval of exploit_share_random_minus_targeted includes zero or lies below zero at the pre-registered cell (rung first_number, mixing probability 0.5, audit fraction 0.1).
