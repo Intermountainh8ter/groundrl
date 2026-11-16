@@ -171,3 +171,13 @@ Metric: `/audit/exploit_share_random_minus_targeted` in `results/242-audit-alloc
 Expected: metric increases to at least 0.05 (range 0.05 to 1.0).
 
 Falsifier: the 95% bootstrap interval of exploit_share_random_minus_targeted includes zero or lies below zero at the pre-registered cell (rung first_number, mixing probability 0.5, audit fraction 0.1).
+
+## 2026-11-16T13:52:33Z strictness-diversity proposal:da445206a20d83e6258110b324285b0f15c1a910f46c22e185f172d24b62a5e6
+
+Hypothesis: on the SIMULATED exploit/honest ladder simulator (TEST split, group size 8, 20 groups per task, seed 7, exploit mixing probability 0.5), the mean number of distinct output strings among full-reward rollouts per group (groups with at least one full-reward rollout) is higher under the first_number rung than under the strict rung, and the paired bootstrap interval of the difference excludes zero.
+
+Metric: `/strictness/diversity_by_level/p_0.5/first_number_minus_strict` in `results/248-strictness-diversity.json`.
+
+Expected: metric increases to at least 0.5 (range 0.5 to 1.0).
+
+Falsifier: the 95% bootstrap interval of first_number_minus_strict at exploit mixing probability 0.5 includes zero or lies below zero, or the point estimate is below 0.5.

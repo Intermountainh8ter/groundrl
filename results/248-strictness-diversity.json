@@ -1,0 +1,95 @@
+{
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/strictness_diversity.py --split test --group-size 8 --groups-per-task 20 --seed 7 --out results/248-strictness-diversity.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T13:52:56Z",
+    "wall_s": 0.327
+  },
+  "simulated": true,
+  "split": "test",
+  "strictness": {
+    "diversity_by_level": {
+      "p_0.1": {
+        "first_number_minus_strict": 0.5666037735849057,
+        "first_number_minus_strict_ci95": [
+          0.5515094339622642,
+          0.580566037735849
+        ],
+        "mean_distinct": {
+          "dup_key": 1.3245283018867924,
+          "first_number": 1.5666037735849057,
+          "skip_denominator": 1.5007547169811322,
+          "strict": 1.0
+        },
+        "valid_group_share": {
+          "dup_key": 1.0,
+          "first_number": 1.0,
+          "skip_denominator": 1.0,
+          "strict": 1.0
+        }
+      },
+      "p_0.5": {
+        "first_number_minus_strict": 0.9915094339622641,
+        "first_number_minus_strict_ci95": [
+          0.9892452830188678,
+          0.9935896226415094
+        ],
+        "mean_distinct": {
+          "dup_key": 1.5649546827794563,
+          "first_number": 1.991509433962264,
+          "skip_denominator": 1.879788639365918,
+          "strict": 1.0
+        },
+        "valid_group_share": {
+          "dup_key": 0.999245283018868,
+          "first_number": 1.0,
+          "skip_denominator": 0.999811320754717,
+          "strict": 0.9967924528301887
+        }
+      },
+      "p_0.9": {
+        "first_number_minus_strict": 0.5632075471698113,
+        "first_number_minus_strict_ci95": [
+          0.5492405660377359,
+          0.5762264150943397
+        ],
+        "mean_distinct": {
+          "dup_key": 1.394565722248026,
+          "first_number": 1.5632075471698113,
+          "skip_denominator": 1.5223851030110935,
+          "strict": 1.0
+        },
+        "valid_group_share": {
+          "dup_key": 0.8124528301886792,
+          "first_number": 1.0,
+          "skip_denominator": 0.9524528301886792,
+          "strict": 0.5632075471698114
+        }
+      }
+    }
+  },
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ],
+  "weak_rung": "first_number"
+}
