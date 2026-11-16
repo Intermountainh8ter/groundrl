@@ -271,3 +271,13 @@ Metric: `/sign_flip_share/v0_vs_v2/mean_share` in `results/296-sign-flip-prob025
 Expected: metric stays at or above 0.85 at mixing probability 0.25 (range 0.85 to 1.0).
 
 Falsifier: the mean v0-vs-v2 sign-change share across the seven hacks is below 0.85 at mixing probability 0.25, G=8.
+
+## 2026-11-16T20:01:00Z audit-allocation-frac05 proposal:081e40472b7bfcd2ae86a065ebf8f51806bee3af07c74c50a5a2ed1333cee042
+
+Hypothesis: on the SIMULATED exploit/honest ladder simulator (TEST split, group size 8, 20 groups per task, seed 7, exploit mixing probability 0.5, weak rung first_number), at audit fraction 0.5 of full-reward rollouts the exploit share among rewarded rollouts after audit under random audit minus targeted audit stays below 0.05, because full-reward rollouts tie under the weak verifier so targeting by weak reward has no signal to use.
+
+Metric: `/audit/exploit_share_random_minus_targeted` in `results/298-audit-allocation-frac05.json`.
+
+Expected: metric stays below 0.05 (near 0.0, as at audit fraction 0.1; range 0.0 to 0.05).
+
+Falsifier: exploit_share_random_minus_targeted at the pre-registered cell is at least 0.05 at audit fraction 0.5.
