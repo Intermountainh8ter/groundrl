@@ -351,3 +351,13 @@ Metric: `/asymmetry_seeds/primary_min` in `results/328-asymmetry-seeds.json`.
 Expected: metric stays at or above 0.15 (range 0.15 to 0.25).
 
 Falsifier: the minimum over seeds 7, 13 and 21 of exploit_share_fp_minus_fn at the primary cell is below 0.15.
+
+## 2026-11-16T23:13:55Z clustering-seeds proposal:43235828101f9b19ab39fba47a5d2e19e1c4d52a7f06ecb40dfbc295786e7c87
+
+Hypothesis: on the SIMULATED ladder (TEST split, group size 8, 20 groups per task, false-positive rate 0.2, exploit probability 0.5, rung strict), making the false-positive error task-clustered (a fixed 20% of tasks are blind spots where every exploit rollout is accepted, versus independent per-rollout acceptance at 0.2) raises the zero-variance group share by at least 0.10 in every one of seeds 7, 13 and 21, while the exploit share of reinforced rollouts differs by less than 0.05 between the two modes.
+
+Metric: `/clustering_seeds/zero_variance_diff_min` in `results/329-clustering-seeds.json`.
+
+Expected: metric (minimum over seeds of clustered minus independent zero-variance group share) is at least 0.10 (range 0.10 to 0.30).
+
+Falsifier: the minimum over seeds 7, 13 and 21 of clustered minus independent zero-variance group share at the primary cell is below 0.10.
