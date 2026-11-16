@@ -279,3 +279,7 @@ split) gives a mean v0-vs-v2 sign-change share of 0.6383885286791867, averaged o
 (`results/293-sign-flip-group-size2.json`, `/sign_flip_share/v0_vs_v2/mean_share`). This is below
 the G=4 value 0.8958503586543898 and above the pre-registered floor of 0.50, so the hypothesis held.
 The mean strict-reversal share is 0.07579640463071512. Per-hack values are in the results file.
+
+### Verifier error rate 0.3 (SIMULATED, iter 299)
+
+At verifier error rate 0.3 the primary-cell false-positive minus false-negative exploit share gap is 0.22872611002107404 (95% interval 0.22358930395423438 to 0.23343205130323225), above the error-rate-0.2 value of 0.1653428751179616. Source: `results/299-verifier-error-rate03.json`; reproduce with `python3 scripts/verifier_error_asymmetry.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.3 --seed 7 --out results/299-verifier-error-rate03.json`.

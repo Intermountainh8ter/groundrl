@@ -281,3 +281,13 @@ Metric: `/audit/exploit_share_random_minus_targeted` in `results/298-audit-alloc
 Expected: metric stays below 0.05 (near 0.0, as at audit fraction 0.1; range 0.0 to 0.05).
 
 Falsifier: exploit_share_random_minus_targeted at the pre-registered cell is at least 0.05 at audit fraction 0.5.
+
+## 2026-11-16T20:08:59Z verifier-error-rate03 proposal:7c007b707bbe6b0b6ccabd77bbad96abc6e580db4d2aa08dd582a53efb3d13d9
+
+Hypothesis: on the SIMULATED exploit/honest ladder (TEST split, group size 8, 20 groups per task, seed 7, exploit probabilities 0.1/0.5/0.9), at verifier error rate 0.3 the primary-cell exploit_share_fp_minus_fn (strict version, exploit prob 0.5) is strictly above its error-rate-0.2 value of 0.1653428751179616 in results/236-verifier-error-asymmetry.json.
+
+Metric: `/asymmetry/exploit_share_fp_minus_fn` in `results/299-verifier-error-rate03.json`.
+
+Expected: metric increases above 0.1653428751179616 (range 0.17 to 0.40).
+
+Falsifier: exploit_share_fp_minus_fn at error rate 0.3 at the primary cell is at or below 0.1653428751179616.

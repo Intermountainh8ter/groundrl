@@ -1,0 +1,257 @@
+{
+  "asymmetry": {
+    "exploit_share_fp_minus_fn": 0.22872611002107404,
+    "exploit_share_fp_minus_fn_ci95": [
+      0.22358930395423438,
+      0.23343205130323225
+    ],
+    "primary_cell": {
+      "exploit_prob": 0.5,
+      "version": "strict"
+    }
+  },
+  "cells": {
+    "p_0.1": {
+      "dup_key": {
+        "exploit_share_fp_minus_fn": -0.01086387257567896,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.016535847220612212,
+          -0.005539221075905261
+        ],
+        "fn": {
+          "exploit_share": 0.08300952511949383,
+          "reinforced_rollouts": 29081,
+          "zero_variance_group_share": 0.059433962264150944
+        },
+        "fp": {
+          "exploit_share": 0.07214565254381487,
+          "reinforced_rollouts": 41139,
+          "zero_variance_group_share": 0.8116981132075471
+        }
+      },
+      "first_number": {
+        "exploit_share_fp_minus_fn": -0.03615453761394903,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.0409970357552997,
+          -0.03181634264254488
+        ],
+        "fn": {
+          "exploit_share": 0.1351403866705528,
+          "reinforced_rollouts": 30879,
+          "zero_variance_group_share": 0.0760377358490566
+        },
+        "fp": {
+          "exploit_share": 0.09898584905660378,
+          "reinforced_rollouts": 42400,
+          "zero_variance_group_share": 1.0
+        }
+      },
+      "skip_denominator": {
+        "exploit_share_fp_minus_fn": -0.03346908786793765,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.038562760050622515,
+          -0.028491545651974166
+        ],
+        "fn": {
+          "exploit_share": 0.1252226693936795,
+          "reinforced_rollouts": 30314,
+          "zero_variance_group_share": 0.07471698113207548
+        },
+        "fp": {
+          "exploit_share": 0.09175358152574184,
+          "reinforced_rollouts": 42091,
+          "zero_variance_group_share": 0.9545283018867925
+        }
+      },
+      "strict": {
+        "exploit_share_fp_minus_fn": 0.031377518692180965,
+        "exploit_share_fp_minus_fn_ci95": [
+          0.029776297923181868,
+          0.0330064082386093
+        ],
+        "fn": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 26667,
+          "zero_variance_group_share": 0.024528301886792454
+        },
+        "fp": {
+          "exploit_share": 0.031377518692180965,
+          "reinforced_rollouts": 39455,
+          "zero_variance_group_share": 0.5647169811320755
+        }
+      }
+    },
+    "p_0.5": {
+      "dup_key": {
+        "exploit_share_fp_minus_fn": -0.040026725640700755,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.05211838175133397,
+          -0.025237235180553205
+        ],
+        "fn": {
+          "exploit_share": 0.448945554278937,
+          "reinforced_rollouts": 26981,
+          "zero_variance_group_share": 0.16433962264150945
+        },
+        "fp": {
+          "exploit_share": 0.40891882863823625,
+          "reinforced_rollouts": 35924,
+          "zero_variance_group_share": 0.5839622641509434
+        }
+      },
+      "first_number": {
+        "exploit_share_fp_minus_fn": -0.08503539210520106,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.09176718197289564,
+          -0.07783687343448366
+        ],
+        "fn": {
+          "exploit_share": 0.5868278449353898,
+          "reinforced_rollouts": 35985,
+          "zero_variance_group_share": 0.2792452830188679
+        },
+        "fp": {
+          "exploit_share": 0.5017924528301887,
+          "reinforced_rollouts": 42400,
+          "zero_variance_group_share": 1.0
+        }
+      },
+      "skip_denominator": {
+        "exploit_share_fp_minus_fn": -0.0828786870060449,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.09043567603498538,
+          -0.07523495359138976
+        ],
+        "fn": {
+          "exploit_share": 0.5609045793587115,
+          "reinforced_rollouts": 33651,
+          "zero_variance_group_share": 0.2469811320754717
+        },
+        "fp": {
+          "exploit_share": 0.4780258923526666,
+          "reinforced_rollouts": 40707,
+          "zero_variance_group_share": 0.8907547169811321
+        }
+      },
+      "strict": {
+        "exploit_share_fp_minus_fn": 0.22872611002107404,
+        "exploit_share_fp_minus_fn_ci95": [
+          0.22358930395423438,
+          0.23343205130323225
+        ],
+        "fn": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 14802,
+          "zero_variance_group_share": 0.034339622641509436
+        },
+        "fp": {
+          "exploit_share": 0.22872611002107404,
+          "reinforced_rollouts": 27522,
+          "zero_variance_group_share": 0.03207547169811321
+        }
+      }
+    },
+    "p_0.9": {
+      "dup_key": {
+        "exploit_share_fp_minus_fn": -0.015690811952494887,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.021719550491631268,
+          -0.008416815069883721
+        ],
+        "fn": {
+          "exploit_share": 0.8802157252341755,
+          "reinforced_rollouts": 24661,
+          "zero_variance_group_share": 0.6843396226415094
+        },
+        "fp": {
+          "exploit_share": 0.8645249132816806,
+          "reinforced_rollouts": 30847,
+          "zero_variance_group_share": 0.580377358490566
+        }
+      },
+      "first_number": {
+        "exploit_share_fp_minus_fn": -0.025729837372988507,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.029241147651574022,
+          -0.0222054124747752
+        ],
+        "fn": {
+          "exploit_share": 0.9270977619012903,
+          "reinforced_rollouts": 41151,
+          "zero_variance_group_share": 0.7898113207547169
+        },
+        "fp": {
+          "exploit_share": 0.9013679245283018,
+          "reinforced_rollouts": 42400,
+          "zero_variance_group_share": 1.0
+        }
+      },
+      "skip_denominator": {
+        "exploit_share_fp_minus_fn": -0.02579333672312778,
+        "exploit_share_fp_minus_fn_ci95": [
+          -0.029714871439740408,
+          -0.02183702184782189
+        ],
+        "fn": {
+          "exploit_share": 0.9169929309407286,
+          "reinforced_rollouts": 36780,
+          "zero_variance_group_share": 0.7518867924528302
+        },
+        "fp": {
+          "exploit_share": 0.8911995942176009,
+          "reinforced_rollouts": 39430,
+          "zero_variance_group_share": 0.8886792452830189
+        }
+      },
+      "strict": {
+        "exploit_share_fp_minus_fn": 0.7283614244075529,
+        "exploit_share_fp_minus_fn_ci95": [
+          0.7220841352524768,
+          0.7352228096075447
+        ],
+        "fn": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 3007,
+          "zero_variance_group_share": 0.5584905660377358
+        },
+        "fp": {
+          "exploit_share": 0.7283614244075529,
+          "reinforced_rollouts": 15782,
+          "zero_variance_group_share": 0.025849056603773585
+        }
+      }
+    }
+  },
+  "error_rate": 0.3,
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/verifier_error_asymmetry.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.3 --seed 7 --out results/299-verifier-error-rate03.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T20:08:59Z",
+    "wall_s": 0.816
+  },
+  "simulated": true,
+  "split": "test",
+  "versions": [
+    "first_number",
+    "dup_key",
+    "skip_denominator",
+    "strict"
+  ]
+}
