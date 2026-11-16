@@ -291,3 +291,13 @@ Metric: `/asymmetry/exploit_share_fp_minus_fn` in `results/299-verifier-error-ra
 Expected: metric increases above 0.1653428751179616 (range 0.17 to 0.40).
 
 Falsifier: exploit_share_fp_minus_fn at error rate 0.3 at the primary cell is at or below 0.1653428751179616.
+
+## 2026-11-16T20:45:11Z leakiness-vs-hack-rate proposal:77be6ce3555f2f459c5c96b475aa3799696b35987b445cbe1cc0a5b712db31b6
+
+Hypothesis: on the SIMULATED GRPO-group ladder (TEST split, group size 8, 20 groups per task, seed 7, exploit mixing probability 0.5), across the 20 (rung, hack class) cells of the four-rung ladder (first_number, dup_key, skip_denominator, strict) and five hack classes, the Spearman rank correlation between the static audit acceptance share (results/265-static-leakiness-probe-resample.json) and the simulated exploit share among rewarded rollouts is at least 0.80.
+
+Metric: `/leakiness/spearman_vs_hack_rate` in `results/305-leakiness-vs-hack-rate.json`.
+
+Expected: metric at least 0.80 (range 0.80 to 1.0).
+
+Falsifier: the Spearman correlation across the 20 cells is below 0.80.
