@@ -221,3 +221,13 @@ Metric: `/degenerate_group_fraction_by_reward/v2/mean_share` in `results/285-deg
 Expected: metric increases to at least 0.40 (range 0.40 to 0.70); v2 below v1 below v0.
 
 Falsifier: the v2 mean zero-advantage group share at G=2 is below 0.40, or v2 is not strictly below both v1 and v0.
+
+## 2026-11-16T19:07:40Z degenerate-group-size4 proposal:78adf54689a273435e9abeef87ace19a954b2843f64977870bf1ace24673e90c
+
+Hypothesis: on the TEST split with G=4, 20 seeded groups per task, hack mixing probability 0.5 and seed 7, averaged over the seven required audit hack policies, the SIMULATED share of groups with all-identical rewards (zero group-normalised advantage) under reward v2 lies strictly between its G=8 value in `results/282-degenerate-group-by-reward.json` and its G=2 value in `results/285-degenerate-group-size2.json`, is at least 0.05 and at most 0.30, and v2 is strictly below v1 and v0.
+
+Metric: `/degenerate_group_fraction_by_reward/v2/mean_share` in `results/289-degenerate-group-size4.json`.
+
+Expected: metric between 0.05 and 0.30 (above the G=8 value, below the G=2 value).
+
+Falsifier: the v2 mean zero-advantage group share at G=4 is below 0.05 or above 0.30, or is not strictly between the G=8 and G=2 values, or v2 is not strictly below both v1 and v0.
