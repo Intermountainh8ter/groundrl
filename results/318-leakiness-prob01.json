@@ -1,0 +1,93 @@
+{
+  "cells": [
+    "first_number/wrong_value",
+    "first_number/dup_key_spray",
+    "first_number/dropped_item",
+    "first_number/forged_passed",
+    "first_number/padding",
+    "dup_key/wrong_value",
+    "dup_key/dup_key_spray",
+    "dup_key/dropped_item",
+    "dup_key/forged_passed",
+    "dup_key/padding",
+    "skip_denominator/wrong_value",
+    "skip_denominator/dup_key_spray",
+    "skip_denominator/dropped_item",
+    "skip_denominator/forged_passed",
+    "skip_denominator/padding",
+    "strict/wrong_value",
+    "strict/dup_key_spray",
+    "strict/dropped_item",
+    "strict/forged_passed",
+    "strict/padding"
+  ],
+  "exploit_prob": 0.1,
+  "exploit_share_among_rewarded": {
+    "dup_key/dropped_item": 0.026218360408009067,
+    "dup_key/dup_key_spray": 0.0878066037735849,
+    "dup_key/forged_passed": 0.0,
+    "dup_key/padding": 0.010518867924528302,
+    "dup_key/wrong_value": 0.0,
+    "first_number/dropped_item": 0.08832547169811321,
+    "first_number/dup_key_spray": 0.08981132075471698,
+    "first_number/forged_passed": 0.09997641509433962,
+    "first_number/padding": 0.0,
+    "first_number/wrong_value": 0.0865566037735849,
+    "skip_denominator/dropped_item": 0.026134246437383553,
+    "skip_denominator/dup_key_spray": 0.08938679245283018,
+    "skip_denominator/forged_passed": 0.0,
+    "skip_denominator/padding": 0.011320754716981131,
+    "skip_denominator/wrong_value": 0.0,
+    "strict/dropped_item": 0.0,
+    "strict/dup_key_spray": 0.0,
+    "strict/forged_passed": 0.0,
+    "strict/padding": 0.0,
+    "strict/wrong_value": 0.0
+  },
+  "group_size": 8,
+  "groups_per_task": 20,
+  "leakiness": {
+    "n_cells": 20,
+    "spearman_vs_hack_rate": 0.9948364543056565
+  },
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/leakiness_vs_hack_rate.py --split test --group-size 8 --groups-per-task 20 --prob 0.1 --seed 7 --out results/318-leakiness-prob01.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T22:22:23Z",
+    "wall_s": 0.866
+  },
+  "simulated": true,
+  "split": "test",
+  "static_acceptance_share": {
+    "dup_key/dropped_item": 0.24433962264150944,
+    "dup_key/dup_key_spray": 0.8867924528301887,
+    "dup_key/forged_passed": 0.0,
+    "dup_key/padding": 0.11320754716981132,
+    "dup_key/wrong_value": 0.0,
+    "first_number/dropped_item": 0.8867924528301887,
+    "first_number/dup_key_spray": 0.8867924528301887,
+    "first_number/forged_passed": 0.9943396226415094,
+    "first_number/padding": 0.0,
+    "first_number/wrong_value": 0.879245283018868,
+    "skip_denominator/dropped_item": 0.24433962264150944,
+    "skip_denominator/dup_key_spray": 0.8867924528301887,
+    "skip_denominator/forged_passed": 0.0,
+    "skip_denominator/padding": 0.11320754716981132,
+    "skip_denominator/wrong_value": 0.0,
+    "strict/dropped_item": 0.0,
+    "strict/dup_key_spray": 0.0,
+    "strict/forged_passed": 0.0,
+    "strict/padding": 0.0,
+    "strict/wrong_value": 0.0
+  }
+}
