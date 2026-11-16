@@ -361,3 +361,13 @@ Metric: `/clustering_seeds/zero_variance_diff_min` in `results/329-clustering-se
 Expected: metric (minimum over seeds of clustered minus independent zero-variance group share) is at least 0.10 (range 0.10 to 0.30).
 
 Falsifier: the minimum over seeds 7, 13 and 21 of clustered minus independent zero-variance group share at the primary cell is below 0.10.
+
+## 2026-11-16T23:20:16Z clustering-fn-seeds proposal:747347e0de02f230964fb7357b2bdc34977a69c38c6136a65ec4689d37d778b7
+
+Hypothesis: on the SIMULATED ladder (TEST split, group size 8, 20 groups per task, false-negative rate 0.2, exploit probability 0.5, rung strict), making the false-negative error task-clustered (a fixed 20% of tasks are blind spots where every honest rollout is rejected, versus independent per-rollout rejection at 0.2) raises the zero-variance group share by at least 0.10 in every one of seeds 7, 13 and 21.
+
+Metric: `/clustering_fn_seeds/zero_variance_diff_min` in `results/331-clustering-fn-seeds.json`.
+
+Expected: metric (minimum over seeds of clustered minus independent zero-variance group share) is at least 0.10 (range 0.10 to 0.30).
+
+Falsifier: the minimum over seeds 7, 13 and 21 of clustered minus independent zero-variance group share at the primary cell is below 0.10.

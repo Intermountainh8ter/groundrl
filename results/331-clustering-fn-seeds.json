@@ -1,0 +1,107 @@
+{
+  "clustering_fn_seeds": {
+    "exploit_share_diff_max_abs": 0.0,
+    "exploit_share_diff_per_seed": {
+      "13": 0.0,
+      "21": 0.0,
+      "7": 0.0
+    },
+    "zero_variance_diff_mean": 0.18993710691823898,
+    "zero_variance_diff_min": 0.18716981132075472,
+    "zero_variance_diff_per_seed": {
+      "13": 0.1911320754716981,
+      "21": 0.18716981132075472,
+      "7": 0.19150943396226416
+    }
+  },
+  "per_seed": {
+    "13": {
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "exploit_share_diff": 0.0,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "modes": {
+        "clustered": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 16904,
+          "zero_variance_group_share": 0.20679245283018868
+        },
+        "independent": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 16928,
+          "zero_variance_group_share": 0.015660377358490567
+        }
+      },
+      "n_blind_spots": 53,
+      "n_tasks": 265,
+      "version": "strict",
+      "zero_variance_diff": 0.1911320754716981
+    },
+    "21": {
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "exploit_share_diff": 0.0,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "modes": {
+        "clustered": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 17050,
+          "zero_variance_group_share": 0.2058490566037736
+        },
+        "independent": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 17070,
+          "zero_variance_group_share": 0.01867924528301887
+        }
+      },
+      "n_blind_spots": 53,
+      "n_tasks": 265,
+      "version": "strict",
+      "zero_variance_diff": 0.18716981132075472
+    },
+    "7": {
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "exploit_share_diff": 0.0,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "modes": {
+        "clustered": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 16836,
+          "zero_variance_group_share": 0.20660377358490567
+        },
+        "independent": {
+          "exploit_share": 0.0,
+          "reinforced_rollouts": 16991,
+          "zero_variance_group_share": 0.01509433962264151
+        }
+      },
+      "n_blind_spots": 53,
+      "n_tasks": 265,
+      "version": "strict",
+      "zero_variance_diff": 0.19150943396226416
+    }
+  },
+  "provenance": {
+    "command": "python3 scripts/verifier_error_clustering_fn_seeds.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --seeds 7 13 21 --out results/331-clustering-fn-seeds.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7,
+      13,
+      21
+    ],
+    "started_at": "2026-11-16T23:20:28Z",
+    "wall_s": 0.181
+  },
+  "simulated": true,
+  "split": "test"
+}
