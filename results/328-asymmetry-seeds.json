@@ -1,0 +1,40 @@
+{
+  "asymmetry_seeds": {
+    "per_seed": {
+      "13": 0.16962516839686187,
+      "21": 0.1656641899595078,
+      "7": 0.1653428751179616
+    },
+    "primary_max": 0.16962516839686187,
+    "primary_mean": 0.16687741115811042,
+    "primary_min": 0.1653428751179616,
+    "primary_spread": 0.004282293278900257
+  },
+  "error_rate": 0.2,
+  "exploit_probs": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "group_size": 8,
+  "groups_per_task": 20,
+  "provenance": {
+    "command": "python3 scripts/verifier_error_asymmetry_seeds.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --seeds 7 13 21 --out results/328-asymmetry-seeds.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7,
+      13,
+      21
+    ],
+    "started_at": "2026-11-16T23:08:54Z",
+    "wall_s": 2.021
+  },
+  "simulated": true,
+  "split": "test"
+}

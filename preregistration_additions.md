@@ -341,3 +341,13 @@ Metric: `/strictness_seeds/gap_p0.5_mean` in `results/325-strictness-seeds.json`
 Expected: metric stays at or above 0.95 (range 0.95 to 1.0).
 
 Falsifier: mean gap at p=0.5 below 0.95, or a spread across the three seeds of 0.02 or more.
+
+## 2026-11-16T23:08:54Z asymmetry-seeds proposal:bf556750d3e2efd014bcee68ea75ef3708fc154a97582de93230cc0ff1b851e1
+
+Hypothesis: on the SIMULATED exploit/honest ladder (TEST split, group size 8, 20 groups per task, error rate 0.2, exploit probability 0.5, rung strict), exploit_share_fp_minus_fn is at least 0.15 in every one of seeds 7, 13 and 21, so the seed-7 value in results/236 is not a seed artefact.
+
+Metric: `/asymmetry_seeds/primary_min` in `results/328-asymmetry-seeds.json`.
+
+Expected: metric stays at or above 0.15 (range 0.15 to 0.25).
+
+Falsifier: the minimum over seeds 7, 13 and 21 of exploit_share_fp_minus_fn at the primary cell is below 0.15.
