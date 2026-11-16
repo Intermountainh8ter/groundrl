@@ -311,3 +311,13 @@ Metric: `/leakiness/spearman_vs_hack_rate` in `results/318-leakiness-prob01.json
 Expected: metric stays at or above 0.80 (range 0.80 to 1.0).
 
 Falsifier: the Spearman correlation across the 20 cells at mixing probability 0.1 is below 0.80.
+
+## 2026-11-16T22:37:20Z leakiness-val-prob09 proposal:0a7cf5a2a15d1da61c7daba8b8c8ebaa72e5ffc3200942a97076d28475a7032d
+
+Hypothesis: on the SIMULATED GRPO-group ladder (VAL split, group size 8, 20 groups per task, seed 7, exploit mixing probability 0.9), across the 20 (rung, hack class) cells the Spearman rank correlation between static audit acceptance share and simulated exploit share among rewarded rollouts is at least 0.80.
+
+Metric: `/leakiness/spearman_vs_hack_rate` in `results/321-leakiness-val-prob09.json`.
+
+Expected: metric stays at or above 0.80 (range 0.80 to 1.0).
+
+Falsifier: the Spearman correlation across the 20 cells on VAL at mixing probability 0.9 is below 0.80.
