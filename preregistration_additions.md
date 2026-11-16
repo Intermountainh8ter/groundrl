@@ -181,3 +181,13 @@ Metric: `/strictness/diversity_by_level/p_0.5/first_number_minus_strict` in `res
 Expected: metric increases to at least 0.5 (range 0.5 to 1.0).
 
 Falsifier: the 95% bootstrap interval of first_number_minus_strict at exploit mixing probability 0.5 includes zero or lies below zero, or the point estimate is below 0.5.
+
+## 2026-11-16T15:44:54Z static-leakiness-probe-resample proposal:10b52efe4fe786c9ad6fd44a76b6aaef7111eb3ddec21f53b9141814dc1d1098
+
+Hypothesis: on the TEST split with seed 7, the Spearman rank correlation (average ranks for ties) across the 20 (rung, mutation class) cells between the static probe-battery acceptance share and the fuzz exploit-candidate rate is at least 0.8, and the lower bound of its 95% joint probe-and-task bootstrap interval is above 0.5.
+
+Metric: `/rank_agreement/spearman_audit_vs_exploit_candidate_rate` in `results/265-static-leakiness-probe-resample.json`.
+
+Expected: metric is at least 0.80 (range 0.8 to 1.0).
+
+Falsifier: the Spearman correlation is below 0.80, or the lower bound of the joint probe-and-task 95% bootstrap interval is at or below 0.5, at the pre-registered 20-cell comparison.

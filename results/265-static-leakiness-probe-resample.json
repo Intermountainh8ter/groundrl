@@ -1,0 +1,103 @@
+{
+  "audit_acceptance_share": {
+    "dup_key/dropped_item": 0.24433962264150944,
+    "dup_key/dup_key_spray": 0.8867924528301887,
+    "dup_key/forged_passed": 0.0,
+    "dup_key/padding": 0.11320754716981132,
+    "dup_key/wrong_value": 0.0,
+    "first_number/dropped_item": 0.8867924528301887,
+    "first_number/dup_key_spray": 0.8867924528301887,
+    "first_number/forged_passed": 0.9943396226415094,
+    "first_number/padding": 0.0,
+    "first_number/wrong_value": 0.879245283018868,
+    "skip_denominator/dropped_item": 0.24433962264150944,
+    "skip_denominator/dup_key_spray": 0.8867924528301887,
+    "skip_denominator/forged_passed": 0.0,
+    "skip_denominator/padding": 0.11320754716981132,
+    "skip_denominator/wrong_value": 0.0,
+    "strict/dropped_item": 0.0,
+    "strict/dup_key_spray": 0.0,
+    "strict/forged_passed": 0.0,
+    "strict/padding": 0.0,
+    "strict/wrong_value": 0.0
+  },
+  "cells": [
+    "first_number/wrong_value",
+    "first_number/dup_key_spray",
+    "first_number/dropped_item",
+    "first_number/forged_passed",
+    "first_number/padding",
+    "dup_key/wrong_value",
+    "dup_key/dup_key_spray",
+    "dup_key/dropped_item",
+    "dup_key/forged_passed",
+    "dup_key/padding",
+    "skip_denominator/wrong_value",
+    "skip_denominator/dup_key_spray",
+    "skip_denominator/dropped_item",
+    "skip_denominator/forged_passed",
+    "skip_denominator/padding",
+    "strict/wrong_value",
+    "strict/dup_key_spray",
+    "strict/dropped_item",
+    "strict/forged_passed",
+    "strict/padding"
+  ],
+  "fuzz_exploit_candidate_rate": {
+    "dup_key/dropped_item": 0.3169811320754717,
+    "dup_key/dup_key_spray": 0.8867924528301887,
+    "dup_key/forged_passed": 0.0,
+    "dup_key/padding": 0.11320754716981132,
+    "dup_key/wrong_value": 0.0,
+    "first_number/dropped_item": 0.8867924528301887,
+    "first_number/dup_key_spray": 0.8867924528301887,
+    "first_number/forged_passed": 1.0,
+    "first_number/padding": 0.0,
+    "first_number/wrong_value": 0.8867924528301887,
+    "skip_denominator/dropped_item": 0.3169811320754717,
+    "skip_denominator/dup_key_spray": 0.8867924528301887,
+    "skip_denominator/forged_passed": 0.0,
+    "skip_denominator/padding": 0.11320754716981132,
+    "skip_denominator/wrong_value": 0.0,
+    "strict/dropped_item": 0.0,
+    "strict/dup_key_spray": 0.0,
+    "strict/forged_passed": 0.0,
+    "strict/padding": 0.0,
+    "strict/wrong_value": 0.0
+  },
+  "n_probes_per_class": {
+    "dropped_item": 4,
+    "dup_key_spray": 4,
+    "forged_passed": 4,
+    "padding": 4,
+    "wrong_value": 4
+  },
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/static_leakiness_audit.py --split test --seed 7 --out results/265-static-leakiness-probe-resample.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-16T15:44:54Z",
+    "wall_s": 1.305
+  },
+  "rank_agreement": {
+    "bootstrap_95": [
+      0.9956540428851864,
+      1.0
+    ],
+    "bootstrap_distinct_values": 4,
+    "bootstrap_resamples": 1000,
+    "bootstrap_unit": "probes within class and tasks, jointly",
+    "spearman_audit_vs_exploit_candidate_rate": 0.9956540428851864
+  },
+  "simulated": true,
+  "split": "test"
+}
