@@ -287,3 +287,11 @@ At verifier error rate 0.3 the primary-cell false-positive minus false-negative 
 ### Style-keyed verifier error (SIMULATED, iteration 333)
 
 Simulated, no model. When the verifier's false-positive acceptance depends on an output style feature and the policy raises that feature's rate from 0.2 to 0.8, the exploit share of reinforced rollouts exceeds that of independent error at 0.2 by at least 0.2254 in every seed (`results/333-style-seeds.json`, `/style_dependent_error/exploit_share_style_minus_independent_min`). At the base style rate the difference is at most 0.0029 in absolute value (`/style_dependent_error/base_rate_diff_max_abs`).
+
+### Task-persistent verifier error (SIMULATED, iteration 336)
+
+Simulated, no model. A seeded 20% of tasks accept every wrong output and the rest accept none (marginal rate 0.2), versus independent error at 0.2. This is the same construction as the clustered run of iteration 329, re-registered under a new hypothesis; the pre-registered threshold was a zero-variance group share difference of at least 0.20 in every seed. The minimum over seeds 7, 13 and 21 was 0.1885 (`results/336-persistent-seeds.json`, `/task_persistent/zero_variance_share_diff_min`), so the hypothesis is refuted. The exploit share difference stayed at most 0.0031 in absolute value (`/task_persistent/exploit_share_diff_max_abs`).
+
+```
+python3 scripts/verifier_error_persistent_seeds.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --prob 0.5 --seeds 7 13 21 --out results/336-persistent-seeds.json
+```

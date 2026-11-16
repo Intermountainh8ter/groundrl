@@ -381,3 +381,13 @@ Metric: `/style_dependent_error/exploit_share_style_minus_independent_min` in `r
 Expected: metric (minimum over seeds of raised-style minus independent exploit share) is at least 0.10 (range 0.10 to 0.40).
 
 Falsifier: the minimum over seeds 7, 13 and 21 of raised-style minus independent exploit share at the primary cell is below 0.10, or the base-rate difference is 0.02 or more.
+
+## 2026-11-16T23:52:06Z persistent-seeds proposal:ec4ed19eaef79f5565f81dd1dedfc683d534d0e8721f0d962a1f4c6cabab81ef
+
+Hypothesis: on the SIMULATED strict-rung ladder (TEST split, group size 8, 20 groups per task, exploit probability 0.5), a task-persistent false-positive model (a seeded 20% of tasks accept wrong outputs with probability 1.0, the rest 0.0; marginal 0.2) yields an exploit share of reinforced rollouts that differs from independent error at 0.2 by less than 0.02 in every one of seeds 7, 13 and 21, while the share of zero-variance (all-accepted or all-rejected) groups rises by at least 0.20 over independent error in every seed.
+
+Metric: `/task_persistent/zero_variance_share_diff_min` in `results/336-persistent-seeds.json`.
+
+Expected: metric (minimum over seeds of task-persistent minus independent zero-variance group share) is at least 0.20 (range 0.20 to 1.0).
+
+Falsifier: the minimum over seeds 7, 13 and 21 of the zero-variance group share difference is below 0.20, or the exploit share difference is 0.02 or more in any seed.
