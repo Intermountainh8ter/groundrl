@@ -283,3 +283,7 @@ The mean strict-reversal share is 0.07579640463071512. Per-hack values are in th
 ### Verifier error rate 0.3 (SIMULATED, iter 299)
 
 At verifier error rate 0.3 the primary-cell false-positive minus false-negative exploit share gap is 0.22872611002107404 (95% interval 0.22358930395423438 to 0.23343205130323225), above the error-rate-0.2 value of 0.1653428751179616. Source: `results/299-verifier-error-rate03.json`; reproduce with `python3 scripts/verifier_error_asymmetry.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.3 --seed 7 --out results/299-verifier-error-rate03.json`.
+
+### Style-keyed verifier error (SIMULATED, iteration 333)
+
+Simulated, no model. When the verifier's false-positive acceptance depends on an output style feature and the policy raises that feature's rate from 0.2 to 0.8, the exploit share of reinforced rollouts exceeds that of independent error at 0.2 by at least 0.2254 in every seed (`results/333-style-seeds.json`, `/style_dependent_error/exploit_share_style_minus_independent_min`). At the base style rate the difference is at most 0.0029 in absolute value (`/style_dependent_error/base_rate_diff_max_abs`).

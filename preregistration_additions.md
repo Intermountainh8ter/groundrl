@@ -371,3 +371,13 @@ Metric: `/clustering_fn_seeds/zero_variance_diff_min` in `results/331-clustering
 Expected: metric (minimum over seeds of clustered minus independent zero-variance group share) is at least 0.10 (range 0.10 to 0.30).
 
 Falsifier: the minimum over seeds 7, 13 and 21 of clustered minus independent zero-variance group share at the primary cell is below 0.10.
+
+## 2026-11-16T23:33:14Z style-seeds proposal:ebe0c2ab73457eb3e80eaedef23cc16004f878bbdb6eddb422660c38d604a960
+
+Hypothesis: on the SIMULATED strict-rung ladder (TEST split, group size 8, 20 groups per task, exploit probability 0.5), once the policy raises the style-feature rate among exploit rollouts from 0.2 to 0.8, the exploit share of reinforced rollouts under style-keyed false-positive error (accept 0.8 if styled, 0.05 if not) exceeds that under independent false-positive error at 0.2 by at least 0.10 in every one of seeds 7, 13 and 21, whereas at the base style rate 0.2 the two differ by less than 0.02.
+
+Metric: `/style_dependent_error/exploit_share_style_minus_independent_min` in `results/333-style-seeds.json`.
+
+Expected: metric (minimum over seeds of raised-style minus independent exploit share) is at least 0.10 (range 0.10 to 0.40).
+
+Falsifier: the minimum over seeds 7, 13 and 21 of raised-style minus independent exploit share at the primary cell is below 0.10, or the base-rate difference is 0.02 or more.

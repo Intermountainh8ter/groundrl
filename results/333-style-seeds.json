@@ -1,0 +1,116 @@
+{
+  "per_seed": {
+    "13": {
+      "arms": {
+        "independent": {
+          "exploit_share": 0.16505199889279923,
+          "reinforced_rollouts": 25289
+        },
+        "style_base": {
+          "exploit_share": 0.16700852003786684,
+          "reinforced_rollouts": 25352
+        },
+        "style_raised": {
+          "exploit_share": 0.39052916844957924,
+          "reinforced_rollouts": 35055
+        }
+      },
+      "base_diff": 0.0019565211450676134,
+      "base_style": 0.2,
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "n_tasks": 265,
+      "raised_diff": 0.22547716955678002,
+      "raised_style": 0.8,
+      "version": "strict"
+    },
+    "21": {
+      "arms": {
+        "independent": {
+          "exploit_share": 0.1646188761934575,
+          "reinforced_rollouts": 25556
+        },
+        "style_base": {
+          "exploit_share": 0.1675456549118388,
+          "reinforced_rollouts": 25408
+        },
+        "style_raised": {
+          "exploit_share": 0.3906897044123947,
+          "reinforced_rollouts": 35015
+        }
+      },
+      "base_diff": 0.00292677871838129,
+      "base_style": 0.2,
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "n_tasks": 265,
+      "raised_diff": 0.2260708282189372,
+      "raised_style": 0.8,
+      "version": "strict"
+    },
+    "7": {
+      "arms": {
+        "independent": {
+          "exploit_share": 0.1657937226794786,
+          "reinforced_rollouts": 25393
+        },
+        "style_base": {
+          "exploit_share": 0.1678909952606635,
+          "reinforced_rollouts": 25320
+        },
+        "style_raised": {
+          "exploit_share": 0.39536408735815703,
+          "reinforced_rollouts": 35074
+        }
+      },
+      "base_diff": 0.002097272581184917,
+      "base_style": 0.2,
+      "error_rate": 0.2,
+      "exploit_prob": 0.5,
+      "group_size": 8,
+      "groups_per_task": 20,
+      "n_tasks": 265,
+      "raised_diff": 0.22957036467867845,
+      "raised_style": 0.8,
+      "version": "strict"
+    }
+  },
+  "provenance": {
+    "command": "python3 scripts/verifier_error_style_seeds.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --seeds 7 13 21 --out results/333-style-seeds.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7,
+      13,
+      21
+    ],
+    "started_at": "2026-11-16T23:33:19Z",
+    "wall_s": 0.226
+  },
+  "simulated": true,
+  "split": "test",
+  "style_dependent_error": {
+    "base_rate_diff_max_abs": 0.00292677871838129,
+    "base_rate_diff_per_seed": {
+      "13": 0.0019565211450676134,
+      "21": 0.00292677871838129,
+      "7": 0.002097272581184917
+    },
+    "exploit_share_style_minus_independent_mean": 0.22703945415146523,
+    "exploit_share_style_minus_independent_min": 0.22547716955678002,
+    "exploit_share_style_minus_independent_per_seed": {
+      "13": 0.22547716955678002,
+      "21": 0.2260708282189372,
+      "7": 0.22957036467867845
+    }
+  }
+}
