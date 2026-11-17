@@ -295,3 +295,15 @@ Simulated, no model. A seeded 20% of tasks accept every wrong output and the res
 ```
 python3 scripts/verifier_error_persistent_seeds.py --split test --group-size 8 --groups-per-task 20 --error-rate 0.2 --prob 0.5 --seeds 7 13 21 --out results/336-persistent-seeds.json
 ```
+
+### Isomorphic-perturbation rung (SIMULATED, no model)
+
+A scripted memorizer that replays the original-order gold items is accepted by the strict rung on
+1.0 of the 265 TEST tasks, but by the strict-plus-reversed-order rung on 0.683 (survivors: 0.570
+single-item tasks, 0.113 unanswerable tasks, 0.0 multi-item palindromes); the honest policy is
+accepted on 1.0 under both. Pre-registered range 0.55 to 0.75, so the prediction held. This
+probes one perturbation (item order) only.
+
+```
+python3 scripts/isomorphic_rung.py --split test --seed 7 --out results/360-isomorphic-rung.json
+```

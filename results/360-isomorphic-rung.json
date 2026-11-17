@@ -1,0 +1,37 @@
+{
+  "honest_accept_rate": {
+    "strict": 1.0,
+    "strict_iso": 1.0
+  },
+  "memorizer_accept_rate": {
+    "strict": 1.0,
+    "strict_iso": 0.6830188679245283
+  },
+  "memorizer_survivors_by_kind": {
+    "palindromic_multi": 0.0,
+    "single_item": 0.569811320754717,
+    "unanswerable": 0.11320754716981132
+  },
+  "n_tasks": 265,
+  "provenance": {
+    "command": "python3 scripts/isomorphic_rung.py --split test --seed 7 --out results/360-isomorphic-rung.json",
+    "data_sources": [
+      {
+        "license": "CC0-1.0",
+        "url": "https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/"
+      }
+    ],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-17T02:32:29Z",
+    "wall_s": 0.09
+  },
+  "rungs": [
+    "strict",
+    "strict_iso"
+  ],
+  "simulated": true,
+  "split": "test"
+}

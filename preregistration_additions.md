@@ -391,3 +391,13 @@ Metric: `/task_persistent/zero_variance_share_diff_min` in `results/336-persiste
 Expected: metric (minimum over seeds of task-persistent minus independent zero-variance group share) is at least 0.20 (range 0.20 to 1.0).
 
 Falsifier: the minimum over seeds 7, 13 and 21 of the zero-variance group share difference is below 0.20, or the exploit share difference is 0.02 or more in any seed.
+
+## 2026-11-17T02:32:29Z isomorphic-rung proposal:134a48170a82c6faf3b82461474dd1d94822a95c617be6c1be754382f7d12f19
+
+Hypothesis: on the TEST split (265 tasks), a scripted memorizer that replays the original-order gold items is accepted by the strict rung on 100% of tasks, but by the strict plus reversed-order isomorphic rung (strict grading also applied to the task re-posed with its gold items in reversed order) on between 55% and 75% of tasks (it survives only single-item, unanswerable and palindromic tasks), while the honest policy that answers the perturbed task is accepted on 100% under both rungs. SIMULATED: scripted policies, no model.
+
+Metric: `/memorizer_accept_rate/strict_iso` in `results/360-isomorphic-rung.json`.
+
+Expected: metric decreases from 1.0 under strict to between 0.55 and 0.75 under strict_iso.
+
+Falsifier: memorizer acceptance under strict_iso is below 0.55 or above 0.75, or honest acceptance under strict_iso is below 1.0, or memorizer acceptance under strict is not 1.0.
