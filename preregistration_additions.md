@@ -431,3 +431,13 @@ Metric: `/arms/isomorphic/final_exploit_prob` in `results/399-simulated-grpo-iso
 Expected: metric decreases to below 0.05 (range 0.0 to 0.05), versus at least 0.50 for the extensional arm.
 
 Falsifier: isomorphic-arm mean final exploit probability is 0.05 or above, or the extensional arm is below 0.50.
+
+## 2026-11-18T04:13:52Z isomorphic-noisy-grader proposal:101b4521135ca0cdf877f9d1da9cef67f47cc37d33a599c797c6dedcd94ba29d
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, honest accept 0.3, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7), with each grader decision flipped with probability 0.2 (effective accept a*0.6+0.2), the isomorphic arm (base exploit accept 0.18) ends with mean final exploit probability below 0.05 while the extensional arm (base exploit accept 0.6) ends at or above 0.50; at noise 0.5 (no signal) the isomorphic arm's final exploit probability is at least 0.02 and at noise 0.2 it is lower than at noise 0.5.
+
+Metric: `/arms/isomorphic_noisy/noise_0p2/final_exploit_prob` in `results/400-isomorphic-noisy-grader.json`.
+
+Expected: metric stays below 0.05 (range 0.0 to 0.05) at noise 0.2.
+
+Falsifier: isomorphic-arm final exploit probability at noise 0.2 is 0.05 or above, or the extensional arm at noise 0.2 is below 0.50, or the isomorphic arm at noise 0.2 is not lower than at noise 0.5.

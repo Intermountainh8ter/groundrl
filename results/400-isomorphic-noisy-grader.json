@@ -1,0 +1,96 @@
+{
+  "arms": {
+    "extensional_noisy": {
+      "noise_0": {
+        "effective_exploit_accept": 0.6,
+        "effective_honest_accept": 0.3,
+        "final_exploit_prob": 0.9592616434669888,
+        "noise": 0.0
+      },
+      "noise_0p1": {
+        "effective_exploit_accept": 0.58,
+        "effective_honest_accept": 0.33999999999999997,
+        "final_exploit_prob": 0.9002528666284831,
+        "noise": 0.1
+      },
+      "noise_0p2": {
+        "effective_exploit_accept": 0.56,
+        "effective_honest_accept": 0.38,
+        "final_exploit_prob": 0.7578501089000457,
+        "noise": 0.2
+      },
+      "noise_0p3": {
+        "effective_exploit_accept": 0.54,
+        "effective_honest_accept": 0.42,
+        "final_exploit_prob": 0.367717007024104,
+        "noise": 0.3
+      },
+      "noise_0p5": {
+        "effective_exploit_accept": 0.5,
+        "effective_honest_accept": 0.5,
+        "final_exploit_prob": 0.055044878217242486,
+        "noise": 0.5
+      }
+    },
+    "isomorphic_noisy": {
+      "noise_0": {
+        "effective_exploit_accept": 0.18,
+        "effective_honest_accept": 0.3,
+        "final_exploit_prob": 0.02538720074489157,
+        "noise": 0.0
+      },
+      "noise_0p1": {
+        "effective_exploit_accept": 0.244,
+        "effective_honest_accept": 0.33999999999999997,
+        "final_exploit_prob": 0.0272070635344171,
+        "noise": 0.1
+      },
+      "noise_0p2": {
+        "effective_exploit_accept": 0.308,
+        "effective_honest_accept": 0.38,
+        "final_exploit_prob": 0.03183384120086324,
+        "noise": 0.2
+      },
+      "noise_0p3": {
+        "effective_exploit_accept": 0.372,
+        "effective_honest_accept": 0.42,
+        "final_exploit_prob": 0.03820121041823883,
+        "noise": 0.3
+      },
+      "noise_0p5": {
+        "effective_exploit_accept": 0.5,
+        "effective_honest_accept": 0.5,
+        "final_exploit_prob": 0.06519459037805846,
+        "noise": 0.5
+      }
+    }
+  },
+  "config": {
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.3,
+    "lr": 0.5,
+    "memoriser_survival_assumed": 0.3,
+    "noises": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_isomorphic_noisy.py --seed 7 --out results/400-isomorphic-noisy-grader.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T04:13:57Z",
+    "wall_s": 1.57
+  },
+  "simulated": true
+}
