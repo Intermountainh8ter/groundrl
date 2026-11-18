@@ -1,0 +1,46 @@
+{
+  "config": {
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accepts": [
+      0.3,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ],
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "crossover": {
+    "min_honest_accept_exploit_lt_0p5": 0.5,
+    "threshold": 0.5
+  },
+  "non_increasing_in_honest_accept": true,
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_honest_accept_sweep.py --seed 7 --out results/405-honest-accept-sweep.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T04:34:04Z",
+    "wall_s": 1.256
+  },
+  "simulated": true,
+  "sweep": {
+    "exploit_prob_final_h0p30": 0.9582186682377284,
+    "exploit_prob_final_h0p40": 0.7993204613026481,
+    "exploit_prob_final_h0p45": 0.548389805084707,
+    "exploit_prob_final_h0p50": 0.2825874205967372,
+    "exploit_prob_final_h0p55": 0.11878603473675094,
+    "exploit_prob_final_h0p60": 0.057416001074074796,
+    "exploit_prob_final_h0p65": 0.03688789885082611,
+    "exploit_prob_final_h0p70": 0.027725740734116284
+  }
+}

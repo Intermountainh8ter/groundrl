@@ -441,3 +441,13 @@ Metric: `/arms/isomorphic_noisy/noise_0p2/final_exploit_prob` in `results/400-is
 Expected: metric stays below 0.05 (range 0.0 to 0.05) at noise 0.2.
 
 Falsifier: isomorphic-arm final exploit probability at noise 0.2 is 0.05 or above, or the extensional arm at noise 0.2 is below 0.50, or the isomorphic arm at noise 0.2 is not lower than at noise 0.5.
+
+## 2026-11-18T04:33:11Z honest-accept-sweep proposal:133825dc2eeb08d7cf7b5432df3b3fa21871d831d420d112714a3602d8d72791
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, exploit false-accept 0.6, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7, no audit), sweeping the honest accept rate over {0.30, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70}, the smallest honest accept rate at which mean final exploit probability falls below 0.50 lies between 0.45 and 0.65, near the exploit accept rate, and final exploit probability is non-increasing in the honest accept rate.
+
+Metric: `/crossover/min_honest_accept_exploit_lt_0p5` in `results/405-honest-accept-sweep.json`.
+
+Expected: metric lies between 0.45 and 0.65.
+
+Falsifier: the smallest grid honest accept rate with mean final exploit probability below 0.50 is under 0.45 or above 0.65, none reaches it, or final exploit probability is not non-increasing in the honest accept rate.

@@ -318,3 +318,13 @@ Mean final exploit probability by audit budget (0, 0.25, 0.5, 0.75, 1.0):
 (`/sweep/*` in `results/394-simulated-grpo-audit-budget.json`). The pre-registered hypotheses held
 (0.606 at budget 0.25 against a floor of 0.50; 0.0131 at budget 1.0 against a ceiling of 0.05; non-increasing in budget).
 This is a toy policy, not a trained model.
+
+### Honest-accept sweep (simulated)
+
+Simulated, model-free: with the exploit accept rate held at 0.6 and no audit, the smallest honest
+accept rate on the grid at which mean final exploit probability falls below 0.50 is 0.5
+(`results/405-honest-accept-sweep.json`, `/crossover/min_honest_accept_exploit_lt_0p5`).
+
+```
+PYTHONPATH=src python3 scripts/simulated_grpo_honest_accept_sweep.py --seed 7 --out results/405-honest-accept-sweep.json
+```
