@@ -1,0 +1,44 @@
+{
+  "config": {
+    "budgets": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.3,
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "effective_exploit_accept": {
+    "b0": 0.6,
+    "b0p25": 0.44999999999999996,
+    "b0p5": 0.3,
+    "b0p75": 0.15,
+    "b1": 0.0
+  },
+  "non_increasing_in_budget": true,
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_audit_budget.py --seed 7 --out results/394-simulated-grpo-audit-budget.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T03:44:01Z",
+    "wall_s": 0.816
+  },
+  "simulated": true,
+  "sweep": {
+    "exploit_prob_final_b0": 0.9550436756075975,
+    "exploit_prob_final_b0p25": 0.6060547819422393,
+    "exploit_prob_final_b0p5": 0.05528605041733161,
+    "exploit_prob_final_b0p75": 0.021418188394233637,
+    "exploit_prob_final_b1": 0.013117308786234213
+  }
+}

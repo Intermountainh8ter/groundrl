@@ -401,3 +401,13 @@ Metric: `/memorizer_accept_rate/strict_iso` in `results/360-isomorphic-rung.json
 Expected: metric decreases from 1.0 under strict to between 0.55 and 0.75 under strict_iso.
 
 Falsifier: memorizer acceptance under strict_iso is below 0.55 or above 0.75, or honest acceptance under strict_iso is below 1.0, or memorizer acceptance under strict is not 1.0.
+
+## 2026-11-18T03:43:30Z simulated-grpo-audit-budget proposal:501f7844a933ae9bfa1a3b14fb9be5b762209270fc314ecdc21fc51829c9f14d
+
+Hypothesis: in a SIMULATED two-action softmax GRPO loop per task (honest versus exploit; group size 8; honest accept probability 0.3, exploit false-accept probability 0.6; group-normalised advantages; learning rate 0.5; 200 steps; 200 tasks; seed 7), with a strong verifier that rejects every exploit rollout it checks, auditing 25% of exploit-accepted rollouts leaves the effective exploit accept rate at 0.45, above the honest 0.3, so the mean final exploit probability stays at least 0.50 (from an initial 0.05), whereas auditing 100% drives it below 0.05; final exploit probability is non-increasing in audit budget across {0, 0.25, 0.5, 0.75, 1.0}.
+
+Metric: `/sweep/exploit_prob_final_b0p25` in `results/394-simulated-grpo-audit-budget.json`.
+
+Expected: metric is at least 0.50 (range 0.5 to 1.0).
+
+Falsifier: mean final exploit probability at audit budget 0.25 is below 0.50, or at budget 1.0 is 0.05 or above, or the sweep is not non-increasing in budget.

@@ -307,3 +307,14 @@ probes one perturbation (item order) only.
 ```
 python3 scripts/isomorphic_rung.py --split test --seed 7 --out results/360-isomorphic-rung.json
 ```
+
+### Simulated GRPO audit-budget sweep (SIMULATED, no model)
+
+`python3 scripts/simulated_grpo_audit_budget.py --seed 7 --out results/394-simulated-grpo-audit-budget.json`
+runs a two-action softmax GRPO loop per task where the cheap check accepts exploit rollouts more
+often than honest ones, and a strong verifier re-checks a fraction of exploit-accepted rollouts.
+Mean final exploit probability by audit budget (0, 0.25, 0.5, 0.75, 1.0):
+0.955, 0.606, 0.0553, 0.0214, 0.0131
+(`/sweep/*` in `results/394-simulated-grpo-audit-budget.json`). The pre-registered hypotheses held
+(0.606 at budget 0.25 against a floor of 0.50; 0.0131 at budget 1.0 against a ceiling of 0.05; non-increasing in budget).
+This is a toy policy, not a trained model.
