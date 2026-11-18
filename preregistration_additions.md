@@ -451,3 +451,13 @@ Metric: `/crossover/min_honest_accept_exploit_lt_0p5` in `results/405-honest-acc
 Expected: metric lies between 0.45 and 0.65.
 
 Falsifier: the smallest grid honest accept rate with mean final exploit probability below 0.50 is under 0.45 or above 0.65, none reaches it, or final exploit probability is not non-increasing in the honest accept rate.
+
+## 2026-11-18T04:42:36Z exploit-accept-crossover proposal:5e0bdab450eed4896b2768ac637ea0a1d73cbad3714ca83d43fb19a59713f850
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7, no audit), the smallest honest accept rate (grid 0.30 to 0.90) with mean final exploit probability below 0.5 is non-decreasing in the exploit accept rate (0.4, 0.6, 0.8), and at exploit accept 0.8 it lies between 0.60 and 0.90.
+
+Metric: `/crossover_by_exploit_accept/e0p80` in `results/406-exploit-accept-crossover.json`.
+
+Expected: metric increases relative to the exploit accept 0.6 crossover and lies between 0.60 and 0.90.
+
+Falsifier: the crossover at exploit accept 0.8 is below 0.60, above 0.90 or absent, or the three crossovers are not non-decreasing in the exploit accept rate.
