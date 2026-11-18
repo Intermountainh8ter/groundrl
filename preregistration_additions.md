@@ -461,3 +461,13 @@ Metric: `/crossover_by_exploit_accept/e0p80` in `results/406-exploit-accept-cros
 Expected: metric increases relative to the exploit accept 0.6 crossover and lies between 0.60 and 0.90.
 
 Falsifier: the crossover at exploit accept 0.8 is below 0.60, above 0.90 or absent, or the three crossovers are not non-decreasing in the exploit accept rate.
+
+## 2026-11-18T04:52:28Z crossover-seed-spread proposal:d0cb1fd889f6aaa465c31674d4c7f33e2336ab0ada20ef0683463424c439352f
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05, exploit accept 0.6, no audit), over seeds 7, 11, 13, 17 and 19 and honest accept grid 0.500 to 0.700 step 0.025, the smallest honest accept rate with mean final exploit probability below 0.5 differs by at most 0.05 between the largest and smallest seed (max minus min).
+
+Metric: `/crossover_seed_spread/e0p60/max_minus_min` in `results/408-crossover-seed-spread.json`.
+
+Expected: metric is at most 0.05 (range 0.0 to 0.05), with every per-seed crossover between 0.55 and 0.65.
+
+Falsifier: max minus min of the per-seed crossovers exceeds 0.05, or any seed has no crossover on the grid.
