@@ -1,0 +1,68 @@
+{
+  "config": {
+    "exploit_accepts": [
+      0.0,
+      0.1,
+      0.2
+    ],
+    "group": 8,
+    "honest_accepts": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "crossover_by_exploit_accept": {
+    "e0p00": 0.5,
+    "e0p10": 0.5,
+    "e0p20": 0.5
+  },
+  "crossover_non_decreasing_in_exploit_accept": true,
+  "e0p20_h0p50_at_least_p0": false,
+  "exploit_prob_final": {
+    "e0p00": {
+      "h0p50": 0.009186373169444826,
+      "h0p60": 0.007716096073235583,
+      "h0p70": 0.006583797590232959,
+      "h0p80": 0.005403217043828821,
+      "h0p90": 0.004499913161500214,
+      "h1p00": 0.0036354528247968874
+    },
+    "e0p10": {
+      "h0p50": 0.010866491774417451,
+      "h0p60": 0.009163363429414057,
+      "h0p70": 0.007510215898859851,
+      "h0p80": 0.006033716500348934,
+      "h0p90": 0.005157395005482559,
+      "h1p00": 0.00404430397598212
+    },
+    "e0p20": {
+      "h0p50": 0.013904153301123587,
+      "h0p60": 0.011151045308611876,
+      "h0p70": 0.008742839811246895,
+      "h0p80": 0.007272963710138896,
+      "h0p90": 0.005784805050483069,
+      "h1p00": 0.004503544814464424
+    }
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_strict_arm.py --seed 7 --out results/411-strict-arm.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T05:11:21Z",
+    "wall_s": 2.704
+  },
+  "simulated": true,
+  "strict_stays_below_p0": true,
+  "threshold": 0.5
+}
