@@ -421,3 +421,13 @@ Metric: `/critical/min_budget_below_0p25` in `results/397-audit-budget-critical.
 Expected: metric lies between 0.40 and 0.55.
 
 Falsifier: the smallest grid budget with mean final exploit probability below 0.25 is under 0.40 or above 0.55, or no grid budget reaches below 0.25.
+
+## 2026-11-18T04:08:42Z simulated-grpo-isomorphic-arm proposal:ee1692731c15cf9eb908c97228af970a25e218cdbd25f933c6a3b5bf621f8425
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, honest accept 0.3, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7), the extensional arm (exploit false-accept 0.6) ends with mean final exploit probability of at least 0.50, while the isomorphic arm (exploit accept 0.6 times an assumed memoriser survival rate of 0.3, i.e. 0.18, below the honest 0.3; honest accept unchanged) ends below 0.05.
+
+Metric: `/arms/isomorphic/final_exploit_prob` in `results/399-simulated-grpo-isomorphic-arm.json`.
+
+Expected: metric decreases to below 0.05 (range 0.0 to 0.05), versus at least 0.50 for the extensional arm.
+
+Falsifier: isomorphic-arm mean final exploit probability is 0.05 or above, or the extensional arm is below 0.50.

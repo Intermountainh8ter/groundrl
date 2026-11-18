@@ -1,0 +1,33 @@
+{
+  "arms": {
+    "extensional": {
+      "exploit_accept": 0.6,
+      "final_exploit_prob": 0.9556020531735051
+    },
+    "isomorphic": {
+      "exploit_accept": 0.18,
+      "final_exploit_prob": 0.02432446700105395
+    }
+  },
+  "config": {
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.3,
+    "lr": 0.5,
+    "memoriser_survival_assumed": 0.3,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_isomorphic_arm.py --seed 7 --out results/399-simulated-grpo-isomorphic-arm.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T04:08:47Z",
+    "wall_s": 0.309
+  },
+  "simulated": true
+}
