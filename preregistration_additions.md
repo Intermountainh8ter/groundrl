@@ -501,3 +501,13 @@ Metric: `/exploit_prob_final/e0p00/h0p90` in `results/411-strict-arm.json`.
 Expected: metric decreases below 0.05 (range 0.0 to 0.05).
 
 Falsifier: mean final exploit probability at exploit accept 0.0 is at or above 0.05 at any honest accept rate on the grid, or at exploit accept 0.2 and honest accept 0.5 it is below 0.05.
+
+## 2026-11-18T05:16:59Z crossover-low-grid proposal:080894fd29cc8ffff4a0be2bf741aa4ebd7d2ebfcc6dc56ceb8261435194bb46
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05, no audit) at exploit accept 0.6, over seeds 7, 11, 13, 17 and 19 and honest accept grid 0.10 to 0.50 step 0.05, every seed has a crossover (smallest honest accept with mean final exploit probability below 0.5) on the grid, and the largest per-seed crossover is at most 0.40.
+
+Metric: `/crossover_seed_spread/e0p60/max` in `results/412-crossover-low-grid.json`.
+
+Expected: metric decreases to at most 0.40 (range 0.10 to 0.40).
+
+Falsifier: any seed has no crossover on the grid 0.10 to 0.50, or the largest per-seed crossover exceeds 0.40.
