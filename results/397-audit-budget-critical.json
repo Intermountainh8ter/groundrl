@@ -1,0 +1,47 @@
+{
+  "config": {
+    "budgets": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.7
+    ],
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.3,
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200,
+    "threshold": 0.25
+  },
+  "critical": {
+    "break_even_budget": 0.5,
+    "min_budget_below_0p25": 0.35
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_audit_critical.py --seed 7 --out results/397-audit-budget-critical.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-18T03:56:04Z",
+    "wall_s": 1.398
+  },
+  "simulated": true,
+  "sweep": {
+    "exploit_prob_final_b0p3": 0.41471973101765464,
+    "exploit_prob_final_b0p35": 0.24076033949239994,
+    "exploit_prob_final_b0p4": 0.1398328309062743,
+    "exploit_prob_final_b0p45": 0.09283289285210918,
+    "exploit_prob_final_b0p5": 0.05528605041733161,
+    "exploit_prob_final_b0p55": 0.04266235242524065,
+    "exploit_prob_final_b0p6": 0.032621117492835944,
+    "exploit_prob_final_b0p7": 0.024531527601327593
+  }
+}

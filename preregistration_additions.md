@@ -411,3 +411,13 @@ Metric: `/sweep/exploit_prob_final_b0p25` in `results/394-simulated-grpo-audit-b
 Expected: metric is at least 0.50 (range 0.5 to 1.0).
 
 Falsifier: mean final exploit probability at audit budget 0.25 is below 0.50, or at budget 1.0 is 0.05 or above, or the sweep is not non-increasing in budget.
+
+## 2026-11-18T03:55:49Z audit-budget-critical proposal:b9f35d6f2ad118910c3a22fd8aacc41d26b941e4884cb5fc0fbd5f379d8b7a9d
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, honest accept 0.3, exploit false-accept 0.6, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7) with a strong verifier that rejects every audited exploit-accepted rollout, the smallest audit budget on the grid {0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.70} at which mean final exploit probability falls below 0.25 lies between 0.40 and 0.55, near the break-even budget 0.5.
+
+Metric: `/critical/min_budget_below_0p25` in `results/397-audit-budget-critical.json`.
+
+Expected: metric lies between 0.40 and 0.55.
+
+Falsifier: the smallest grid budget with mean final exploit probability below 0.25 is under 0.40 or above 0.55, or no grid budget reaches below 0.25.
