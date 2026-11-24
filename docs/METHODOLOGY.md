@@ -207,7 +207,9 @@ Stages, in order (`docs/RUNBOOK.md` has the commands):
 
 ### 6a. GRPO run — null result (2026-10-14)
 
-With the pre-registered settings in `train/configs/qwen3-0.6b-24gb.json` (reward v2,
+With the pre-registered settings in `train/configs/qwen3-0.6b-24gb.json`, run as its float16
+variant `train/configs/qwen3-0.6b-gfx906.json` (the two differ only in dtype; see hypothesis 4
+below) (reward v2,
 LoRA on the merged SFT model, group size 8, KL beta 0.02, lr 2e-5, 300 optimizer
 steps on gfx906 under torch 2.4.1+rocm6.0, TRL 0.17.0, warmup_steps=15, scale_rewards=true,
 loss_type=bnpo), the run was degenerate at every log point:
@@ -247,6 +249,15 @@ a hypothesis-driven change (listed below as the next-step options), which is a
 3. **EOS token drift.** The TRL logs show the tokenizer EOS/BOS/PAD were patched
    mid-run ("new PAD/BOS/EOS tokens that differ from the model config"). Pin
    `tokenizer.pad_token_id` and `generation_config.eos_token_id` before training.
+4. **float16 instead of the pre-registered bfloat16.** The run used the gfx906 config recorded
+   in `summary_grpo.json`, not the 24gb file the pre-registration names. The files differ only
+   in dtype (`dtype: float16`, `fp16: true`, `bf16: false`), because the card has no bfloat16
+   hardware (`docs/ROCM_GFX906.md`). That is a deviation from the pre-registered config and it
+   was not itself pre-registered. The SFT stage and its evaluation ran under the same float16
+   config (`eval_sft.json` records `qwen3-0.6b-gfx906`) and produced correct completions, which
+   argues against dtype being the whole cause. But the GRPO path (TRL generation on the merged
+   model) was never run in bfloat16, so dtype is untested as a contributor. Check by running
+   the same prompts through the merged model in both dtypes before any training run.
 
 Only after one of these is confirmed as the cause does another GRPO run belong
 in this repo. That next run will have its own pre-registered config and its own

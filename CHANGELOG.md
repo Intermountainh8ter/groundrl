@@ -6,6 +6,12 @@ All notable changes. Dates are ISO. Version 0.1.0 is the first and only release 
 
 ### Changed
 
+* Docs now say which config the GRPO run used and where it deviated from the pre-registration:
+  `results/groundrl-grpo/DIAGNOSTIC.md` named the 24gb config, but `summary_grpo.json` records
+  `qwen3-0.6b-gfx906`, which differs only in dtype (float16 instead of bfloat16). The dtype is now
+  listed as a fourth, untested hypothesis for the degenerate run (`docs/METHODOLOGY.md` §6a).
+* `docs/ROCM_GFX906.md` said the gfx906 stack pins `trl==1.15.0`; the requirements file and both
+  real runs use `trl==0.17.0`, which is below the `trl>=1.15` floor in `pyproject.toml`. Corrected.
 * Launch copy (`docs/launch/`) rewritten around the real results: one SFT run (Qwen3-0.6B, LoRA,
   AMD gfx906) and one degenerate GRPO run reported as a null result, with the limits stated next
   to the numbers. The launch-copy tests now derive the quoted numbers from `results/`.
