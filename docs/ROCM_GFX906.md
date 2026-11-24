@@ -63,8 +63,13 @@ return correct results on both cards.
 
 That pin forces the rest of the stack down with it, because current
 `transformers` wants `torch>=2.5`. The combination that works is pinned in
-`train/requirements-rocm-gfx906.txt`: `transformers==4.56.2` and `trl==1.15.0`,
-which are this repo's declared floors.
+`train/requirements-rocm-gfx906.txt`: `transformers==4.56.2` (this repo's declared floor)
+and `trl==0.17.0`. The TRL pin is **below** the floor declared in `pyproject.toml`
+(`trl>=1.15`): per the comment in that requirements file, TRL 1.14 and later need
+`torch>=2.5`, and 0.17 is the last release that works with the 2.4.1 wheel. The real runs
+used it (`environment` in `summary_sft.json` and `summary_grpo.json`). Installing the package
+afterwards with dependency resolution may pull TRL back up to the floor (not tested here); if it
+does, reinstall the requirements file, or install the package with `pip install --no-deps -e .`.
 
 **Do not** set `HSA_OVERRIDE_GFX_VERSION` to make the card claim to be a gfx908
 or gfx90a. It will stop the error and let kernels compiled for a different
