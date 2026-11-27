@@ -1,0 +1,40 @@
+{
+  "arms": {
+    "miss_const_0p25": {
+      "exploit_prob_final": 0.1811706500266869,
+      "miss_kind": "const",
+      "miss_value": 0.25
+    },
+    "miss_none": {
+      "exploit_prob_final": 0.05572742541194873,
+      "miss_kind": "const",
+      "miss_value": 0.0
+    },
+    "miss_prop_p": {
+      "exploit_prob_final": 0.09434339113147716,
+      "miss_kind": "prop",
+      "miss_value": 1.0
+    }
+  },
+  "config": {
+    "budget": 0.5,
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.3,
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_correlated_audit.py --seed 7 --out results/696-correlated-audit.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T19:49:33Z",
+    "wall_s": 0.502
+  },
+  "simulated": true
+}

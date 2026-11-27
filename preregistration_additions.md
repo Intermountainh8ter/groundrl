@@ -551,3 +551,13 @@ Metric: `/final_exploit_prob/steps_800` in `results/687-steps-horizon.json`.
 Expected: metric increases to at least 0.90 at 800 steps (range 0.90 to 1.0) while 50 steps stays below 0.05.
 
 Falsifier: mean final exploit probability at 800 steps is below 0.90, or at 50 steps it is 0.05 or higher.
+
+## 2026-11-27T19:49:33Z correlated-audit proposal:491fdae474c5d569d4b40ef15fb7a649120cf745d1191f76cd5634a32e5accde
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05, exploit accept 0.6, honest accept 0.3, seed 7, no KL), an audit of 50 percent of exploit-accepted rollouts whose strong verifier misses each audited exploit with probability equal to the current exploit probability p leaves mean final exploit probability at least 0.90, whereas a strong verifier with no misses stays below 0.10 and a constant miss rate of 0.25 stays below 0.5.
+
+Metric: `/arms/miss_prop_p/exploit_prob_final` in `results/696-correlated-audit.json`.
+
+Expected: metric increases to at least 0.90 (range 0.9 to 1.0); no-miss arm below 0.10, constant-miss 0.25 arm below 0.5.
+
+Falsifier: mean final exploit probability in the p-proportional-miss arm is below 0.90, or the no-miss arm is 0.10 or higher, or the constant-miss 0.25 arm is 0.5 or higher.

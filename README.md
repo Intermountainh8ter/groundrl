@@ -328,3 +328,16 @@ accept rate on the grid at which mean final exploit probability falls below 0.50
 ```
 PYTHONPATH=src python3 scripts/simulated_grpo_honest_accept_sweep.py --seed 7 --out results/405-honest-accept-sweep.json
 ```
+
+### Correlated strong-verifier misses (SIMULATED, iteration 696)
+
+Same two-action loop as the audit-budget sweep (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05,
+exploit accept 0.6, honest accept 0.3, audit budget 0.5, seed 7). Arms differ in the chance that
+the strong verifier misses an audited exploit. Mean final exploit probability: no misses 0.0557,
+constant miss 0.25 gives 0.181, miss equal to the current exploit probability gives 0.0943
+(`results/696-correlated-audit.json`). The pre-registered prediction of at least 0.90 for the
+last arm was **refuted**; at this budget a miss rate that tracks p did not restore the exploit.
+
+```
+python3 scripts/simulated_grpo_correlated_audit.py --seed 7 --out results/696-correlated-audit.json
+```
