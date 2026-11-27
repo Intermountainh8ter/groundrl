@@ -511,3 +511,13 @@ Metric: `/crossover_seed_spread/e0p60/max` in `results/412-crossover-low-grid.js
 Expected: metric decreases to at most 0.40 (range 0.10 to 0.40).
 
 Falsifier: any seed has no crossover on the grid 0.10 to 0.50, or the largest per-seed crossover exceeds 0.40.
+
+## 2026-11-27T16:47:49Z kl-term proposal:90b85dabb430cfc4709dda4380dbcf4e75c70508cd78b096b0ddad1c4e17eb93
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, p0 0.05, seed 7, no audit) at exploit accept 0.6 and honest accept 0.6, adding a KL pull of coefficient 0.1 on the logit toward the reference (theta += lr * (grad - beta * (theta - theta_ref)), applied on every step, including zero-advantage groups) lowers mean final exploit probability by at least 0.05 relative to coefficient 0.0, and the lowering at coefficient 0.1 is not smaller than at coefficient 0.02.
+
+Metric: `/final_exploit_prob/b0p10` in `results/667-kl-term.json`.
+
+Expected: metric decreases to at most the coefficient-0.0 value minus 0.05 (range 0.0 to 0.6).
+
+Falsifier: mean final exploit probability at coefficient 0.1 is within 0.05 of (or above) the value at coefficient 0.0, or the reduction at 0.1 is smaller than at 0.02.

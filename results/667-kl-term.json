@@ -1,0 +1,39 @@
+{
+  "config": {
+    "betas": [
+      0.0,
+      0.02,
+      0.1
+    ],
+    "exploit_accept": 0.6,
+    "group": 8,
+    "honest_accept": 0.6,
+    "lr": 0.5,
+    "p0": 0.05,
+    "steps": 200,
+    "tasks": 200
+  },
+  "drop_0p10_not_smaller_than_0p02": true,
+  "drop_at_least_min": false,
+  "drop_vs_b0p00": {
+    "b0p00": 0.0,
+    "b0p02": 0.006058546315490819,
+    "b0p10": 0.008901959258344007
+  },
+  "final_exploit_prob": {
+    "b0p00": 0.05880099643648131,
+    "b0p02": 0.05274245012099049,
+    "b0p10": 0.049899037178137304
+  },
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_kl_term.py --seed 7 --out results/667-kl-term.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T16:47:49Z",
+    "wall_s": 0.594
+  },
+  "simulated": true
+}
