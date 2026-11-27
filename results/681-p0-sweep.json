@@ -1,0 +1,38 @@
+{
+  "config": {
+    "exploit_accept": 0.9,
+    "group": 8,
+    "honest_accept": 0.6,
+    "lr": 0.5,
+    "p0s": [
+      0.001,
+      0.01,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "steps": 200,
+    "tasks": 200
+  },
+  "final_exploit_prob": {
+    "p0_0p001": 0.0010649132475561297,
+    "p0_0p01": 0.02659523537197218,
+    "p0_0p05": 0.9667279580110728,
+    "p0_0p1": 0.9778463239263465,
+    "p0_0p2": 0.9811015018413791
+  },
+  "high_at_least_min": true,
+  "hypothesis_supported": true,
+  "low_below_max": true,
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_p0_sweep.py --seed 7 --out results/681-p0-sweep.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T18:04:05Z",
+    "wall_s": 0.806
+  },
+  "simulated": true
+}

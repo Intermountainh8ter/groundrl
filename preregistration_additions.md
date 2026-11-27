@@ -531,3 +531,13 @@ Metric: `/final_exploit_prob/lr0p10` in `results/676-lr-sweep.json`.
 Expected: metric stays below 0.3 at lr 0.1 (range 0.05 to 0.3) while lr 0.5 exceeds 0.5.
 
 Falsifier: mean final exploit probability at lr 0.1 is 0.3 or higher, or at lr 0.5 it is below 0.5.
+
+## 2026-11-27T18:03:55Z p0-sweep proposal:7d12c932b43feec631c9cfbb642f4a50aaa9e32721b2a9f2812c76f9d0866c1e
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 steps, 200 tasks, seed 7, no audit, no KL) at exploit accept 0.9 and honest accept 0.6, mean final exploit probability at p0 0.001 is below 0.5 while at p0 0.2 it is at least 0.9, so a loose grader is only exploited when the policy samples the exploit often enough early on.
+
+Metric: `/final_exploit_prob/p0_0p001` in `results/681-p0-sweep.json`.
+
+Expected: metric stays below 0.5 at p0 0.001 (range 0.0 to 0.5) while p0 0.2 is at least 0.9.
+
+Falsifier: mean final exploit probability at p0 0.001 is 0.5 or higher, or at p0 0.2 it is below 0.9.
