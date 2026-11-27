@@ -1,0 +1,38 @@
+{
+  "config": {
+    "exploit_accept": 0.9,
+    "group": 8,
+    "honest_accept": 0.6,
+    "lr": 0.5,
+    "p0": 0.01,
+    "steps_list": [
+      50,
+      100,
+      200,
+      400,
+      800
+    ],
+    "tasks": 200
+  },
+  "final_exploit_prob": {
+    "steps_100": 0.01433404317247158,
+    "steps_200": 0.023735947669527153,
+    "steps_400": 0.5656579543400063,
+    "steps_50": 0.011901634468592373,
+    "steps_800": 0.9916881063782975
+  },
+  "high_at_least_min": true,
+  "hypothesis_supported": true,
+  "low_below_max": true,
+  "provenance": {
+    "command": "python3 scripts/simulated_grpo_steps_horizon.py --seed 7 --out results/687-steps-horizon.json",
+    "data_sources": [],
+    "hardware": "CPU only, x86_64, python 3.11.2",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T18:30:13Z",
+    "wall_s": 1.458
+  },
+  "simulated": true
+}

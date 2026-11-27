@@ -541,3 +541,13 @@ Metric: `/final_exploit_prob/p0_0p001` in `results/681-p0-sweep.json`.
 Expected: metric stays below 0.5 at p0 0.001 (range 0.0 to 0.5) while p0 0.2 is at least 0.9.
 
 Falsifier: mean final exploit probability at p0 0.001 is 0.5 or higher, or at p0 0.2 it is below 0.9.
+
+## 2026-11-27T18:30:05Z steps-horizon proposal:fe5188239606a6904f04547d465cd2486de83dc7288b2ef1ed7419c3823ee641
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, lr 0.5, 200 tasks, p0 0.01, seed 7, exploit accept 0.9, honest accept 0.6, no audit, no KL), mean final exploit probability at 50 steps is below 0.05 while at 800 steps it is at least 0.90, so an audit-free short run can pass a loose grader that a longer run exploits.
+
+Metric: `/final_exploit_prob/steps_800` in `results/687-steps-horizon.json`.
+
+Expected: metric increases to at least 0.90 at 800 steps (range 0.90 to 1.0) while 50 steps stays below 0.05.
+
+Falsifier: mean final exploit probability at 800 steps is below 0.90, or at 50 steps it is 0.05 or higher.
