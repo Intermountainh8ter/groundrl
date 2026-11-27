@@ -521,3 +521,13 @@ Metric: `/final_exploit_prob/b0p10` in `results/667-kl-term.json`.
 Expected: metric decreases to at most the coefficient-0.0 value minus 0.05 (range 0.0 to 0.6).
 
 Falsifier: mean final exploit probability at coefficient 0.1 is within 0.05 of (or above) the value at coefficient 0.0, or the reduction at 0.1 is smaller than at 0.02.
+
+## 2026-11-27T17:32:18Z lr-sweep proposal:14a0400980908e120dc175bfaa74b6a6c0ebe7e6ebf349ec312804bd83386be9
+
+Hypothesis: in the SIMULATED two-action softmax GRPO loop (group 8, 200 steps, 200 tasks, p0 0.05, seed 7, no audit, no KL term) at exploit accept 0.9 and honest accept 0.6, mean final exploit probability at lr 0.5 is at least 0.5 while at lr 0.1 it is below 0.3, so the same loose grader is exploited or not depending on learning rate.
+
+Metric: `/final_exploit_prob/lr0p10` in `results/676-lr-sweep.json`.
+
+Expected: metric stays below 0.3 at lr 0.1 (range 0.05 to 0.3) while lr 0.5 exceeds 0.5.
+
+Falsifier: mean final exploit probability at lr 0.1 is 0.3 or higher, or at lr 0.5 it is below 0.5.
